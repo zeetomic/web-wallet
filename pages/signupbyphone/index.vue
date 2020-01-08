@@ -17,8 +17,8 @@
           </el-row>
           <el-row>
             <el-col :xs="24" :sm="17" :md="12" :lg="10" :xl="8">
-              <el-form-item label="PASSWORD" prop="password">
-                <el-input type="password" v-model="ruleFormTel.password" show-password>
+              <el-form-item label="PASSWORD" prop="passwords">
+                <el-input type="password" v-model="ruleFormTel.passwords" show-password>
                 </el-input>
               </el-form-item>
             </el-col>
@@ -50,38 +50,6 @@ import { mixinLogin } from "@/plugins/mixins/mixin_login.js";
 export default {
   layout: 'login_signup',
   mixins: [mixinLogin],
-  data() {
-    // // Custom form validate
-    // var validatePass = (rule, value, callback) => {
-    //   if (!value) {
-    //     return callback(new Error("Please input the password"));
-    //   }
-    //   callback();
-    // };
-    // var validateTel = (rule, value, callback) => {
-    //   if (!value || value === '+855') {
-    //     return callback(new Error("Please input Phone Number"));
-    //   }
-    //   callback();
-    // };
-    return {
-      loading: false,
-      labelPosition: 'top',
-      // ruleForm: {
-      //   tel: "+855",
-      //   password: ""
-      // },
-      // rules: {
-      //   password: [{ validator: validatePass, trigger: "blur" }],
-      //   tel: [{ validator: validateTel, trigger: "blur" }]
-      // }
-    }
-  },
-  computed: {
-    ...mapState({
-      msg: state => state.users.msg
-    })
-  },
   methods: {
     onSubmit() {
       this.$refs["ruleFormTel"].validate(valid => {
@@ -89,8 +57,8 @@ export default {
           this.loading = true;
           this.$store
             .dispatch("users/SignUpByPhone", {
-              phone: this.ruleForm.tel,
-              password: this.ruleForm.password
+              phone: this.ruleFormTel.tel,
+              password: this.ruleFormTel.passwords
             })
             .then( _=> {
               if(this.msg === "Successfully registered!")
