@@ -239,5 +239,17 @@ export const actions = {
       }, config)
       .then()
       .catch()
-  }
+  },
+// Add Receipt
+  async handleAddReceipt({commit},data) {
+    await axios
+      .post(process.env.apiUrl + "/addreceipt", {
+        receipt_no: data.receipt_no,
+        amount: data.amount,
+        location: data.location,
+        approval_code: data.approval_code
+      }, config)
+      .then()
+      .catch()
+  }  
 };

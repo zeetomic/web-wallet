@@ -3,7 +3,7 @@
     <video autoplay class="feed"></video>
     <br>
     <el-row type="flex" justify="center">
-      <el-button icon="el-icon-camera" circle></el-button>
+      <el-button icon="el-icon-camera" circle v-on:click="$emit('takePicture')"></el-button>
     </el-row>
   </div>
 </template>
