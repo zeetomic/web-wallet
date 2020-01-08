@@ -25,3 +25,4 @@ ENV NUXT_PORT=5000
 
 # start the app
 CMD [ "npm", "start" ]
+#testnet
