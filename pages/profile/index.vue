@@ -34,6 +34,9 @@
               </p>
             </div>
           </div>
+          <nuxt-link to="/verify">
+            <el-button type="primary">Verify</el-button>
+          </nuxt-link>
           <nuxt-link to="/activity">
             <el-button type="primary">Activity</el-button>
           </nuxt-link>
@@ -120,6 +123,7 @@ ul {
   padding-left: 2rem;
   padding-top: 1rem;
   word-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 .detail span {
   line-height: 20px;

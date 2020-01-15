@@ -7,7 +7,6 @@
         </h2>
         
         <el-form :rules="rules" :model="ruleForm" ref="ruleForm" :label-position="labelPosition">
-          
           <el-row>
             <el-col :xs="24" :sm="17" :md="12" :lg="10" :xl="8">
               <el-form-item label="Email" prop="email">
@@ -23,11 +22,17 @@
             </el-col>
           </el-row>
           <el-row>
-            <el-col :xs="24" :sm="17" :md="12" :lg="10" :xl="8">
+            <el-col :xs="24" :sm="17" :md="12" :lg="10" :xl="8" style="margin-top: -20px">
+              <nuxt-link to="/forgetpassword" style="float: right">Forget Password?</nuxt-link>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :xs="24" :sm="17" :md="12" :lg="10" :xl="8" style="padding-top: 1rem">
               <el-button type="primary" :loading="loading" @click="onSubmit()">Log In</el-button>
             </el-col>
           </el-row>
         </el-form>
+        
         <div style="padding-top: 1rem">
           <el-row>
             <el-col :xs="24" :sm="17" :md="12" :lg="10" :xl="8">

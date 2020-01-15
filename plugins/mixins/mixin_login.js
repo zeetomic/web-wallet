@@ -48,7 +48,7 @@ export const mixinLogin = {
   computed: {
     ...mapState({
       token: state => state.users.token,
-      msg: state => state.users.msg
+      msg: state => state.users.resMsg.msg
     })
   }
 };

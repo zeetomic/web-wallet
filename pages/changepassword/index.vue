@@ -29,9 +29,6 @@
                   </el-form-item>
                 </el-col>
               </el-row>
-              <div class="msg">
-                <span>{{ this.msg }}</span>
-              </div>
               <el-button type="primary" @click="onSubmit()">Change Password</el-button>
             </el-form>
           </div>
@@ -42,8 +39,11 @@
 </template>
  
 <script>
+import { mixinMsg } from "@/plugins/mixins/mixin_msg.js";
+
 export default {
   middleware: ["auth"],
+  mixins: [mixinMsg],
   data() {
     const validateOldPass = (rule, value, callback) => {
       if (!value) {
@@ -82,19 +82,32 @@ export default {
   },
   methods: {
     onSubmit() {
-      const { oldPass, newPass, newPass2 } = this.ruleForm; // read-only
       this.$refs["ruleForm"].validate(valid => {
         if (valid) {
           this.loading = true;
           this.$store
-            .dispatch("graph/ChangePassword", {
-              corrent_passwords: oldPass,
-              new_passwords: newPass
+            .dispatch("users/handleChangePassword", {
+              current_password: this.ruleForm.oldPass,
+              new_password: this.ruleForm.newPass
             })
             .then(() => {
+              if(this.type !== 'error') {
+                this.$notify({
+                  title: 'Success',
+                  message: this.apiMsg,
+                  type: this.type
+                });
+              } else {
+                this.$notify({
+                  title: 'Failed',
+                  message: this.apiMsg,
+                  type: this.type
+                });
+              }
               this.ruleForm.oldPass = "";
               this.ruleForm.newPass = "";
               this.ruleForm.newPass2 = "";
+              this.loading = false;
             });
         }
       });

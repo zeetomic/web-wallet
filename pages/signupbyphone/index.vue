@@ -8,7 +8,7 @@
         <el-form :model="ruleFormTel" ref="ruleFormTel" :rules="rulesTel" :label-position="labelPosition">
           <el-row>
             <el-col :xs="24" :sm="17" :md="12" :lg="10" :xl="8">
-              <el-form-item label="TEL" prop="tel">
+              <el-form-item label="PHONE" prop="tel">
                 <el-input type="tel" v-model="ruleFormTel.tel">
                   <!-- <template slot="prepend" >+855</template> -->
                 </el-input>

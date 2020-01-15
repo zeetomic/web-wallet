@@ -15,7 +15,7 @@
         </div>
       </el-form>
       <div class="respone">
-        <span>{{ this.msg }}</span>
+        <span>{{ this.res_msg }}</span>
       </div>
       <div class="button">
         <el-button type="primary" @click="getWallet()">Get Wallet</el-button>
@@ -58,9 +58,11 @@
 import axios from 'axios';
 import Cookie from 'js-cookie';
 import VuePin from "@/components/VuePin";
+import { mixinMsg } from '@/plugins/mixins/mixin_msg';
 
 export default {
   middleware: ["auth"],
+  mixins: [mixinMsg],
   components: {
     VuePin
   },
@@ -68,7 +70,6 @@ export default {
     return {
       pin: "",
       pin1: "",
-      msg: "",
       dialogVisible: false,
       value: [],
       res_msg: ""
@@ -79,38 +80,27 @@ export default {
       const pin = this.pin;
       const pin1 = this.pin1;
       if (pin === "") {
-        this.msg = "PIN must be filled out!";
+        this.res_msg = "PIN must be filled out!";
         return false;
       } else if (pin !== pin1) {
-        this.msg = "PIN does not match!";
+        this.res_msg = "PIN does not match!";
         return false;
       } else {
-        const token = Cookie.get("jwt");
-        const config = {
-          headers: {
-            Authorization: "Bearer " + token
+        this.$store.dispatch('users/handleGetWallet', {
+          pin: this.pin
+        })
+        .then(_=> {
+          if(this.apiMsg !== 'Opp! look like you already had a wallet') {
+            this.value = this.apiMsg;
+            this.dialogVisible = true;
+          } else {
+            this.$notify({
+              title: "Opp!",
+              message: this.apiMsg,
+              type: 'error'
+            });
           }
-        };
-          axios
-          .post(process.env.apiUrl + "/getwallet", {
-            pin: this.pin
-          }, config)
-          .then(res => {
-            if(res.data.message != "Opp! look like you already had a wallet") {
-              this.value = res.data.message;
-              this.dialogVisible = true;
-            }
-            else {
-              this.$notify({
-                title: "Opp!",
-                message: res.data.message,
-                type: "error"
-              });
-            }
-          })
-          .catch(err => {
-            this.msg = err.message;
-          });
+        })
       }
     },
     handleClose(done) {

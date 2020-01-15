@@ -30,7 +30,7 @@ export default {
   */
   plugins: [
     '@/plugins/element-ui',
-    { src: '~/plugins/vue-qrcode-reader', ssr: false }
+    { src: '~/plugins/vue-qrcode-reader', ssr: false },
   ],
   /*
   ** Nuxt.js modules

@@ -19,11 +19,11 @@
             <el-divider></el-divider>
             <transition name="el-fade-in">
               <div v-show="showlink" >
-                <el-button type="primary" @click="handleAsset()">
+                <el-button type="primary" @click="handleAsset()" style="width: 100%">
                   <i class="el-icon-s-promotion"></i>Send
                 </el-button>
                 <el-divider></el-divider>
-                <el-button type="primary" @click="handleReceive()">
+                <el-button type="primary" @click="handleReceive()" style="width: 100%">
                   <i class="el-icon-download"></i>Receive
                 </el-button>
               </div>

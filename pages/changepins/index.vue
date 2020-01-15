@@ -18,11 +18,8 @@
           </el-form-item>
         </div>
       </el-form>
-      <div class="respone">
-        <span>{{ this.msg }}</span>
-      </div>
       <div class="button">
-        <el-button type="primary" @click="ChangePIN()">Change PINS</el-button>
+        <el-button type="primary" @click="ChangePIN()">Change PIN</el-button>
       </div>
     </el-card>
   </div>
@@ -30,9 +27,11 @@
  
 <script>
 import VuePin from "@/components/VuePin";
+import { mixinMsg } from "@/plugins/mixins/mixin_msg.js";
 
 export default {
   middleware: ["auth"],
+  mixins: [mixinMsg],
   components: {
     VuePin
   },
@@ -60,16 +59,28 @@ export default {
       } else {
         this.loading = true;
         this.$store
-          .dispatch("graph/ChangePINcode", {
-            corrent_pin: oldPin,
+          .dispatch("users/handleChangePIN", {
+            current_pin: oldPin,
             new_pin: newPin1
           })
           .then(() => {
-            this.ruleForm.oldPin = "";
-            this.ruleForm.newPin1 = "";
-            this.ruleForm.newPin2 = "";
-            this.msg = this.$store.state.graph.msg;
-            this.loading = this.$store.state.graph.loading;
+            if(this.type !== 'error') {
+              this.$notify({
+                title: 'Success',
+                message: this.apiMsg,
+                type: this.type
+              });
+            } else {
+              this.$notify({
+                title: 'Failed',
+                message: this.apiMsg,
+                type: this.type
+              });
+            }
+            this.oldPin = "";
+            this.newPin1 = "";
+            this.newPin2 = "";
+            this.loading = this.$store.state.users.loading;
           });
       }
     }

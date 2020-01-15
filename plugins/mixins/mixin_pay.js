@@ -1,7 +1,9 @@
 import Cookies from "js-cookie";
 import axios from "axios";
+import { mixinMsg } from "@/plugins/mixins/mixin_msg.js";
 
 export const mixinPay = {
+  mixins: [mixinMsg],
   data() {
     const validatePayto = (rule, value, callback) => {
       if (!value) {
@@ -66,25 +68,40 @@ export const mixinPay = {
         this.msg = "Please Input PIN Code";
       } else {
         this.loading = true;
-        const token = Cookies.get("jwt");
-        const config = {
-          headers: {
-            Authorization: "Bearer " + token
-          }
-        };
-        await axios.post(process.env.apiUrl + "/sendpayment", {
+        this.$store.dispatch('users/handleSend', {
           asset_code: this.ruleForm.asset_code,
           destination: this.ruleForm.payto,
           amount: this.ruleForm.amount,
           memo: this.ruleForm.memo,
           pin: this.ruleForm.pin_code
-        }, config)
-        .then((res) => {
-          const h = this.$createElement;
-          this.$notify({
-            title: 'Message',
-            message: h('i', { style: 'color: teal' }, res.data.message)
-          });
+        })
+        // const token = Cookies.get("jwt");
+        // const config = {
+        //   headers: {
+        //     Authorization: "Bearer " + token
+        //   }
+        // };
+        // await axios.post(process.env.apiUrl + "/sendpayment", {
+        //   asset_code: this.ruleForm.asset_code,
+        //   destination: this.ruleForm.payto,
+        //   amount: this.ruleForm.amount,
+        //   memo: this.ruleForm.memo,
+        //   pin: this.ruleForm.pin_code
+        // }, config)
+        .then(_=> {
+          if(this.type !== 'error') {
+            this.$notify({
+              title: 'Success',
+              message: this.apiMsg,
+              type: this.type
+            });
+          } else {
+            this.$notify({
+              title: 'failed',
+              message: this.apiMsg,
+              type: this.type
+            });
+          }
           this.loading = false;
           this.dialogPIN = false;
           this.ruleForm.payto = "";
