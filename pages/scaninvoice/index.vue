@@ -89,6 +89,7 @@
 </template>
 
 <script>
+import cookieparser from "cookieparser";
 import axios from 'axios';
 import Cookie from 'js-cookie';
 import {mapState} from 'vuex';
@@ -135,16 +136,11 @@ export default {
       },
     };
   },
-  asyncData ({req, res, error, redirect}) {
+  asyncData ({req, error, redirect}) {
     let token;
-    if (process.server) {
-      const jwtCookie = req.headers.cookie
-        .split(";")
-        .find(c => c.trim().startsWith("jwt="));
-      if (!jwtCookie) {
-        return;
-      }
-      token = jwtCookie.split("=")[1];
+    if (req && process.server) {
+      const parsed = cookieparser.parse(req.headers.cookie);
+      token = parsed.jwt;
     }
     if (process.client) {
       token = Cookie.get("jwt");
