@@ -46,9 +46,9 @@ export const actions = {
         email: data.email,
         password: data.passwords
       })
-      .then(async res => {
+      .then(async(res) => {
         const token = await res.data.token;
-        commit("setToken", token);
+        await commit("setToken", token);
         Cookie.set("jwt", token);
         this.$router.push("/");
       })
@@ -60,9 +60,9 @@ export const actions = {
       phone: data.tel,
       password: data.passwords
     })
-    .then(async res => {
+    .then(async(res) => {
       const token = await res.data.token;
-      commit("setToken", token);
+      await commit("setToken", token);
       Cookie.set("jwt", token);
       this.$router.push("/");
     })
@@ -74,7 +74,7 @@ export const actions = {
         email: data.email,
         password: data.passwords
       })
-      .then(async res => {
+      .then(async (res) => {
         const msg = await res.data.message;
         commit("setMsg", msg);
       });
