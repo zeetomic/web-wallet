@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <div class="card">
+    <div class="card" v-loading="loading">
       <h1>Please input PIN Code</h1>
       <el-form>
         <div class="pin_code">
@@ -68,6 +68,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       pin: "",
       pin1: "",
       dialogVisible: false,
@@ -86,6 +87,7 @@ export default {
         this.res_msg = "PIN does not match!";
         return false;
       } else {
+        this.loading = true;
         this.$store.dispatch('users/handleGetWallet', {
           pin: this.pin
         })
@@ -100,6 +102,7 @@ export default {
               type: 'error'
             });
           }
+          this.loading = false;
         })
       }
     },
@@ -117,6 +120,7 @@ export default {
         const doc = new jsPDF({
           orientation: "landscape"
         });
+        doc.setFontSize(14);
         doc.text("Wallet: " + this.value.wallet, 10, 10);
         doc.text("Private Key: " + this.value.seed, 10, 20);
         doc.save("YourKey.pdf");

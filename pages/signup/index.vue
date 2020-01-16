@@ -60,7 +60,7 @@ export default {
               if(this.msg === "Successfully registered!")
               {
                 this.$notify({
-                  title: "Successful Register",
+                  title: "Successful Registered",
                   message: this.msg,
                   type: "success"
                 });
