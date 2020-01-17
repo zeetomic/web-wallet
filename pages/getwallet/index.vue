@@ -29,7 +29,7 @@
           <br />be showed to you once.
           Zeetomic will not be able to help you recover it if lost.
         </p>
-        <br />
+        <br/>
         <div class="key">
           <h4>
             Public key (will be Wallet):
