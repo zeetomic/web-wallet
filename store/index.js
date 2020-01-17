@@ -32,7 +32,7 @@ let token = null;
 let parsed = null;
 export const actions = {
   async nuxtServerInit ({commit}, {req, res, app}) {
-    if(req.headers.cookie) {
+    if(req && req.headers.cookie) {
       parsed = cookieparser.parse(req.headers.cookie);
       token = parsed.jwt;
       if(!token) return;
