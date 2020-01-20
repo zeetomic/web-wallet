@@ -11,7 +11,9 @@
           </nuxt-link>
         </div>
         
-        <el-table v-if="!history.error" :data="history" style="max-width: 100%" max-height="500">
+        <el-table v-if="!history.error" :data="history" style="max-width: 100%" max-height="500" 
+          :header-row-class-name="tableRowClassName"
+          :row-class-name="tableRowClassName">
           <el-table-column prop="created_at" label="DateTime" width="230"></el-table-column>
           <el-table-column label="Type" width="160">
             <template slot-scope="props">
@@ -40,7 +42,10 @@
         <el-table
           v-if="!history.error"
           :data="history"
-          style="width: 100%">
+          style="width: 100%"
+          max-height="550" 
+          :header-row-class-name="tableRowClassName"
+          :row-class-name="tableRowClassName">
           <el-table-column type="expand">
             <template slot-scope="props">
               <div>
@@ -109,6 +114,11 @@ export default {
           name: 'login'
         })
       })
+  },
+  methods: {
+    tableRowClassName({row, rowIndex}) {
+      return 'warning-row';
+    }
   },
 };
 </script>

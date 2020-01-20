@@ -80,18 +80,20 @@
                 :data="portfolio"
                 max-height="200"
                 style="width: 100%"
+                :header-row-class-name="tableRowClassName"
+                :row-class-name="tableRowClassName"
                 >
                 <el-table-column
                   label= "Asset"
                 >
                   <template slot-scope="props">
-                  <span>{{props.row.asset_code !== undefined ? props.row.asset_code : "XML"}}</span>
+                  <span>{{props.row.asset_code !== undefined ? props.row.asset_code : props.row.asset_type}}</span>
                   </template>
                 </el-table-column>
                 <el-table-column
                   prop="balance"
                   label="Amount"
-                  >
+                >
                 </el-table-column>
               </el-table>
             </el-row>
@@ -149,6 +151,11 @@ export default {
           name: 'login'
         })
       })
+  },
+  methods: {
+    tableRowClassName({row, rowIndex}) {
+      return 'warning-row';
+    }
   },
 };
 </script>
@@ -224,10 +231,10 @@ p {
   color: #ff4a68;
   font-size: 20px;
 }
-.el-table,
-.el-table tr {
-  background: black!important;
-}
+// .el-table{
+//   background-color: transparent!important;
+//   color: #fafafa;
+// }
 // mobile
 @media only screen and (max-width: 768px) {
   .el-row {

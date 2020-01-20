@@ -3,7 +3,12 @@
     <el-card class="card">
       <h1 style="padding-bottom:1rem">Activity:</h1>
       <div class="history desktop">
-        <el-table :data="activity" style="max-width: 100%" max-height="500">
+        <el-table 
+          :data="activity" 
+          style="max-width: 100%" 
+          max-height="500" 
+          :header-row-class-name="tableRowClassName"
+          :row-class-name="tableRowClassName">
           <el-table-column prop="created_at" label="Activity Date"></el-table-column>
           <el-table-column label="Receipt NO">
             <template slot-scope="props">
@@ -25,7 +30,9 @@
       <div class="mobile">
         <el-table
           :data="activity"
-          style="width: 100%">
+          style="width: 100%"
+          :header-row-class-name="tableRowClassName"
+          :row-class-name="tableRowClassName">
           <el-table-column type="expand">
             <template slot-scope="props">
               <div>
@@ -90,6 +97,11 @@ export default {
           name: 'login'
         })
       })
+  },
+  methods: {
+    tableRowClassName({row, rowIndex}) {
+      return 'warning-row';
+    }
   },
 }
 </script>

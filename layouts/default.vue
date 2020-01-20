@@ -11,6 +11,7 @@
 </template>
 
 <style>
+
 *,
 *:before,
 *:after {
@@ -55,6 +56,28 @@ html {
 }
 .el-notification {
   z-index: 99999 !important;
+}
+/** table */
+.el-table{
+  background-color: transparent!important;
+  color: #fafafa;
+}
+.el-table th{
+  color: #fafafa;
+  background: transparent!important;
+  /* for header */
+}
+.el-table__header {
+  background: transparent;
+}
+.el-table .warning-row{
+  background-color: transparent!important;
+}
+.el-table--enable-row-hover .el-table__body tr:hover > td {
+  background-color: #66b1ff;
+}
+.el-table__expanded-cell {
+  background: #031626;
 }
 /** SmartPhone Tablet */
 @media only screen and (max-width: 768px) {
