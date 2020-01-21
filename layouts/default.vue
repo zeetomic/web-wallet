@@ -74,7 +74,7 @@ html {
   background-color: transparent!important;
 }
 .el-table--enable-row-hover .el-table__body tr:hover > td {
-  background-color: #66b1ff;
+  background: transparent;
 }
 .el-table__expanded-cell {
   background: #031626;
