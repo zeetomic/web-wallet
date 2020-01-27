@@ -56,13 +56,12 @@ export default {
   },
   // PWA
   icon: {
-    iconSrc: '/assets/Zeetomic_Logo.png'
+    iconSrc: '/assets/zee_logo.png'
   },
   manifest: {
     short_name: 'zeetomic',
     name: 'zeetomic',
     start_url: '/login',
-    theme_color: '#15151a',
-    icons: '/assets/zee_logo.png'
+    theme_color: '#15151a'
   },
 }
