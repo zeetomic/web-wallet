@@ -55,17 +55,13 @@ export default {
     apiUrl: 'https://testnet-api.zeetomic.com/pub/v1'
   },
   // PWA
-  pwa: {
     icon: {
-      iconSrc: '/assets/zee_logo.png'
+      iconSrc: './assets/zee_logo.png'
     },
     manifest: {
       short_name: 'zeetomic',
       name: 'zeetomic',
       start_url: '/',
       theme_color: '#15151a',
-
     },
-  }
-  
 }
