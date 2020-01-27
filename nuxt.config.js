@@ -61,7 +61,7 @@ export default {
   manifest: {
     short_name: 'zeetomic',
     name: 'zeetomic',
-    start_url: '/login',
+    start_url: '/',
     theme_color: '#15151a'
   },
 }
