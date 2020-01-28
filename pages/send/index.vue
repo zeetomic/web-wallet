@@ -92,6 +92,7 @@
 <script>
 import VuePin from "@/components/VuePin";
 // import { mixinPay } from "@/plugins/mixins/mixin_pay.js";
+import { mixinMsg } from "@/plugins/mixins/mixin_msg.js";
 import axios from 'axios';
 import Cookie from 'js-cookie';
 
@@ -100,6 +101,7 @@ export default {
   components: {
     VuePin
   },
+  mixins: [mixinMsg],
   // mixins: [mixinPay],
   data() {
     const validatePayto = (rule, value, callback) => {
@@ -179,27 +181,58 @@ export default {
   methods: {
     async handleSend(){
       this.loading = true;
-      const token = Cookie.get('jwt');
-      const config = {
-        headers: {
-        "Authorization": "Bearer "+ token,
-        }
-      };
-      await axios.post(process.env.apiUrl + "/pub/v1/sendpayment", {
-        asset: this.ruleForm.asset_code,
-        wallet: this.ruleForm.payto,
+      this.$store.dispatch('users/handleSend', {
+        asset_code: this.ruleForm.asset_code,
+        destination: this.ruleForm.payto,
         amount: this.ruleForm.amount,
         memo: this.ruleForm.memo,
-        pin: this.ruleForm.pin_code,
-      }, config)
-      .then((res)=> {
-        const h = this.$createElement;
-        this.$notify({
-          title: 'Message',
-          message: h('i', { style: 'color: teal' }, res.data.message)
-        });
-        this.loading = false;
+        pin: this.ruleForm.pin_code
       })
+      // const token = Cookie.get('jwt');
+      // const config = {
+      //   headers: {
+      //   "Authorization": "Bearer "+ token,
+      //   }
+      // };
+      // await axios.post(process.env.apiUrl + "/sendpayment", {
+      //   asset_code: this.ruleForm.asset_code,
+      //   destination: this.ruleForm.payto,
+      //   amount: this.ruleForm.amount,
+      //   memo: this.ruleForm.memo,
+      //   pin: this.ruleForm.pin_code,
+      // }, config)
+
+      // .then((res)=> {
+      //   const h = this.$createElement;
+      //   this.$notify({
+      //     title: 'Message',
+      //     message: h('i', { style: 'color: teal' }, res.data.message)
+      //   });
+      //   this.loading = false;
+      // })
+      .then(_=> {
+        if(this.type !== 'error') {
+          this.$notify({
+            title: 'Success',
+            message: this.apiMsg,
+            type: this.type
+          });
+        } else {
+          this.$notify({
+            title: 'failed',
+            message: this.apiMsg,
+            type: this.type
+          });
+        }
+        this.loading = false;
+        this.dialogPIN = false;
+        this.ruleForm.payto = "";
+        this.ruleForm.asset_code = "";
+        this.ruleForm.amount = "";
+        this.ruleForm.memo = "";
+        this.ruleForm.pin_code = "";
+        // this.$router.push("/");
+      });
     },
     handleNext() {
       this.$refs["ruleForm"].validate(valid => {

@@ -241,8 +241,13 @@ export const actions = {
         image_uri: data.image_uri
       }, config)
       .then((res) => {
-        const msg = res.data.message !== undefined ? res.data.message : res.data.error.message
-        commit('setMsg', msg)
+        if(res.data.message) {
+          commit('setMsg', res.data.message);
+          commit('setType', 'success');
+        } else {
+          commit('setMsg', res.data.error.message);
+          commit('setType', 'error');
+        }
       })
       .catch((err) => {
         this.$router.push('/login');

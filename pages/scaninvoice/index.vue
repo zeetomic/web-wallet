@@ -93,8 +93,11 @@ import cookieparser from "cookieparser";
 import axios from 'axios';
 import Cookie from 'js-cookie';
 import {mapState} from 'vuex';
+import { mixinMsg } from "@/plugins/mixins/mixin_msg.js";
+
 
 export default {
+  mixins: [mixinMsg],
   data() {
     var validateStoreLocation = (rule, value, callback) => {
       if (!value) {
@@ -211,12 +214,19 @@ export default {
           image_uri: this.imageUrl
         })
         .then(_=> {
-          this.msg = this.$store.state.users.msg;
-          this.$notify({
-            title: "Message",
-            message: this.msg,
-            type: "info"
-          });
+          if(this.type !== 'error') {
+            this.$notify({
+              title: 'Success',
+              message: this.apiMsg,
+              type: this.type
+            });
+          } else {
+            this.$notify({
+              title: 'failed',
+              message: this.apiMsg,
+              type: this.type
+            });
+          }
         })
       }
     },
