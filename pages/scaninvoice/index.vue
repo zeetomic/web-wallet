@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page" v-loading.fullscreen.lock="loading">
     <el-row type="flex" justify="center">
       <h2>Please Upload Your Invoice</h2>
     </el-row>
@@ -119,6 +119,7 @@ export default {
     };
     return {
       labelPosition: 'top',
+      loading: false,
       links: null,
       imageUrl: "",
       documents_uri: "",
@@ -206,6 +207,7 @@ export default {
           this.authMsg = "";
         }, 5000)
       } else {
+        this.loading = true;
         this.$store.dispatch('users/handleAddReceipt', {
           receipt_no: this.ruleForm.bills_number,
           amount: this.ruleForm.amount,
@@ -227,6 +229,14 @@ export default {
               type: this.type
             });
           }
+          this.ruleForm.bills_number = "";
+          this.ruleForm.amount = "";
+          this.ruleForm.store_location = "";
+          this.ruleForm.authorization_code = "";
+          this.imageUrl = "";
+          this.outerVisible = false;
+          this.innerVisible = false;
+          this.loading = false;
         })
       }
     },
@@ -268,12 +278,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  h2, h4 {
-    color: #fafafa;
-    span {
-      color: #24c94e;
-    }
+h2, h4 {
+  color: #fafafa;
+  span {
+    color: #24c94e;
   }
+}
 .upload_documentUri {
   display: inline;
 }

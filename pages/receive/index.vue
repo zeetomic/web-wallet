@@ -81,6 +81,7 @@ h4 {
 }
 .key span {
   word-wrap: break-word;
+  overflow-wrap: anywhere;
   background: red;
 }
 .qrcode {
