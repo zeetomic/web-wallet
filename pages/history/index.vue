@@ -17,13 +17,21 @@
           <el-table-column prop="created_at" label="DateTime" width="230"></el-table-column>
           <el-table-column label="Type">
             <template slot-scope="props">
-            <span>{{props.row.type !== "manage_offer" ? props.row.type : "fee"}}</span>
+              <span>{{props.row.type !== "manage_offer" ? props.row.type : "fee"}}</span>
             </template>
           </el-table-column>
           <el-table-column prop="amount" label="Amount"></el-table-column>
           <el-table-column prop="asset_code" label="Asset"></el-table-column>
-          <el-table-column prop="from" label="From"></el-table-column>
-          <el-table-column prop="to" label="To"></el-table-column>
+          <el-table-column label="From">
+            <template slot-scope="props">
+              <span>{{props.row.from ? sliceString(props.row.from) : null}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="To">
+            <template slot-scope="props">
+              <span>{{props.row.to ? sliceString(props.row.to) : null}}</span>
+            </template>
+          </el-table-column>
           <!-- <el-table-column
               prop="memo"
               label="Memo"
@@ -58,11 +66,11 @@
               </div>
               <div style="padding-top: 5px">
                 <el-tag>From: </el-tag>
-                <span style="color:#3076bf; word-wrap: break-word">{{ props.row.from }}</span>
+                <span style="color:#3076bf; word-wrap: break-word">{{ props.row.from ? sliceString(props.row.from) : null}}</span>
               </div>
               <div style="padding-top: 5px">
                 <el-tag>To: </el-tag>
-                <span style="color:#3076bf; word-wrap: break-word">{{ props.row.to }}</span>
+                <span style="color:#3076bf; word-wrap: break-word">{{ props.row.to ? sliceString(props.row.to) : null }}</span>
               </div>
             </template>
           </el-table-column>
@@ -72,7 +80,10 @@
           </el-table-column>
           <el-table-column
             label="Type"
-            prop="type">
+            >
+              <template slot-scope="props">
+                <span>{{props.row.type !== "manage_offer" ? props.row.type : "fee"}}</span>
+              </template>
           </el-table-column>
         </el-table>
       </div>
@@ -118,6 +129,11 @@ export default {
   methods: {
     tableRowClassName({row, rowIndex}) {
       return 'warning-row';
+    },
+    sliceString(str) {
+      const firstChar = str.slice(0,4);
+      const lastChar = str.slice(-3);
+      return firstChar + '.........' + lastChar;
     }
   },
 };
