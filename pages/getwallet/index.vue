@@ -20,18 +20,18 @@
       <div class="button">
         <el-button type="primary" @click="getWallet()">Get Wallet</el-button>
       </div>
-      <el-dialog type="text" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+      <el-dialog type="text" :visible.sync="dialogVisible" width="80%" :before-close="handleClose">
         <span slot="title" style="font-size:25px">
           <i class="el-icon-warning" style="color:orange"></i> Warning
         </span>
-        <p>
+        <p class="warning">
           Please keep your key secure. This secret key will only
-          <br />be showed to you once.
-          Zeetomic will not be able to help you recover it if lost.
+          be showed to you once.
+          <br />Zeetomic will not be able to help you recover it if lost.
         </p>
         <br/>
         <div class="key">
-          <h4>
+          <h4 class="public_key">
             Public key (will be Wallet):
             <span
               style="background-color:yellow"
@@ -40,7 +40,7 @@
         </div>
         <br />
         <div class="key">
-          <h4>
+          <h4 class="secret_key">
             Secret key (SAVE THIS AND KEEP THIS SECURE):
             <span
               style="background-color:yellow"
@@ -92,7 +92,7 @@ export default {
           pin: this.pin
         })
         .then(_=> {
-          if(this.apiMsg !== 'Opp! look like you already had a wallet') {
+          if(this.apiMsg == 'Opp! look like you already had a wallet') {
             this.value = this.apiMsg;
             this.dialogVisible = true;
           } else {
@@ -165,5 +165,50 @@ h4 {
 }
 .el-dialog .el-button {
   margin: 1rem 0 0 0;
+}
+/** SmartPhone Tablet */
+@media only screen and (max-width: 768px) {
+  .warning {
+    font-size: 16px!important;
+  }
+  .public_key {
+
+  }
+  .secret_key {
+
+  }
+}
+/* Normal */
+@media only screen and (min-width: 769px) and (max-width: 1199px) {
+  .warning {
+    font-size: 18px!important;
+  }
+  .public_key,
+  .secret_key {
+    font-size: 16px!important;
+  }
+}
+/* Large monitor */
+@media only screen and (min-width: 1200px) and (max-width: 1919px) {
+ .warning {
+    font-size: 18px!important;
+  }
+  .public_key,
+  .secret_key {
+    font-size: 16px!important;
+  }
+}
+/* Landscape */
+@media only screen and (max-height: 500px) {
+}
+/* Widescreen */
+@media only screen and (min-width: 1920px) {
+  .warning {
+    font-size: 18px!important;
+  }
+  .public_key,
+  .secret_key {
+    font-size: 16px!important;
+  }
 }
 </style>

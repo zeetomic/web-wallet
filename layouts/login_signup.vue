@@ -46,7 +46,7 @@ label.el-form-item__label {
   a {
     color: #FF5733;
   }
-  .el-button {
+  .login_register {
     width: 100%;
   }
   .zeetomic-footer {

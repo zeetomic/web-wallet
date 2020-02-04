@@ -28,16 +28,19 @@
           </el-row>
           <el-row>
             <el-col :xs="24" :sm="17" :md="12" :lg="10" :xl="8" style="padding-top: 1rem">
-              <el-button type="primary" :loading="loading" @click="onSubmit()">Log In</el-button>
+              <el-button class="login_register" type="primary" :loading="loading" @click="onSubmit()">Log In</el-button>
             </el-col>
           </el-row>
         </el-form>
-        
-        <div style="padding-top: 1rem">
+        <div>
           <el-row>
             <el-col :xs="24" :sm="17" :md="12" :lg="10" :xl="8">
-              <nuxt-link to="/loginbyphone">By Phone Number</nuxt-link>
-              <nuxt-link to="/signup" style="float: right">Sign up</nuxt-link>
+              <nuxt-link to="/loginbyphone">
+                <el-button type="text" style="color: #FF5733">By Phone Number</el-button>
+              </nuxt-link>
+              <nuxt-link to="/signup" style="float: right">
+                <el-button type="text" style="color: #FF5733">Sign Up</el-button>
+              </nuxt-link>
             </el-col>
           </el-row>
         </div>
@@ -86,28 +89,5 @@ export default {
       })
     }
   },
-        // else {
-        //   this.$store
-        //     .dispatch("users/LoginByPhone", {
-        //       tel: this.ruleForm.tel,
-        //       passwords: this.ruleForm.passwords
-        //     })
-        //     .then(() => {
-        //       if(this.token) {
-        //         this.$notify({
-        //           title: "Successful",
-        //           message: "Login Successful",
-        //           type: "success"
-        //         });
-        //       } else {
-        //         this.$notify({
-        //           title: "Failed",
-        //           message: "Login failed the username or password is incorrect",
-        //           type: "error"
-        //         });
-        //       }
-        //       this.loading = false;
-        //     });
-        // }
 };
 </script>

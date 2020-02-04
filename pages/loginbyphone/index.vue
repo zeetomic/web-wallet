@@ -27,15 +27,19 @@
           </el-row>
           <el-row>
             <el-col :xs="24" :sm="17" :md="12" :lg="10" :xl="8" style="padding-top: 1rem">
-              <el-button type="primary" :loading="loading" @click="onSubmit()">Log In</el-button>
+              <el-button class="login_register" type="primary" :loading="loading" @click="onSubmit()">Log In</el-button>
             </el-col>
           </el-row>
         </el-form>
-        <div style="padding-top: 1rem">
+        <div>
           <el-row>
             <el-col :xs="24" :sm="17" :md="12" :lg="10" :xl="8">
-              <nuxt-link to="/login">By Email</nuxt-link>
-              <nuxt-link to="/signup" style="float: right">Sign up</nuxt-link>
+              <nuxt-link to="/login">
+                <el-button type="text" style="color: #FF5733">By Email</el-button>
+              </nuxt-link>
+              <nuxt-link to="/signup" style="float: right">
+                <el-button type="text" style="color: #FF5733">Sign up</el-button>
+              </nuxt-link>
             </el-col>
           </el-row>
         </div>

@@ -15,15 +15,15 @@
           :header-row-class-name="tableRowClassName"
           :row-class-name="tableRowClassName">
           <el-table-column prop="created_at" label="DateTime" width="230"></el-table-column>
-          <el-table-column label="Type" width="160">
+          <el-table-column label="Type">
             <template slot-scope="props">
             <span>{{props.row.type !== "manage_offer" ? props.row.type : "fee"}}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="amount" label="Amount" width="150"></el-table-column>
-          <el-table-column prop="asset_code" label="Asset" width="100"></el-table-column>
-          <el-table-column prop="from" label="From" width="250"></el-table-column>
-          <el-table-column prop="to" label="To" width="250"></el-table-column>
+          <el-table-column prop="amount" label="Amount"></el-table-column>
+          <el-table-column prop="asset_code" label="Asset"></el-table-column>
+          <el-table-column prop="from" label="From"></el-table-column>
+          <el-table-column prop="to" label="To"></el-table-column>
           <!-- <el-table-column
               prop="memo"
               label="Memo"

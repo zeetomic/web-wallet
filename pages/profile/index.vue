@@ -11,7 +11,14 @@
                   alt="profile"
                   class="box-img"
                 />
-                <h3>{{ user_profile.first_name + ' ' + user_profile.mid_name + ' ' + user_profile.last_name }}</h3>
+                <h3 v-if="user_profile.first_name || user_profile.mid_name || user_profile.last_name">{{ user_profile.first_name + ' ' + user_profile.mid_name + ' ' + user_profile.last_name }}</h3>
+                <div v-else>
+                  <h3>Please Verify Your Account</h3>
+                  <br />
+                  <nuxt-link to="/verify">
+                    <el-button type="success" class="btn_verify">Verify</el-button>
+                  </nuxt-link>
+                </div>
               </div>
             </el-card>
           </el-col>
@@ -34,9 +41,6 @@
               </p>
             </div>
           </div>
-          <nuxt-link to="/verify">
-            <el-button type="primary">Verify</el-button>
-          </nuxt-link>
           <nuxt-link to="/activity">
             <el-button type="primary">Activity</el-button>
           </nuxt-link>
@@ -132,6 +136,11 @@ ul {
   margin: 1rem;
   padding: 0.5rem 1rem;
 }
+.btn_verify {
+  margin: 0rem;
+  padding: 12px;
+  width: 100%;
+}
 .Branch {
   padding-top: 5%;
 }
@@ -143,6 +152,5 @@ ul {
   .el-button {
     margin: 1rem;
   }
-  
 }
 </style>
