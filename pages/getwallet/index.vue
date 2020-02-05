@@ -92,7 +92,7 @@ export default {
           pin: this.pin
         })
         .then(_=> {
-          if(this.apiMsg == 'Opp! look like you already had a wallet') {
+          if(this.apiMsg !== 'Opp! look like you already had a wallet') {
             this.value = this.apiMsg;
             this.dialogVisible = true;
           } else {
