@@ -8,7 +8,8 @@
             <div class="key">
               <h4>Wallet:</h4>
               <div class="qrcode">
-                <qrcode-vue :value="user_profile.wallet" :size="200" background="#fafafa"></qrcode-vue>
+                <!-- <qrcode-vue :value="user_profile.wallet" :size="200" background="#fafafa"></qrcode-vue> -->
+                <vue-qr size="250" :dotScale="0.5" :logoSrc="zee" margin="10" :text="this.user_profile.wallet"></vue-qr>
               </div>
               <span>{{ user_profile.wallet }}</span>
             </div>
@@ -43,6 +44,7 @@ export default {
   mixins: [mixinReceive],
   data() {
     return {
+      zee: require("~/assets/zee1.png"),
       loading: true
     };
   },
