@@ -33,15 +33,15 @@
         <div class="key">
           <h4 class="public_key">
             Public key (will be Wallet):
-            <span
-              style="background-color:yellow"
-            >{{ this.value.wallet }}</span>
+            <div style="padding-top: 0.6rem"></div>
           </h4>
+          <span style="background-color:yellow; color:  #191819">{{ this.value.wallet }}</span>
         </div>
         <br />
         <div class="key">
           <h4 class="secret_key">
             Secret key (SAVE THIS AND KEEP THIS SECURE):
+            <div style="padding-top: 0.6rem"></div>
             <span
               style="background-color:yellow"
             >{{ this.value.seed }}</span>
@@ -160,8 +160,14 @@ h4 {
   color: black;
 }
 .key {
-  border: 1px solid red;
+  // border: 1px solid red;
   padding: 5px;
+}
+.key span {
+  background-color:yellow;
+  border-radius: 2px;
+  color: #191819;
+  font-size: 16px;
 }
 .el-dialog .el-button {
   margin: 1rem 0 0 0;
@@ -170,12 +176,6 @@ h4 {
 @media only screen and (max-width: 768px) {
   .warning {
     font-size: 16px!important;
-  }
-  .public_key {
-
-  }
-  .secret_key {
-
   }
 }
 /* Normal */

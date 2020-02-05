@@ -74,7 +74,7 @@
             ></el-input>
           </el-form-item>
         </el-form>
-        <el-button @click="handleClose()">Cancel</el-button>
+        <el-button type="danger" @click="handleClose()">Cancel</el-button>
         <el-button type="primary" @click="handleNext()">Next</el-button>
       </div>
     </el-dialog>
@@ -112,7 +112,7 @@
             <div class="qrcode">
               <qrcode-vue :value="this.user_profile.wallet" :size="200"></qrcode-vue>
             </div>
-            <span style="background-color:yellow">{{this.user_profile.wallet }}</span>
+            <span class="wallet_key">{{this.user_profile.wallet }}</span>
           </div>
         </div>
         <input type="text" id="myInput" v-model="this.user_profile.wallet" />
@@ -314,8 +314,14 @@ export default {
 }
 .key {
   border: 1px solid red;
+  border-radius: 4px;
   padding: 5px;
-  background: #363c4e;
+  background: #696b6a;
+}
+.key .wallet_key {
+  padding: 2px;
+  background-color:yellow;
+  border-radius: 2px;
 }
 .qrcode {
   padding: 1rem;

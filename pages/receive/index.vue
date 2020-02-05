@@ -78,11 +78,13 @@ h4 {
   border: 1px solid yellow;
   padding: 5px;
   background: #696b6a;
+  border-radius: 2px;
 }
 .key span {
   word-wrap: break-word;
   overflow-wrap: anywhere;
   background: red;
+  border-radius: 2px;
 }
 .qrcode {
   padding: 1rem;

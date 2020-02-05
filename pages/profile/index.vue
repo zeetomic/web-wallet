@@ -29,9 +29,9 @@
           <div class="info">
             <h1>Your Information</h1>
             <div class="detail">
-              <p>First_Name : {{ user_profile.first_name }}</p>
-              <p>Middle_Name : {{ user_profile.mid_name }}</p>
-              <p>Last_Name : {{ user_profile.last_name }}</p>
+              <p v-show="user_profile.first_name">First_Name : {{ user_profile.first_name }}</p>
+              <p v-show="user_profile.midname">Middle_Name : {{ user_profile.mid_name }}</p>
+              <p v-show="user_profile.last_name">Last_Name : {{ user_profile.last_name }}</p>
               <p>Gender : {{ user_profile.gender }}</p>
             </div>
             <div class="detail" v-if="user_profile.wallet != null">
