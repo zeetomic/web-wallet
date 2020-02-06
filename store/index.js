@@ -1,7 +1,7 @@
 import cookieparser from "cookieparser";
 
 export const actions = {
-  async nuxtServerInit ({commit, dispatch}, {req, res, app}) {
+  async nuxtServerInit ({ commit }, { req }) {
     if(!req.headers.cookie) return;
 
     const parsed = cookieparser.parse(req.headers.cookie);

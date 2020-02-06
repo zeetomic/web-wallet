@@ -111,7 +111,7 @@
           <div class="key">
             <div class="qrcode">
               <!-- <qrcode-vue :value="this.user_profile.wallet" :size="200"></qrcode-vue> -->
-              <vue-qr size="250" :dotScale="0.5" :logoSrc="zee" margin="10" :text="this.user_profile.wallet"></vue-qr>
+              <vue-qr :size="250" :dotScale="0.5" :logoSrc="zee" :margin="10" :text="this.user_profile.wallet"></vue-qr>
             </div>
             <span class="wallet_key">{{this.user_profile.wallet }}</span>
           </div>
