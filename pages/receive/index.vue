@@ -2,12 +2,11 @@
   <div class="page">
     <el-row>
       <el-col>
-        <el-card class="card" v-loading="loading">
+        <el-card class="card">
           <h2>Wallet:</h2>
           <div class="DialogReceive">
             <div class="key">
               <div class="qrcode">
-                <!-- <qrcode-vue :value="user_profile.wallet" :size="200" background="#fafafa"></qrcode-vue> -->
                 <vue-qr size="250" :dotScale="0.5" :logoSrc="zee" margin="10" :text="user_profile.wallet"></vue-qr>
               </div>
               <span>{{ user_profile.wallet }}</span>
@@ -31,25 +30,46 @@
 </template>
 
 <script>
-import QrcodeVue from "qrcode.vue";
-import { mixinReceive } from "@/plugins/mixins/mixin_receive.js";
+// import { mixinReceive } from "@/plugins/mixins/mixin_receive.js";
 import { mapGetters } from "vuex";
+import axios from 'axios';
 
 export default {
   middleware: ["auth"],
-  components: {
-    QrcodeVue
-  },
-  mixins: [mixinReceive],
+  // mixins: [mixinReceive],
   data() {
     return {
       zee: require("~/assets/zee1.png"),
-      loading: true
     };
   },
-  created() {
-    this.handleReceive();
+  asyncData({req, res}) {
+    let token;
+    if (process.server) {
+      const jwtCookie = req.headers.cookie
+        .split(";")
+        .find(c => c.trim().startsWith("jwt="));
+      if (!jwtCookie) {
+        return;
+      }
+      token = jwtCookie.split("=")[1];
+    }
+    if (process.client) {
+      token = Cookie.get("jwt");
+    }
+    const config = {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    };
+    return axios.get(process.env.apiUrl + "/userprofile", config)
+      .then((res) => {
+        return { user_profile: res.data }
+      })
+      .catch()
   }
+  // created() {
+  //   this.handleReceive();
+  // }
 };
 </script>
 
