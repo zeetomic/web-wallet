@@ -8,7 +8,7 @@
             <div class="key">
               <div class="qrcode">
                 <!-- <qrcode-vue :value="user_profile.wallet" :size="200" background="#fafafa"></qrcode-vue> -->
-                <vue-qr size="250" :dotScale="0.5" :logoSrc="zee" margin="10" :text="this.user_profile.wallet"></vue-qr>
+                <vue-qr size="250" :dotScale="0.5" :logoSrc="zee" margin="10" :text="user_profile.wallet"></vue-qr>
               </div>
               <span>{{ user_profile.wallet }}</span>
             </div>
