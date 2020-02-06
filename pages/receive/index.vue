@@ -6,7 +6,6 @@
           <h2>Wallet:</h2>
           <div class="DialogReceive">
             <div class="key">
-              <h4>Wallet:</h4>
               <div class="qrcode">
                 <!-- <qrcode-vue :value="user_profile.wallet" :size="200" background="#fafafa"></qrcode-vue> -->
                 <vue-qr size="250" :dotScale="0.5" :logoSrc="zee" margin="10" :text="this.user_profile.wallet"></vue-qr>

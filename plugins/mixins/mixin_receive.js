@@ -13,17 +13,6 @@ export const mixinReceive = {
     // },
     methods: {
         handleReceive() {
-            // this.$store.dispatch('graph/query_User', {
-            //     id: Cookies.get('id')
-            // })
-            // .then(() => {
-            //     if(this.loading) {
-            //         this.loading = this.$store.state.graph.loading;
-
-            //     } else {
-            //         this.dialogVisible_Receive = true;
-            //     }
-            // })
             this.$store.dispatch('users/GETUserProfile')
                 .then(_=> {
                     this.user_profile = this.$store.state.users.user_profile

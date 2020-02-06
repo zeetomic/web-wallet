@@ -126,20 +126,9 @@ export const actions = {
       })
   },
 // GET_UserProfile
-  async GETUserProfile({ commit }, data) {
+  async GETUserProfile({ commit }) {
     let token;
-    if (process.server) {
-      const jwtCookie = req.headers.cookie
-        .split(";")
-        .find(c => c.trim().startsWith("jwt="));
-      if (!jwtCookie) {
-        return;
-      }
-      token = jwtCookie.split("=")[1];
-    }
-    if (process.client) {
-      token = Cookie.get("jwt");
-    }
+    token = Cookie.get("jwt");
     const config = {
       headers: {
         Authorization: "Bearer " + token
@@ -148,6 +137,9 @@ export const actions = {
     await axios.get(process.env.apiUrl + "/userprofile", config)
       .then((res) => {
         commit("setUserProfile",res.data);
+      })
+      .catch((err) => {
+        this.$router.push('/login');
       })
   },
 // Get Wallet
