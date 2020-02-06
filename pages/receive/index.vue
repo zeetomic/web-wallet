@@ -9,7 +9,7 @@
               <div class="qrcode">
                 <no-ssr>
                 <vue-qr 
-                  :size="200" 
+                  :size="250" 
                   :dotScale="0.5" 
                   :logoSrc="zee" 
                   :margin="10" 
