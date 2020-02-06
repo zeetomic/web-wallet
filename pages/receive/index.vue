@@ -2,7 +2,7 @@
   <div class="page">
     <el-row>
       <el-col>
-        <el-card class="card">
+        <el-card class="card" v-loading="loading">
           <h2>Wallet:</h2>
           <div class="DialogReceive">
             <div class="key">
@@ -40,6 +40,7 @@ export default {
   data() {
     return {
       zee: require("~/assets/zee1.png"),
+      loading: true,
     };
   },
   asyncData({req, res}) {
@@ -63,7 +64,7 @@ export default {
     };
     return axios.get(process.env.apiUrl + "/userprofile", config)
       .then((res) => {
-        return { user_profile: res.data }
+        return { user_profile: res.data, loading: false }
       })
       .catch()
   }
