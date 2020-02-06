@@ -7,7 +7,7 @@
           <div class="DialogReceive">
             <div class="key">
               <div class="qrcode">
-                <vue-qr size="250" :dotScale="0.5" :logoSrc="zee" margin="10" :text="user_profile.wallet"></vue-qr>
+                <vue-qr size="200" :dotScale="0.5" :logoSrc="zee" margin="10" :text="user_profile.wallet"></vue-qr>
               </div>
               <span>{{ user_profile.wallet }}</span>
             </div>
@@ -30,47 +30,47 @@
 </template>
 
 <script>
-// import { mixinReceive } from "@/plugins/mixins/mixin_receive.js";
-import { mapGetters } from "vuex";
+import { mixinReceive } from "@/plugins/mixins/mixin_receive.js";
 import axios from 'axios';
+import Cookie from 'js-cookie';
 
 export default {
   middleware: ["auth"],
-  // mixins: [mixinReceive],
+  mixins: [mixinReceive],
   data() {
     return {
       zee: require("~/assets/zee1.png"),
       loading: true,
     };
   },
-  asyncData({req, res}) {
-    let token;
-    if (process.server) {
-      const jwtCookie = req.headers.cookie
-        .split(";")
-        .find(c => c.trim().startsWith("jwt="));
-      if (!jwtCookie) {
-        return;
-      }
-      token = jwtCookie.split("=")[1];
-    }
-    if (process.client) {
-      token = Cookie.get("jwt");
-    }
-    const config = {
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    };
-    return axios.get(process.env.apiUrl + "/userprofile", config)
-      .then((res) => {
-        return { user_profile: res.data, loading: false }
-      })
-      .catch()
-  }
-  // created() {
-  //   this.handleReceive();
+  // asyncData({req, res}) {
+  //   let token;
+  //   if (process.server) {
+  //     const jwtCookie = req.headers.cookie
+  //       .split(";")
+  //       .find(c => c.trim().startsWith("jwt="));
+  //     if (!jwtCookie) {
+  //       return;
+  //     }
+  //     token = jwtCookie.split("=")[1];
+  //   }
+  //   if (process.client) {
+  //     token = Cookie.get("jwt");
+  //   }
+  //   const config = {
+  //     headers: {
+  //       Authorization: "Bearer " + token
+  //     }
+  //   };
+  //   return axios.get(process.env.apiUrl + "/userprofile", config)
+  //     .then((res) => {
+  //       return { user_profile: res.data, loading: false }
+  //     })
+  //     .catch()
   // }
+  created() {
+    this.handleReceive();
+  }
 };
 </script>
 

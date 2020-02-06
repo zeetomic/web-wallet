@@ -12,8 +12,8 @@ export const mixinReceive = {
     //     }
     // },
     methods: {
-        handleReceive() {
-            this.$store.dispatch('users/GETUserProfile')
+        async handleReceive() {
+            await this.$store.dispatch('users/GETUserProfile')
                 .then(_=> {
                     this.user_profile = this.$store.state.users.user_profile
                     if(this.loading) {

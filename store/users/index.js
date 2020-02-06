@@ -127,8 +127,7 @@ export const actions = {
   },
 // GET_UserProfile
   async GETUserProfile({ commit }) {
-    let token;
-    token = Cookie.get("jwt");
+    const token = Cookie.get("jwt");
     const config = {
       headers: {
         Authorization: "Bearer " + token
