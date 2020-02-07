@@ -44,11 +44,11 @@
           <nuxt-link to="/activity">
             <el-button type="primary">Activity</el-button>
           </nuxt-link>
-          <nuxt-link to="/changepassword">
-            <el-button type="danger">Change Password</el-button>
-          </nuxt-link>
           <nuxt-link to="/changepins">
             <el-button type="danger">Change PIN</el-button>
+          </nuxt-link>
+          <nuxt-link to="/changepassword">
+            <el-button type="danger">Change Password</el-button>
           </nuxt-link>
         </el-card>
       </el-col>

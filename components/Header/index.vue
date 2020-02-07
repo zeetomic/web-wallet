@@ -119,6 +119,9 @@ export default {
     list-style: none;
     margin: 3rem 15%;
   }
+  span {
+    padding-left: 15px;
+  }
   span,
   i {
     color: #fafafa;

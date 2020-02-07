@@ -32,7 +32,7 @@ html {
 .card {
   background: #131722;
   border: 0.5px solid #363c4e;
-  border-radius: 5px;
+  border-radius: 2px;
 }
 .el-input__inner {
   background: #353535;

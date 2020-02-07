@@ -38,13 +38,11 @@
 </template>
 
 <script>
-// import { mixinReceive } from "@/plugins/mixins/mixin_receive.js";
 import axios from 'axios';
 import Cookie from 'js-cookie';
 
 export default {
   middleware: ["auth"],
-  // mixins: [mixinReceive],
   data() {
     return {
       zee: require("~/assets/zee1.png"),
@@ -93,9 +91,6 @@ export default {
       alert("Copied the text: " + copyText.value);
     }
   }
-  // created() {
-  //   this.handleReceive();
-  // }
 };
 </script>
 
@@ -120,12 +115,6 @@ h4 {
 .DialogReceive {
   text-align: center;
   padding: 1rem;
-}
-.key {
-  border: 1px solid yellow;
-  padding: 5px;
-  background: #696b6a;
-  border-radius: 2px;
 }
 .key span {
   word-wrap: break-word;

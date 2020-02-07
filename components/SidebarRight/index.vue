@@ -318,7 +318,7 @@ export default {
   border: 1px solid red;
   border-radius: 4px;
   padding: 5px;
-  background: #696b6a;
+  background: #141b35;
 }
 .key .wallet_key {
   padding: 2px;
