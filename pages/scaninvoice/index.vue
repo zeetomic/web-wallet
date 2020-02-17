@@ -11,7 +11,6 @@
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
         :before-upload="submitDoc"
-        v-loading="loading"
       >
         <img v-if="imageUrl" :src="imageUrl" class="avatar" />
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
