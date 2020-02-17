@@ -75,7 +75,24 @@ export default {
       this.showlink = false;
     },
     handleLogOut() {
-      this.$store.dispatch("users/Logout");
+      this.CloseBurger();
+      this.$confirm('Are you sure you want to log out?', 'Warning', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning'
+      })
+      .then(async () => {
+        await this.$store.dispatch("users/Logout");
+        await this.$message({
+          type: 'success',
+          message: 'Log Out completed',
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: 'Log Out canceled'
+        });          
+      });
     }
   }
 };

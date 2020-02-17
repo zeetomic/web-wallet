@@ -204,7 +204,23 @@ export default {
     },
     // Other Function
     handleLogout() {
-      this.$store.dispatch("users/Logout");
+      this.$confirm('Are you sure you want to log out?', 'Warning', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning'
+      })
+      .then(() => {
+        this.$message({
+          type: 'success',
+          message: 'Log Out completed',
+        });
+        this.$store.dispatch("users/Logout");
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: 'Log Out canceled'
+        });          
+      });
     }
   }
 };

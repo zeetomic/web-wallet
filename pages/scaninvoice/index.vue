@@ -11,6 +11,7 @@
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
         :before-upload="submitDoc"
+        v-loading="loading"
       >
         <img v-if="imageUrl" :src="imageUrl" class="avatar" />
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -70,7 +71,7 @@
           </el-card>
           <el-form>
             <el-form-item label="Authorization Code:">
-              <el-input v-model="ruleForm.authorization_code" autocomplete="off"></el-input>
+              <el-input v-model="ruleForm.authorization_code" autocomplete="off" type="password" show-password></el-input>
             </el-form-item>
           </el-form>
           <div style="padding-left: 5px; color: red">
@@ -94,7 +95,6 @@ import axios from 'axios';
 import Cookie from 'js-cookie';
 import {mapState} from 'vuex';
 import { mixinMsg } from "@/plugins/mixins/mixin_msg.js";
-
 
 export default {
   mixins: [mixinMsg],
@@ -165,8 +165,10 @@ export default {
       })
   },
   methods: {
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+    async handleAvatarSuccess(res, file) {
+      this.loading = true;
+      this.imageUrl = await URL.createObjectURL(file.raw);
+      this.loading = false;
     },
     submitDoc(file) {
       let formData = new FormData();
@@ -222,6 +224,7 @@ export default {
               message: this.apiMsg,
               type: this.type
             });
+            this.$router.push('/');
           } else {
             this.$notify({
               title: 'failed',
