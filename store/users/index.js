@@ -328,6 +328,31 @@ export const actions = {
         this.$router.push('/login')
       })
   },
+// Add Asset
+  async handleAddAsset({commit}, data) {
+    const token = Cookie.get("jwt");
+    const config = {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    };
+    await axios.post(process.env.apiUrl + '/addasset', {
+      asset_code: data.asset_code,
+      asset_issuer: data.asset_issuer
+    }, config)
+    .then(async(res)=> {
+      if(res.data.message) {
+        commit('setMsg', res.data.message);
+        commit('setType', 'success');
+      } else {
+        commit('setMsg', res.data.error.message);
+        commit('setType', 'error');
+      }
+    })
+    .catch((err)=> {
+      this.$router.push('/login')
+    })
+  },
 // LogOut
   Logout({ commit }) {
     // Clear user in state (to remove token in client AKA. vuex)

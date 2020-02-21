@@ -41,6 +41,7 @@
               </p>
             </div>
           </div>
+          <el-button type="warning" @click="dialogVisible = true">Add Asset</el-button>
           <nuxt-link to="/activity">
             <el-button type="primary">Activity</el-button>
           </nuxt-link>
@@ -53,6 +54,24 @@
         </el-card>
       </el-col>
     </el-row>
+    <el-dialog :visible.sync="dialogVisible" width="60%" :before-close="handleClose">
+      <h3 slot="title" style="color: black">Please fill the form</h3>
+      <el-form
+        :model="ruleForm"
+        ref="ruleForm"
+        :rules="rules"
+        label-width="120px"
+        class="demo-ruleForm"
+      >
+        <el-form-item label="Asset Code: " prop="asset_code">
+          <el-input v-model="ruleForm.asset_code" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Asset Issuer: " prop="asset_issuer">
+          <el-input v-model="ruleForm.asset_issuer"></el-input>
+        </el-form-item>
+      </el-form>
+      <el-button type="primary" @click="handleAddAsset()">Add Asset</el-button>
+    </el-dialog>
   </div>
 </template>
  
@@ -60,9 +79,35 @@
 import { mapState } from "vuex";
 import axios from "axios";
 import Cookie from "js-cookie";
+import { mixinMsg } from "@/plugins/mixins/mixin_msg.js";
 
 export default {
   middleware: ["auth"],
+  mixins: [mixinMsg],
+  data() {
+    return {
+      dialogVisible: false,
+      ruleForm: {
+        asset_code: '',
+        asset_issuer: ''
+      }
+    }
+  },
+  methods: {
+    handleAddAsset() {
+      this.$store.dispatch('users/handleAddAsset', {
+        asset_code: this.ruleForm.asset_code,
+        asset_issuer: this.ruleForm.asset_issuer
+      })
+      .then(() => {
+        this.$notify({
+          title: 'Message',
+          message: this.apiMsg,
+          type: this.type
+        });
+      })
+    }
+  },
   asyncData ({req, res, error, redirect}) {
     let token;
     if (process.server) {

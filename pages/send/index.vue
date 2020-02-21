@@ -91,7 +91,6 @@
 
 <script>
 import VuePin from "@/components/VuePin";
-// import { mixinPay } from "@/plugins/mixins/mixin_pay.js";
 import { mixinMsg } from "@/plugins/mixins/mixin_msg.js";
 import axios from 'axios';
 import Cookie from 'js-cookie';
@@ -102,7 +101,6 @@ export default {
     VuePin
   },
   mixins: [mixinMsg],
-  // mixins: [mixinPay],
   data() {
     const validatePayto = (rule, value, callback) => {
       if (!value) {
@@ -188,28 +186,6 @@ export default {
         memo: this.ruleForm.memo,
         pin: this.ruleForm.pin_code
       })
-      // const token = Cookie.get('jwt');
-      // const config = {
-      //   headers: {
-      //   "Authorization": "Bearer "+ token,
-      //   }
-      // };
-      // await axios.post(process.env.apiUrl + "/sendpayment", {
-      //   asset_code: this.ruleForm.asset_code,
-      //   destination: this.ruleForm.payto,
-      //   amount: this.ruleForm.amount,
-      //   memo: this.ruleForm.memo,
-      //   pin: this.ruleForm.pin_code,
-      // }, config)
-
-      // .then((res)=> {
-      //   const h = this.$createElement;
-      //   this.$notify({
-      //     title: 'Message',
-      //     message: h('i', { style: 'color: teal' }, res.data.message)
-      //   });
-      //   this.loading = false;
-      // })
       .then(_=> {
         if(this.type !== 'error') {
           this.$notify({

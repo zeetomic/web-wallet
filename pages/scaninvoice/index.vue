@@ -8,11 +8,10 @@
       <el-upload
         class="avatar-uploader"
         action="#"
-        :show-file-list="false"
-        :on-success="handleAvatarSuccess"
+        :on-success="handlePictureCardPreview"
         :before-upload="submitDoc"
       >
-        <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+        <img v-if="imageUrl" :src="imageUrl" class="avatar">
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
       </el-upload>
     </el-row>
@@ -51,7 +50,7 @@
             <el-input v-model="ruleForm.amount" type="number" autocomplete="off"></el-input>
           </el-form-item>
         </el-form>
-      <el-dialog
+        <el-dialog
           width="90%"
           title="Invoice Information"
           :visible.sync="innerVisible"
@@ -96,6 +95,7 @@ import {mapState} from 'vuex';
 import { mixinMsg } from "@/plugins/mixins/mixin_msg.js";
 
 export default {
+  middleware: ["auth"],
   mixins: [mixinMsg],
   data() {
     var validateStoreLocation = (rule, value, callback) => {
@@ -164,10 +164,8 @@ export default {
       })
   },
   methods: {
-    async handleAvatarSuccess(res, file) {
-      this.loading = true;
-      this.imageUrl = await URL.createObjectURL(file.raw);
-      this.loading = false;
+    async handlePictureCardPreview(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
     },
     submitDoc(file) {
       let formData = new FormData();
@@ -184,7 +182,7 @@ export default {
           this.documents_uri = await res.data.uri;
         });
     },
-    async handleSubmitInvoice() {
+    handleSubmitInvoice() {
       if(!this.imageUrl) {
         this.msg = "Please Upload Your Invoice Picture";
         setTimeout(()=> {
