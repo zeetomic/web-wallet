@@ -57,7 +57,4 @@ export default {
   width: 26px;
   margin: 5px; 
 } */
-.v-data-table {
-  background: transparent;
-}
 </style>

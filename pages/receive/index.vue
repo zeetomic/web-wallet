@@ -147,9 +147,6 @@ export default {
   word-wrap: break-word;
   overflow-wrap: anywhere;
 }
-.v-card {
-  background: #1e232e!important;
-}
 .qr_code {
   padding-top: 2rem;
 }

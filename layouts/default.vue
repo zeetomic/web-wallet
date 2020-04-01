@@ -34,6 +34,12 @@ export default {
   .v-tabs > .v-tabs-bar {
     background: transparent!important;
   }
+  .v-data-table {
+    background: transparent!important;
+  }
+  .v-card {
+    background: #1e232e!important;
+  }
 /* SmartPhone */
 @media only screen and (max-width: 500px) {
   .v-content {

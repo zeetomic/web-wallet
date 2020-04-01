@@ -270,10 +270,6 @@ export default {
 .balance h1 {
   color: #fafafa;
 }
-.v-card {
-  background: #1e232e!important;;
-}
-/* RESPONSIVE */
 /* SmartPhone */
 @media only screen and (max-width: 500px) {
   .balance h1 {

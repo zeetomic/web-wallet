@@ -64,9 +64,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.v-card {
-  background: #1e232e!important;
-}
-</style>
