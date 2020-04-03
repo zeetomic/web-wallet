@@ -2,7 +2,7 @@
   <div>
     <v-row>
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
-        <v-card class="pa-2">
+        <v-card class="pa-2" elevation="4">
           <h2 >Koompi Wallet</h2>
           <v-row>
             <v-col class="d-flex justify-center" v-if="!portfolio.error">
@@ -17,7 +17,7 @@
         </v-card>
       </v-col>
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
-        <v-card class="pa-2">
+        <v-card class="pa-2" elevation="4">
           <h2>My Porfolio</h2>
           <div v-if="portfolio.error" style="padding-top: 1rem">
             <h4 style="color: red">{{ portfolio.error.message }}</h4>

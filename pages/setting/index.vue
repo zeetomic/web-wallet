@@ -4,7 +4,7 @@
     <h2>Setting</h2>
     <v-row>
       <v-col>
-        <v-card class="pa-2" elevation="12">
+        <v-card class="pa-2" elevation="4">
           <br/>
           <div class="d-flex flex-column">
             <div class="pt-5"></div>

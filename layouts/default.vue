@@ -29,7 +29,7 @@ export default {
 
 <style>
   .v-application {
-    background: #344051!important;
+    background-color: #222834!important;
   }
   .v-tabs > .v-tabs-bar {
     background: transparent!important;
@@ -38,7 +38,7 @@ export default {
     background: transparent!important;
   }
   .v-card {
-    background: #1e232e!important;
+    background: rgba(75, 83, 95, 0.2)!important;
   }
 /* SmartPhone */
 @media only screen and (max-width: 500px) {

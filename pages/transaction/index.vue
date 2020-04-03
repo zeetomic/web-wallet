@@ -1,5 +1,5 @@
 <template>
-  <v-card class="pa-2" elevation="12">
+  <v-card class="pa-2" elevation="4">
     <h2>Transaction</h2>
     <v-tabs height="40" color="white">
       <v-tab>All</v-tab>

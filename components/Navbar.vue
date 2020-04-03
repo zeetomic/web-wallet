@@ -87,7 +87,7 @@
       </v-list-item-group>
 
       <template v-slot:append>
-        <v-list-item-group>
+        <v-list-item-group color="#79c4ff">
           <v-list-item v-for="(item, index) in BottomNavItems" :key="index" :to="item.path">
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -137,7 +137,7 @@ export default {
 <style>
   .v-navigation-drawer,
   .v-app-bar {
-    background: #222834!important;
+    background: #1A1E27!important;
   }
   .v-navigation-drawer:not(.v-navigation-drawer--floating) .v-navigation-drawer__border {
     background-color: rgba(255, 255, 255, 0) !important;

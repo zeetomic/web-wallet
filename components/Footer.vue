@@ -34,7 +34,7 @@
 
 <style scoped>
 .v-bottom-navigation {
-  background: #222834!important;
+  background: #1A1E27!important;
 }
 .v-item-group.v-bottom-navigation .v-btn {
   min-width: 50px;

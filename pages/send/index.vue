@@ -2,13 +2,13 @@
   <div class="container">
     <v-row>
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
-        <v-card class="pa-4" elevation="12">
+        <v-card class="pa-4" elevation="4">
           <h4 class="font-weight-thin headline">ZEETOMIC TOKEN</h4>
           <Portfolio :portfolio="portfolio"/>
         </v-card>
       </v-col>
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
-        <v-card class="pa-2" elevation="12">
+        <v-card class="pa-2" elevation="4">
           <h2>Send Token</h2>
           <br>
           <div v-if="portfolio.error">
