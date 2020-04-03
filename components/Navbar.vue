@@ -9,37 +9,46 @@
         <v-icon>fa fa-bars</v-icon>
       </v-btn>
       <v-spacer></v-spacer>
-        <v-btn text disabled>
+        <!-- <v-btn text disabled>
           <v-avatar size="36px">
             <v-icon>fas fa-user</v-icon>
           </v-avatar>
-          <div v-if="$fetchState.pending">
-            <br />
-            <v-skeleton-loader
-              :loading="true"
-              height="94"
-              type="text"
-              class="mx-auto"
-            >
-            </v-skeleton-loader>
-          </div>
-          <div v-else-if="$fetchState.error">
-            <p>
-              Error while fetching posts: {{ error }}
-            </p>
-          </div>
-          <div v-else>
             <span class="font-weight-thin white--text">
               {{ user_profile.first_name + ' ' + user_profile.mid_name + ' ' + user_profile.last_name }}
             </span>
-          </div>
-        </v-btn>
+        </v-btn> -->
       <v-menu
-        bottom
+        :close-on-content-click="false"
+        :nudge-width="200"
+        offset-y
         transition="scale-transition"
       >
         <template v-slot:activator="{ on }">
-          <v-btn small text v-on="on">
+          <v-btn
+            text
+            color="white"
+            dark
+            v-on="on"
+            rounded
+          >
+            <v-icon>fas fa-bell</v-icon>
+          </v-btn>
+        </template>
+        <v-sheet elevation="12">
+          <div style="height: 320px; width: 50px"></div>
+        </v-sheet>
+      </v-menu>
+      <v-menu
+        transition="scale-transition"
+        bottom
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn 
+            rounded
+            small 
+            text 
+            v-on="on"
+          >
             <v-icon>fa fa-chevron-down</v-icon>
           </v-btn>
         </template>
@@ -59,11 +68,14 @@
       app
     >
       <v-list-item-group color="#79c4ff">
-        <br/>
-        <v-row class="d-flex justify-center align-center" v-if="!mini">
+        <div class="pt-4"></div>
+        <v-row class="d-flex justify-center" v-if="!mini">
           <img src="~/assets/zeetomic-logo-header.png" alt="zeetomic" class="zee_header">
         </v-row>
-        <div style="padding-top: 3rem"></div>
+        <v-row class="d-flex justify-center" v-if="mini">
+          <img src="~/assets/z-logo.png" alt="z-logo" class="z_logo">
+        </v-row>
+        <div style="padding-top: 2rem" ></div>
         <v-list-item v-for="(item, index) in navItems" :key="index" :to="item.path">
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -73,13 +85,24 @@
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
+
+      <template v-slot:append>
+        <v-list-item-group>
+          <v-list-item v-for="(item, index) in BottomNavItems" :key="index" :to="item.path">
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title class="font-weight-medium white--text">{{ item.text }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        </v-list-item-group>
+      </template>
     </v-navigation-drawer>
   </nav>
 </template>
 
 <script>
-import Cookie from 'js-cookie';
-
 export default {
   data() {
     return {
@@ -93,32 +116,12 @@ export default {
         { path: '/transaction' , text: 'Transaction', icon: 'fas fa-list' },
         { path: '/send' , text: 'Send', icon: 'fas fa-arrow-up' },
         { path: '/receive' , text: 'Receive', icon: 'fas fa-arrow-down' },
+      ],
+      BottomNavItems: [
         { path: '/setting' , text: 'Setting', icon: 'fas fa-cog' },
+        // { path: '', text: 'Account', icon: 'fas fa-user-alt'}
       ]
     }
-  },
-  async fetch() {
-    let token ;
-    if(process.server) {
-      const req = this.$nuxt.context.req
-      const jwtCookie = req.headers.cookie
-      .split(";")
-      .find(c => c.trim().startsWith("jwt="));
-      if (!jwtCookie){return}
-      token = jwtCookie.split("=")[1];
-    }
-    if(process.client) {
-      token = Cookie.get('jwt');
-    }
-    const config = {
-      headers: {
-        "Authorization": "Bearer "+ token,
-      }
-    };
-    await this.$axios.get(process.env.baseApi + '/userprofile', config)
-    .then(res => {
-      this.user_profile = res.data
-    })
   },
   methods: {
     handleDrawer() {
@@ -140,7 +143,12 @@ export default {
     background-color: rgba(255, 255, 255, 0) !important;
   }
   .zee_header {
-    width: 120px;
+    width: 136px;
+    height: 21px;
+  }
+  .z_logo {
+    width: 34px;
+    height: 34px;
   }
   @media only screen and (max-width: 500px) {
     .Desktop {

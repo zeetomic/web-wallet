@@ -8,49 +8,35 @@
             <h4 class="font-weight-thin headline">ZEETOMIC TOKEN</h4>
           </v-col>
           <v-col cols="6">
-            <div v-if="$fetchState.pending">
-              <br/>
-              <v-skeleton-loader
-                :loading="true"
-                height="94"
-                type="list-item-two-line"
-              >
-              </v-skeleton-loader>
-            </div>
-            <div v-else-if="$fetchState.error">
-              <p>Error while fetching posts: {{ error }}</p>
-            </div>
-            <div v-else>
-              <v-row class="d-flex justify-center">
-                <client-only>
-                <vue-qr 
-                  alt="qr-code"
-                  class="qr_code desktop"
-                  :logoSrc="ke" 
-                  :margin="10" 
-                  :text="user_profile.wallet">
-                </vue-qr>
-                <vue-qr 
-                  alt="qr-code"
-                  class="qr_code mobile"
-                  :size="130"
-                  :logoSrc="ke" 
-                  :margin="10" 
-                  :text="user_profile.wallet">
-                </vue-qr>
-                </client-only>
-              </v-row>
-              <p class="wallet_key font-weight-medium subtitle-1">{{user_profile.wallet}}</p>
-              <input type="text" id="myInput" v-model="user_profile.wallet" />
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn absolute dark fab top left color="primary" v-on="on" @click="onCopy()">
-                    <v-icon>fa fa-copy</v-icon>
-                  </v-btn>
-                </template>
-                <span>Click To Copy</span>
-              </v-tooltip>
-            </div>
+            <v-row class="d-flex justify-center">
+              <client-only>
+              <vue-qr 
+                alt="qr-code"
+                class="qr_code desktop"
+                :logoSrc="ke" 
+                :margin="10" 
+                :text="user_profile.wallet">
+              </vue-qr>
+              <vue-qr 
+                alt="qr-code"
+                class="qr_code mobile"
+                :size="130"
+                :logoSrc="ke" 
+                :margin="10" 
+                :text="user_profile.wallet">
+              </vue-qr>
+              </client-only>
+            </v-row>
+            <p class="wallet_key font-weight-medium subtitle-1">{{user_profile.wallet}}</p>
+            <input type="text" id="myInput" v-model="user_profile.wallet" />
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-btn absolute dark fab top left color="primary" v-on="on" @click="onCopy()">
+                  <v-icon>fa fa-copy</v-icon>
+                </v-btn>
+              </template>
+              <span>Click To Copy</span>
+            </v-tooltip>
           </v-col>
         </v-row>
         </v-card>
@@ -58,21 +44,7 @@
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
         <v-card class="pa-2" elevation="12">
           <h2>Receive Token</h2>
-          <div v-if="$fetchState.pending">
-            <br/>
-            <v-skeleton-loader
-              :loading="true"
-              height="120"
-              type="table-tbody"
-            >
-            </v-skeleton-loader>
-          </div>
-          <div v-else-if="$fetchState.error">
-            <p>Error while fetching posts: {{ error }}</p>
-          </div>
-          <div v-else>
-            <History :history="history"/>
-          </div>
+          <History :history="history"/>
         </v-card>
       </v-col>
     </v-row>
@@ -81,7 +53,7 @@
 
 <script>
 const History = () => import("~/components/Table/History");
-import Cookie from 'js-cookie';
+import { receive } from '~/utils/asyncData/receive.js';
 
 export default {
   middleware: ['auth'],
@@ -90,39 +62,10 @@ export default {
   },
   data () {
     return {
-      history: null,
-      user_profile: null,
-
       ke: require("~/assets/zee_qr.png"),
     }
   },
-  async fetch() {
-    let token ;
-    if(process.server) {
-      const req = this.$nuxt.context.req
-      const jwtCookie = req.headers.cookie
-      .split(";")
-      .find(c => c.trim().startsWith("jwt="));
-      if (!jwtCookie){return}
-      token = jwtCookie.split("=")[1];
-    }
-    if(process.client) {
-      token = Cookie.get('jwt');
-    }
-    const config = {
-      headers: {
-        "Authorization": "Bearer "+ token,
-      }
-    };
-    await this.$axios.get(process.env.baseApi + '/trx-history', config)
-    .then((res) => {
-      this.history = res.data
-    })
-    await this.$axios.get(process.env.baseApi + '/userprofile', config)
-    .then(res => {
-      this.user_profile = res.data
-    })
-  },
+  asyncData: receive,
   methods: {
     onCopy() {
       /* Get the text field */

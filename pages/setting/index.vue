@@ -7,32 +7,19 @@
         <v-card class="pa-2" elevation="12">
           <br/>
           <div class="d-flex flex-column">
-            <div v-if="$fetchState.pending" style="padding: 0 2rem">
-              <br/>
-              <v-skeleton-loader
-                :loading="true"
-                height="94"
-                type="text"
-              >
-              </v-skeleton-loader>
-            </div>
-            <div v-else-if="$fetchState.error">
-              <p>Error while fetching posts: {{ error }}</p>
-            </div>
-            <div v-else>
+            <div class="pt-5"></div>
+            <v-row class="justify-center">
               <div class="pt-5"></div>
-              <v-row class="justify-center">
-                <span class="font-weight-thin display-1" v-if="user_profile.first_name || user_profile.mid_name || user_profile.last_name">
-                  {{ user_profile.first_name + ' ' + user_profile.mid_name + ' ' + user_profile.last_name }}
-                </span>
-              <div v-else>
+              <span style="text-align: center" class="font-weight-thin display-1" v-if="user_profile.first_name || user_profile.mid_name || user_profile.last_name">
+                {{ user_profile.first_name + ' ' + user_profile.mid_name + ' ' + user_profile.last_name }}
+              </span>
+              <div v-else style="text-align: center">
                 <span style="color: #415593" class="font-weight-thin headline">Please Verify Your Account</span>
                 <v-row class="d-flex justify-center pt-6">
                   <v-btn to="/verify" color="primary">Verify Account</v-btn>
                 </v-row>
               </div>
-              </v-row>
-            </div>
+            </v-row>
           </div>
           <div class="setting_button">
             <v-row>
@@ -138,15 +125,13 @@
 import { message } from "@/utils/Mixin/message.js";
 import { validateAddAsset } from '@/utils/Mixin/validateAddAsset.js';
 import { validateChangePassword } from '@/utils/Mixin/validateChangePassword.js';
-import Cookie from 'js-cookie';
+import { user_profile } from '~/utils/asyncData/user-profile.js';
 
 export default {
   middleware: ['auth'],
   mixins: [message, validateAddAsset, validateChangePassword],
   data() {
     return {
-      user_profile: null,
-
       dialogChangePassword: false,
       dialogAddAsset: false,
       loading: false,
@@ -159,29 +144,7 @@ export default {
       asset_issuer: ''
     }
   },
-  async fetch() {
-    let token ;
-    if(process.server) {
-      const req = this.$nuxt.context.req
-      const jwtCookie = req.headers.cookie
-      .split(";")
-      .find(c => c.trim().startsWith("jwt="));
-      if (!jwtCookie){return}
-      token = jwtCookie.split("=")[1];
-    }
-    if(process.client) {
-      token = Cookie.get('jwt');
-    }
-    const config = {
-      headers: {
-        "Authorization": "Bearer "+ token,
-      }
-    };
-    await this.$axios.get(process.env.baseApi + '/userprofile', config)
-    .then(res => {
-      this.user_profile = res.data
-    })
-  },
+  asyncData: user_profile,
   methods: {
     openAddAsset() {
       this.dialogAddAsset = true;

@@ -4,109 +4,81 @@
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
         <v-card class="pa-4" elevation="12">
           <h4 class="font-weight-thin headline">ZEETOMIC TOKEN</h4>
-          <div v-if="$fetchState.pending">
-            <br/>
-            <v-skeleton-loader
-              :loading="true"
-              height="120"
-              type="table-tbody"
-            >
-            </v-skeleton-loader>
-          </div>
-          <div v-else-if="$fetchState.error">
-            <p>Error while fetching posts: {{ error }}</p>
-          </div>
-          <div v-else>
-            <Portfolio :portfolio="portfolio"/>
-          </div>
+          <Portfolio :portfolio="portfolio"/>
         </v-card>
       </v-col>
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
         <v-card class="pa-2" elevation="12">
           <h2>Send Token</h2>
           <br>
-          <div v-if="$fetchState.pending">
-            <br/>
-            <v-skeleton-loader
-              :loading="true"
-              height="94"
-              type="list-item-two-line"
+          <div v-if="portfolio.error">
+            <h4 style="color: red">{{ portfolio.error.message }}</h4>
+            <br>
+            <v-btn rounded color="pink darken-3 white--text" to="/getwallet">Get Wallet</v-btn>
+          </div>
+          <v-container v-if="!portfolio.error">
+            <v-form v-show="showForm" ref="form"
+              v-model="valid"
+              lazy-validation
             >
-            </v-skeleton-loader>
-          </div>
-          <div v-else-if="$fetchState.error">
-            <p>Error while fetching posts: {{ error }}</p>
-          </div>
-          <div v-else>
-            <div v-if="portfolio.error">
-              <h4 style="color: red">{{ portfolio.error.message }}</h4>
-              <br>
-              <v-btn rounded color="pink darken-3 white--text" to="/getwallet">Get Wallet</v-btn>
-            </div>
-            <v-container v-if="!portfolio.error">
-              <v-form v-show="showForm" ref="form"
-                v-model="valid"
-                lazy-validation
-              >
-                <div v-show="optionSend" class="mobile">
-                  <v-btn @click="handleScan()" outlined>Scan QR</v-btn>
-                  <v-btn @click="handleType()" outlined>Type Wallet</v-btn>
-                </div>
-                <div style="padding-top: 1rem"></div>
-                <v-text-field
-                  label="Receiver Address"
-                  v-show="textfield"
-                  v-model="destination"
-                  :rules="destinationRule"
-                  outlined
-                ></v-text-field>
-                <v-text-field
-                  class="desktop"
-                  label="Receiver Address"
-                  v-model="destination"
-                  :rules="destinationRule"
-                  outlined
-                ></v-text-field>
-                <v-select
-                  outlined
-                  :items="portfolio.map(
-                    portfolio => portfolio.asset_code !== undefined ? 
-                    portfolio.asset_code : portfolio.asset_type
-                  )"
-                  label="Asset Type"
-                  :rules="asset_codeRule"
-                  v-model="asset_code"
-                ></v-select>
-                <v-text-field
-                  label="Amount"
-                  v-model="amount"
-                  :rules="amountRule"
-                  outlined
-                ></v-text-field>
-                <v-text-field
-                  label="Memo"
-                  v-model="memo"
-                  outlined
-                ></v-text-field>
-                <v-btn class="primary" large style="width: 100%" @click="handleNext()">Next</v-btn>
-              </v-form>
-              <div v-show="showPin">
-                <v-row class="d-flex justify-center">
-                  <div class="font-weight-light">
-                    <p>PIN Code</p>
-                    <client-only>
-                      <VuePin v-model="pin" :onlyNumber="true"/>
-                    </client-only>
-                    <div class="pt-10"></div>
-                    <p class="error white--text">{{ this.pin_msg }}</p>
-                  </div>
-                </v-row>
-                <v-row class="d-flex justify-center">
-                  <v-btn color="success" x-large style="width: 100%" :loading="loading" @click="handleSend()">Send</v-btn>
-                </v-row>
+              <div v-show="optionSend" class="mobile">
+                <v-btn @click="handleScan()" outlined>Scan QR</v-btn>
+                <v-btn @click="handleType()" outlined>Type Wallet</v-btn>
               </div>
-            </v-container>
-          </div>
+              <div style="padding-top: 1rem"></div>
+              <v-text-field
+                label="Receiver Address"
+                v-show="textfield"
+                v-model="destination"
+                :rules="destinationRule"
+                outlined
+              ></v-text-field>
+              <v-text-field
+                class="desktop"
+                label="Receiver Address"
+                v-model="destination"
+                :rules="destinationRule"
+                outlined
+              ></v-text-field>
+              <v-select
+                outlined
+                :items="portfolio.map(
+                  portfolio => portfolio.asset_code !== undefined ? 
+                  portfolio.asset_code : portfolio.asset_type
+                )"
+                label="Asset Type"
+                :rules="asset_codeRule"
+                v-model="asset_code"
+              ></v-select>
+              <v-text-field
+                label="Amount"
+                v-model="amount"
+                :rules="amountRule"
+                outlined
+              ></v-text-field>
+              <v-text-field
+                label="Memo"
+                v-model="memo"
+                outlined
+              ></v-text-field>
+              <v-btn class="primary" large style="width: 100%" @click="handleNext()">Next</v-btn>
+            </v-form>
+            <div v-show="showPin">
+              <v-row class="d-flex justify-center">
+                <div class="font-weight-light">
+                  <p>PIN Code</p>
+                  <client-only>
+                    <VuePin v-model="pin" :onlyNumber="true"/>
+                  </client-only>
+                  <div class="pt-10"></div>
+                  <p class="error white--text">{{ this.pin_msg }}</p>
+                </div>
+              </v-row>
+              <v-row class="d-flex justify-center">
+                <v-btn color="success" x-large style="width: 100%" :loading="loading" @click="handleSend()">Send</v-btn>
+              </v-row>
+            </div>
+          </v-container>
         </v-card>
       </v-col>  
     <!-- Dialog Scan -->
@@ -131,7 +103,7 @@ import { validateSend } from '~/utils/Mixin/validateSend.js';
 import { message } from '~/utils/Mixin/message.js';
 import VuePin from '~/components/VuePin';
 import Portfolio from '~/components/Table/Portfolio.vue';
-import Cookie from 'js-cookie';
+import { portfolio } from '~/utils/asyncData/portfolio.js';
 
 export default {
   middleware: ['auth'],
@@ -142,8 +114,6 @@ export default {
   mixins: [validateSend, message],
   data() {
     return {
-      portfolio: null,
-
       dialogScan: false,
       optionSend: true,
       textfield: false,
@@ -165,29 +135,7 @@ export default {
       loading: false,
     }
   },
-  async fetch() {
-    let token ;
-    if(process.server) {
-      const req = this.$nuxt.context.req
-      const jwtCookie = req.headers.cookie
-      .split(";")
-      .find(c => c.trim().startsWith("jwt="));
-      if (!jwtCookie){return}
-      token = jwtCookie.split("=")[1];
-    }
-    if(process.client) {
-      token = Cookie.get('jwt');
-    }
-    const config = {
-      headers: {
-        "Authorization": "Bearer "+ token,
-      }
-    };
-    await this.$axios.get(process.env.baseApi + '/portforlio', config)
-    .then((res) => {
-      this.portfolio = res.data
-    })
-  },
+  asyncData: portfolio,
   methods: {
     async handleType() {
       this.textfield = await true;
