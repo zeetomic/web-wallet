@@ -42,6 +42,7 @@ export default {
   */
   modules: [
     '@nuxtjs/toast',
+    '@nuxtjs/pwa',
     '@nuxtjs/axios'
   ],
   /*
