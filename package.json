@@ -12,12 +12,15 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.9.7",
+    "@nuxtjs/pwa": "^3.0.0-beta.20",
     "@nuxtjs/toast": "^3.3.0",
     "chart.js": "^2.9.3",
     "js-cookie": "^2.2.1",
+    "jspdf": "^1.5.3",
     "nuxt": "^2.12.2",
     "vue-chartjs": "^3.5.0",
-    "vue-qr": "^2.2.1"
+    "vue-qr": "^2.2.1",
+    "vue-qrcode-reader": "^2.1.1"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0",
