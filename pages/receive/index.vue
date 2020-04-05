@@ -52,7 +52,7 @@
 </template>
 
 <script>
-const History = () => import("~/components/Table/History");
+const History = () => import(/* webpackChunkName: "History" */ '~/components/Table/History.vue');
 import { receive } from '~/utils/asyncData/receive.js';
 
 export default {

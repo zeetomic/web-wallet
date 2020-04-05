@@ -99,10 +99,10 @@
 </template>
 
 <script>
+const VuePin = () => import('~/components/VuePin.vue');
+const Portfolio = () => import('~/components/Table/Portfolio.vue');
 import { validateSend } from '~/utils/Mixin/validateSend.js';
 import { message } from '~/utils/Mixin/message.js';
-import VuePin from '~/components/VuePin';
-import Portfolio from '~/components/Table/Portfolio.vue';
 import { portfolio } from '~/utils/asyncData/portfolio.js';
 
 export default {

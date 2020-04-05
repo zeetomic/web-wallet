@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import History from '~/components/Table/History.vue';
+const History = () => import(/* webpackChunkName: "History" */ '~/components/Table/History.vue');
 import { history } from '~/utils/asyncData/trx-history.js';
 
 export default {

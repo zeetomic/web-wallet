@@ -37,7 +37,7 @@
 <script>
 import PieChart from '~/plugins/PieChart.js';
 import { portfolio } from '~/utils/asyncData/portfolio.js';
-import Portfolio from '~/components/Table/Portfolio.vue';
+const Portfolio = () => import('~/components/Table/Portfolio.vue');
 
 export default {
   middleware: ['auth'],

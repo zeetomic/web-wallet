@@ -12,17 +12,12 @@
 </template>
 
 <script>
-import Navbar from '~/components/Navbar.vue';
-import Footer from '~/components/Footer.vue';
+const Navbar = () => import(/* webpackChunkName: "History" */ '~/components/Navbar.vue');
+const Footer = () => import(/* webpackChunkName: "History" */ '~/components/Footer.vue');
 export default {
   components: {
     Navbar,
     Footer
-  },
-  data() {
-    return {
-      
-    }
   }
 }
 </script>
@@ -40,16 +35,16 @@ export default {
   .v-card {
     background: rgba(75, 83, 95, 0.2)!important;
   }
-/* SmartPhone */
-@media only screen and (max-width: 500px) {
-  .v-content {
-    padding: 0!important;
+  /* SmartPhone */
+  @media only screen and (max-width: 500px) {
+    .v-content {
+      padding: 0!important;
+    }
   }
-}
-/* Tablet */
-@media only screen and (min-width: 501px) and (max-width: 767px) {
-  .v-content {
-    padding: 0!important;
-  } 
-}
+  /* Tablet */
+  @media only screen and (min-width: 501px) and (max-width: 767px) {
+    .v-content {
+      padding: 0!important;
+    } 
+  }
 </style>
