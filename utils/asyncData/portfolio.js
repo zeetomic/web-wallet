@@ -24,6 +24,6 @@ export const portfolio = function asyncData({req, redirect, $axios}) {
       }
     })
     .catch((e) => {
-      // redirect('/login');
+      redirect('/login');
     })
 }
