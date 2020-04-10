@@ -194,6 +194,35 @@ export const actions = {
       }
     })
   },
+// Upload Invoice
+  async handleAddReceipt({commit},data) {
+    const token = Cookie.get("jwt");
+    const config = {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    };
+    await this.$axios
+      .post(process.env.baseApi + "/addreceipt", {
+        receipt_no: data.receipt_no,
+        amount: data.amount,
+        location: data.location,
+        approval_code: data.approval_code,
+        image_uri: data.image_uri
+      }, config)
+      .then(async (res) => {
+        if(res.data.message) {
+          await commit('set_msg', res.data.message);
+          await commit('set_type', 'success');
+        } else {
+          await commit('set_msg', res.data.error.message);
+          await commit('set_type', 'error');
+        }
+      })
+      .catch((err) => {
+        this.$router.push('/login');
+      })
+  },
 // LogOut
   handleLogout({commit}) {
     Cookie.remove('jwt');

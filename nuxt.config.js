@@ -30,6 +30,7 @@ export default {
     { src: '~/plugins/chart', ssr: false },
     { src: '~/plugins/vue-qr', ssr: false },
     { src: '~/plugins/vue-qr-reader', ssr: false },
+    { src: '~/plugins/image-uploader', ssr: false },
   ],
   /*
   ** Nuxt.js dev-modules
@@ -86,7 +87,7 @@ export default {
     baseApi: 'https://testnet-api.zeetomic.com/pub/v1'
   },
   icon: {
-    iconSrc: './assets/z-logo.png',
+    iconSrc: './assets/z-logo_copy.png',
   },
   manifest: {
     short_name: 'ZEETOMIC Wallet',

@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <Navbar/>
+    <NavbarMobile/>
     <v-content>
       <v-container>
         <nuxt/>
@@ -13,10 +14,12 @@
 
 <script>
 const Navbar = () => import(/* webpackChunkName: "History" */ '~/components/Navbar.vue');
+const NavbarMobile = () => import(/* webpackChunkName: "History" */ '~/components/NavbarMobile.vue');
 const Footer = () => import(/* webpackChunkName: "History" */ '~/components/Footer.vue');
 export default {
   components: {
     Navbar,
+    NavbarMobile,
     Footer
   }
 }

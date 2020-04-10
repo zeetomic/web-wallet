@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <v-container>
+  <v-container>
     <h2>Setting</h2>
     <v-row>
       <v-col>
@@ -9,7 +8,12 @@
           <div class="d-flex flex-column">
             <div class="pt-5"></div>
             <v-row class="justify-center">
-              <div class="pt-5"></div>
+              <v-avatar size="70" color="indigo">
+                <v-icon>fas fa-user</v-icon>
+              </v-avatar>
+            </v-row>
+            <div class="pt-5"></div>
+            <v-row class="justify-center">
               <span style="text-align: center" class="font-weight-thin display-1" v-if="user_profile.first_name || user_profile.mid_name || user_profile.last_name">
                 {{ user_profile.first_name + ' ' + user_profile.mid_name + ' ' + user_profile.last_name }}
               </span>
@@ -85,7 +89,7 @@
       </v-sheet>
     </v-dialog>
     <!-- Dialog AddAsset -->
-     <v-dialog
+    <v-dialog
       v-model="dialogAddAsset"
       width="90%"
     >
@@ -117,8 +121,7 @@
         </div>
       </v-sheet>
     </v-dialog>
-    </v-container>
-  </div>
+  </v-container>
 </template>
 
 <script>

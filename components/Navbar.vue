@@ -150,6 +150,7 @@ export default {
     width: 34px;
     height: 34px;
   }
+  /* SmartPhone */
   @media only screen and (max-width: 500px) {
     .Desktop {
       display: none!important;
@@ -159,6 +160,6 @@ export default {
   @media only screen and (min-width: 501px) and (max-width: 767px) {
     .Desktop {
       display: none!important;
-    }
+    } 
   }
 </style>
