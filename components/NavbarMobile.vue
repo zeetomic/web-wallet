@@ -121,7 +121,7 @@ export default {
   }
   .nav {
     width: 0;
-    height: 100%;
+    min-height: 100vh;
     background: #1A1E27;
     position: absolute;
     z-index: 9;

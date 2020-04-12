@@ -1,0 +1,61 @@
+<template>
+  <v-form 
+    ref="form"
+    v-model="valid"
+    lazy-validation
+  >
+    <v-text-field
+      label="Phone number"
+      v-model="phone"
+      type="tel"
+      :rules="phoneRule"
+      outlined
+      required
+    ></v-text-field>
+    <v-text-field
+      label="Password"
+      v-model="password"
+      type="password"
+      :rules="passwordRule"
+      outlined
+      required
+    ></v-text-field>
+    <v-btn class="primary" large style="width: 100%" :loading="loading" @click="handleLogin()">Login</v-btn>
+  </v-form>
+</template>
+
+<script>
+import { message } from "~/utils/Mixin/message.js";
+import { validateAuth } from '~/utils/Mixin/validateAuth.js';
+
+export default {
+  mixins: [message, validateAuth],
+  data() {
+    return {
+      phone: '+855',
+      password: '',
+
+      loading: false,
+    }
+  },
+  methods: {
+    handleLogin() {
+      if (this.$refs.form.validate()) {
+        this.loading = true;
+        this.$store.dispatch('users/handleLogin', {
+          phone: this.phone,
+          password: this.password
+        })
+        .then(() => {
+          if(this.type === 'error'){ 
+            this.$toast.error(this.msg);
+          } else {
+            this.$toast.success('Login Successfully');
+          }
+          this.loading = false;
+        })
+      }
+    }
+  }
+}
+</script>

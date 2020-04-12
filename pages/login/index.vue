@@ -2,44 +2,47 @@
   <div class="container">
     <v-row>
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6" class="pa-6">
-        <div>
-        <span class="font-weight-bold display-1">Login To 
-          <!-- <img src="~/assets/koompi_title-min.png" alt="koompi" style="width: 180px; margin: -12px 0"> -->
-          ZEETOMIC
-        </span>
-        </div>
-        <div style="padding: 1.6rem"></div>
-        <v-form 
-          ref="form"
-          v-model="valid"
-          lazy-validation
+        <v-tabs
+          v-model="tabs"
+          centered
+          fixed-tabs
+          background-color="transparent"
         >
-          <v-text-field
-            label="Phone number"
-            v-model="phone"
-            type="tel"
-            :rules="phoneRule"
-            outlined
-            required
-          ></v-text-field>
-          <v-text-field
-            label="Password"
-            v-model="password"
-            type="password"
-            :rules="passwordRule"
-            outlined
-            required
-          ></v-text-field>
-          <v-btn class="primary" large style="width: 100%" :loading="loading" @click="handleLogin()">Login</v-btn>
-          <v-row>
-            <v-col>
-              <v-btn text to="/login/loginwithemail">Login With Email</v-btn>
-            </v-col>
-            <v-col class="d-flex justify-end">
-              <v-btn text to="/register">Sign Up</v-btn>
-            </v-col>
-          </v-row>
-        </v-form>
+          <v-tab>Login</v-tab>
+          <v-tab>Sign Up</v-tab>
+        </v-tabs>
+        <br/>
+        <v-tabs-items 
+          v-model="tabs"
+          style="background: transparent"
+        >
+          <v-tab-item>
+            <span class="font-weight-bold display-1"> 
+              Login To ZEETOMIC
+            </span>
+            <div class="pt-4" v-show="!login_email">
+              <Login/>
+              <v-btn text class="btn" @click="login_email = true">Login With Email</v-btn>
+            </div>
+            <div class="pt-4" v-show="login_email">
+              <LoginEmail />
+              <v-btn text class="btn" @click="login_email = false">Login With Phone</v-btn>
+            </div>
+          </v-tab-item>
+          <v-tab-item>
+            <span class="font-weight-bold display-1"> 
+              Sign Up To ZEETOMIC
+            </span>
+            <div class="pt-4" v-show="!register_email">
+              <Register/>
+              <v-btn text class="btn" @click="register_email = true">Sign Up with email</v-btn>
+            </div>
+            <div class="pt-4" v-show="register_email">
+              <RegisterEmail/>
+              <v-btn text class="btn" @click="register_email = false">Sign Up with email</v-btn>
+            </div>
+          </v-tab-item>
+        </v-tabs-items>
       </v-col>
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6"></v-col>
     </v-row>
@@ -47,37 +50,24 @@
 </template>
 
 <script>
-import { message } from "@/utils/Mixin/message.js";
-import { validateAuth } from '@/utils/Mixin/validateAuth.js';
+const Login = () => import('~/components/UI/Login.vue');
+const LoginEmail = () => import('~/components/UI/LoginEmail.vue');
+const Register = () => import('~/components/UI/Register.vue');
+const RegisterEmail = () => ('~/components/UI/RegisterEmail.vue');
 
 export default {
   layout: 'login_register',
-  mixins: [message, validateAuth],
+  components: {
+    Login,
+    LoginEmail,
+    Register,
+    RegisterEmail
+  },
   data() {
     return {
-      phone: '+855',
-      password: '',
-
-      loading: false,
-    }
-  },
-  methods: {
-    handleLogin() {
-      if (this.$refs.form.validate()) {
-        this.loading = true;
-        this.$store.dispatch('users/handleLogin', {
-          phone: this.phone,
-          password: this.password
-        })
-        .then(() => {
-          if(this.type === 'error'){ 
-            this.$toast.error(this.msg);
-          } else {
-            this.$toast.success('Login Successfully');
-          }
-          this.loading = false;
-        })
-      }
+      tabs: null,
+      login_email: false,
+      register_email: false
     }
   }
 }
@@ -88,5 +78,8 @@ export default {
     width: 100%;
     min-height: 100vh;
     padding: 15% 0;
+  }
+  .btn {
+    padding: 22px 0!important;
   }
 </style>
