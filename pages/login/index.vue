@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <v-row>
-      <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6" class="pa-6">
+      <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
         <v-tabs
           v-model="tabs"
           centered
@@ -44,7 +44,7 @@
           </v-tab-item>
         </v-tabs-items>
       </v-col>
-      <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6"></v-col>
+      <!-- <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6"></v-col> -->
     </v-row>
   </div>
 </template>
@@ -53,7 +53,7 @@
 const Login = () => import('~/components/UI/Login.vue');
 const LoginEmail = () => import('~/components/UI/LoginEmail.vue');
 const Register = () => import('~/components/UI/Register.vue');
-const RegisterEmail = () => ('~/components/UI/RegisterEmail.vue');
+const RegisterEmail = () => import('~/components/UI/RegisterEmail.vue');
 
 export default {
   layout: 'login_register',
@@ -77,9 +77,12 @@ export default {
   .container {
     width: 100%;
     min-height: 100vh;
-    padding: 15% 0;
+    padding-top: 10%;
   }
   .btn {
     padding: 22px 0!important;
+  }
+  .row {
+    min-height: 100vh;
   }
 </style>
