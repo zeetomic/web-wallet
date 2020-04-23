@@ -12,7 +12,7 @@
     </no-ssr>
   <!--Dialog-->
     <v-dialog v-model="dialog" persistent max-width="290">
-      <v-card>
+      <v-sheet>
         <v-card-title class="headline"><v-icon color="yellow">fas fa-exclamation-triangle</v-icon>Message</v-card-title>
         <v-card-text class="border">
           <span class="white--text">{{this.msg}}</span>
@@ -23,7 +23,7 @@
             <v-icon dark right>fas fa-check</v-icon>
           </v-btn>
         </v-card-actions>
-      </v-card>
+      </v-sheet>
     </v-dialog>
   </div>
 </template>
