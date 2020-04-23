@@ -9,7 +9,7 @@
       <div style="padding-top: 5px"></div>
       <v-icon>fas fa-arrow-up</v-icon>
     </v-btn>
-    <v-btn absolute fab top color="#8CC361" class="btn-zee" to="uploadinvoice">
+    <v-btn absolute fab top color="#8CC361" class="btn-zee" to="scaninvoice">
       <img src="~/assets/white_z.png" alt="z">
     </v-btn>
     <v-btn text color="#79c4ff" to="/receive">
@@ -17,7 +17,7 @@
       <div style="padding-top: 5px"></div>
       <v-icon>fas fa-arrow-down</v-icon>
     </v-btn>
-  </v-bottom-navigation>
+  </v-bottom-navigation>  
 </template>
 
 <style scoped>

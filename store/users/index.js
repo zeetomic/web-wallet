@@ -223,6 +223,30 @@ export const actions = {
         this.$router.push('/login');
       })
   },
+// ScanInvoice
+  async handleScanInvoice({commit}, data) {
+    const token = Cookie.get("jwt");
+    const config = {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    };
+    await this.$axios.post(process.env.baseApi + "/get-rewards", {
+      hashs: data.hashs
+    }, config)
+    .then(async (res) => {
+      if(res.data.message) {
+        await commit('set_msg', res.data.message);
+        await commit('set_type', 'success');
+      } else {
+        await commit('set_msg', res.data.error.message);
+        await commit('set_type', 'error');
+      }
+    })
+    .catch(() => {
+      // this.$router.push('/login');
+    })
+  },
 // LogOut
   handleLogout({commit}) {
     Cookie.remove('jwt');

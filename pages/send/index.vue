@@ -86,7 +86,7 @@
         v-model="dialogScan"
         width="90%"
       >
-        <div class="scanqr">
+        <div>
           <qrcode-drop-zone @decode="onDecode">
             <qrcode-stream :camera="camera" @decode="onDecode" @init="onInit" />
           </qrcode-drop-zone>
