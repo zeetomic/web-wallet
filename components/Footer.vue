@@ -30,7 +30,7 @@
   background: #1A1E27!important;
 }
 .v-item-group.v-bottom-navigation .v-btn {
-  min-width: 50px;
+  min-width: 55px;
 }
 /* //Normal */
 @media only screen and (min-width: 768px) and (max-width: 1199px){

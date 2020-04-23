@@ -10,7 +10,7 @@
       <qrcode-capture v-if="noStreamApiSupport" @decode="onDecode" />
       <p class="error">{{ this.error }}</p>
     </no-ssr>
-   <!-- Dialog   -->
+  <!--Dialog-->
     <v-dialog v-model="dialog" persistent max-width="290">
       <v-card>
         <v-card-title class="headline"><v-icon color="yellow">fas fa-exclamation-triangle</v-icon>Message</v-card-title>
