@@ -30,7 +30,6 @@ export default {
     { src: '~/plugins/chart', ssr: false },
     { src: '~/plugins/vue-qr', ssr: false },
     { src: '~/plugins/vue-qr-reader', ssr: false },
-    { src: '~/plugins/image-uploader', ssr: false },
   ],
   /*
   ** Nuxt.js dev-modules

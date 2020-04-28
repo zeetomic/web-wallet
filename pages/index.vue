@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <Spinner v-if="$fetchState.pending"/>
+  <p v-else-if="$fetchState.error">Error while fetching posts: {{ $fetchState.error.message }}</p>
+  <div class="pt-4" v-else>
     <v-row>
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
         <v-card class="pa-2" elevation="4">
-          <h2 >ZEETOMIC Wallet</h2>
+          <h2>ZEETOMIC Wallet</h2>
           <v-row>
             <v-col class="d-flex justify-center" v-if="!portfolio.error">
               <client-only>
@@ -35,8 +37,9 @@
 </template>
 
 <script>
+import Spinner from '~/components/Spinner.vue';
 import PieChart from '~/plugins/PieChart.js';
-import { portfolio } from '~/utils/asyncData/portfolio.js';
+import { portfolio } from '~/utils/fetch/portfolio.js';
 const Portfolio = () => import('~/components/Table/Portfolio.vue');
 
 export default {
@@ -44,17 +47,22 @@ export default {
   components : {
     PieChart,
     Portfolio,
+    Spinner
   },
-  asyncData: portfolio,
   data() {
     return {
       datacollection: null,
       width: 300,
+      portfolio: null
     }
   },
-  mounted() {
-    if(!this.portfolio.error) this.fillData();
+  activated() {
+    // Call fetch again if last fetch more than 30 sec ago
+    if (this.$fetchState.timestamp <= (Date.now() - 30000)) {
+      this.$fetch();
+    }
   },
+  fetch: portfolio,
   computed: {
     chart () {
       return {
@@ -78,7 +86,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-
-</style>

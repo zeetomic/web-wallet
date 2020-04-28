@@ -4,7 +4,7 @@
     <NavbarMobile/>
     <v-content>
       <v-container>
-        <nuxt/>
+        <nuxt keep-alive/>
       </v-container>
     </v-content>
     <div style="margin-top: 3rem"></div>

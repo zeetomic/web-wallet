@@ -1,7 +1,8 @@
 import Cookie from 'js-cookie';
 
-export const history = function asyncData ({req, redirect, $axios}) {
+export const history = async function history() {
   let token;
+  const req = this.$nuxt.context.req;
   if (process.server) {
     const jwtCookie = req.headers.cookie
       .split(";")
@@ -19,11 +20,11 @@ export const history = function asyncData ({req, redirect, $axios}) {
       Authorization: "Bearer " + token
     }
   };
-  return $axios.get(process.env.baseApi + "/trx-history", config)
+  await this.$axios.get(process.env.baseApi + "/trx-history", config)
     .then((res) => {
-      return { history: res.data }
+      this.history = res.data
     })
-    .catch((e) => {
-      redirect('/login');
+    .catch(() => {
+      this.$router.push('/login');
     })
 }

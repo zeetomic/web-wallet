@@ -114,14 +114,14 @@ export default {
   }
   .nav-bg {
     width: 100vw;
-    min-height: 100vh;
+    min-height: 100%;
     background: rgba(0, 0, 0, 0.4);
     position: absolute;
     z-index: 8;
   }
   .nav {
     width: 0;
-    min-height: 100vh;
+    min-height: 100%;
     background: #1A1E27;
     position: absolute;
     z-index: 9;

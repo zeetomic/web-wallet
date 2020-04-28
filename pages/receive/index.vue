@@ -1,5 +1,7 @@
 <template>
-  <div class="container">
+  <Spinner v-if="$fetchState.pending"/>
+  <p v-else-if="$fetchState.error">Error while fetching posts: {{ $fetchState.error.message }}</p>
+  <div class="container" v-else>
     <v-row>
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
         <v-card class="pa-4" elevation="4">
@@ -52,20 +54,30 @@
 </template>
 
 <script>
+import Spinner from '~/components/Spinner.vue';
 const History = () => import(/* webpackChunkName: "History" */ '~/components/Table/History.vue');
-import { receive } from '~/utils/asyncData/receive.js';
+import { receive } from '~/utils/fetch/receive.js';
 
 export default {
   middleware: ['auth'],
   components: {
-    History
+    History,
+    Spinner
   },
   data () {
     return {
       ke: require("~/assets/zee_qr.png"),
+      user_profile: null,
+      history: null
     }
   },
-  asyncData: receive,
+  activated() {
+    // Call fetch again if last fetch more than 30 sec ago
+    if (this.$fetchState.timestamp <= (Date.now() - 30000)) {
+      this.$fetch();
+    }
+  },
+  fetch: receive,
   methods: {
     onCopy() {
       /* Get the text field */

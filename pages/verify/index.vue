@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="headline font-weight-medium">Verify Account</p>
-    <v-card class="pa-8" elevation="12">
+    <v-card class="pa-8" elevation="6">
       <v-form
         ref="form"
         v-model="valid"
@@ -34,15 +34,15 @@
           :rules="genderRule"
         >
         </v-select>
-        <v-btn color="primary" :loading="loading" @click="handleVerify()">Verify</v-btn>
+        <v-btn color="primary" :loading="loading" @click="handleVerify()">setup</v-btn>
       </v-form>
     </v-card>
   </div>
 </template>
 
 <script>
-import { validateVerify } from '@/utils/Mixin/validateVerify.js';
-import { message } from '@/utils/Mixin/message.js';
+import { validateVerify } from '~/utils/Mixin/validateVerify.js';
+import { message } from '~/utils/Mixin/message.js';
 export default {
   middleware: ['auth'],
   mixins: [validateVerify, message],

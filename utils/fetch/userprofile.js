@@ -1,7 +1,8 @@
 import Cookie from 'js-cookie';
 
-export const user_profile = function asyncData({req, redirect, $axios}) {
+export const userprofile = async function() {
   let token;
+  const req = this.$nuxt.context.req;
   if (process.server) {
     const jwtCookie = req.headers.cookie
       .split(";")
@@ -19,11 +20,11 @@ export const user_profile = function asyncData({req, redirect, $axios}) {
       Authorization: "Bearer " + token
     }
   };
-  return $axios.get(process.env.baseApi + "/userprofile", config)
+  await this.$axios.get(process.env.baseApi + "/userprofile", config)
     .then((res) => {
-      return { user_profile: res.data }
+      this.user_profile = res.data
     })
-    .catch((e) => {
-      redirect('/login');
+    .catch(() => {
+      this.$router.push('/login');
     })
 }

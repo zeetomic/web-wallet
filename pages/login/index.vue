@@ -50,10 +50,10 @@
 </template>
 
 <script>
-const Login = () => import('~/components/UI/Login.vue');
-const LoginEmail = () => import('~/components/UI/LoginEmail.vue');
-const Register = () => import('~/components/UI/Register.vue');
-const RegisterEmail = () => import('~/components/UI/RegisterEmail.vue');
+const Login = () => import('~/components/Form/Login.vue');
+const LoginEmail = () => import('~/components/Form/LoginEmail.vue');
+const Register = () => import('~/components/Form/Register.vue');
+const RegisterEmail = () => import('~/components/Form/RegisterEmail.vue');
 
 export default {
   layout: 'login_register',

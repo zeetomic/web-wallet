@@ -1,8 +1,9 @@
 import Cookie from 'js-cookie';
 
-export const getBranches = function asyncData ({req, $axios, redirect}) {
+export const portfolio = async function() {
   let token;
-  if (req && process.server) {
+  const req = this.$nuxt.context.req;
+  if (process.server) {
     const jwtCookie = req.headers.cookie
       .split(";")
       .find(c => c.trim().startsWith("jwt="));
@@ -17,13 +18,12 @@ export const getBranches = function asyncData ({req, $axios, redirect}) {
       Authorization: "Bearer " + token
     }
   };
-  return $axios.get(process.env.baseApi + "/get-all-branches", config)
-    .then((res) => {
-      return { branch: res.data }
+  await this.$axios.get(process.env.baseApi + "/portforlio", config)
+    .then(async(res) => {
+      this.portfolio = await res.data;
+      if(!this.portfolio.error) this.fillData();
     })
-    .catch((e) => {
-      redirect({
-        name: 'login'
-      })
+    .catch(() => {
+      this.$router.push('/login');
     })
 }
