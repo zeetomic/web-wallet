@@ -13,7 +13,7 @@
         <v-card class="pa-2" elevation="4">
           <h2>Send Token</h2>
           <div v-if="portfolio.error">
-            <GetwalletMSG :portfolio="portfolio"/>
+            <Getwallet :portfolio="portfolio"/>
           </div>
           <v-container v-if="!portfolio.error">
             <v-form 
@@ -82,7 +82,6 @@
           </v-container>
         </v-card>
       </v-col>  
-    <!-- Dialog Scan -->
       <v-dialog
         v-model="dialogScan"
         width="90%"
@@ -101,27 +100,31 @@
 
 <script>
 import Spinner from '~/components/Spinner.vue';
-import GetwalletMSG from '~/components/UI/GetwalletMSG.vue';
-const VuePin = () => import('~/components/VuePin.vue');
-const Portfolio = () => import('~/components/Table/Portfolio.vue');
+import Getwallet from '~/components/UI/Getwallet.vue';
+import VuePin from '~/components/VuePin.vue';
+import Portfolio from '~/components/Table/Portfolio.vue';
+
+// const VuePin = () => import('~/components/VuePin.vue');
+// const Portfolio = () => import('~/components/Table/Portfolio.vue');
 import { validateSend } from '~/utils/Mixin/validateSend.js';
 import { message } from '~/utils/Mixin/message.js';
-import { portfolio } from '~/utils/fetch/portfolio_send.js';
+import { portfolio_send } from '~/utils/fetch/portfolio_send.js';
 
 export default {
   middleware: ['auth'],
   components: {
     VuePin,
     Portfolio,
-    Spinner
+    Spinner,
+    Getwallet
   },
   mixins: [validateSend, message],
   data() {
     return {
-      portfolio: [],
+      portfolio: null,
 
-      dialogScan: false,
       optionSend: true,
+      dialogScan: false,
       textfield: false,
       showForm: true,
       showPin: false,
@@ -147,7 +150,7 @@ export default {
       this.$fetch();
     }
   },
-  fetch: portfolio,
+  fetch: portfolio_send,
   methods: {
     async handleType() {
       this.textfield = await true;

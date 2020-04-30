@@ -13,14 +13,12 @@
             <v-row class="d-flex justify-center">
               <client-only>
               <vue-qr 
-                alt="qr-code"
                 class="qr_code desktop"
                 :logoSrc="ke" 
                 :margin="10" 
                 :text="user_profile.wallet">
               </vue-qr>
               <vue-qr 
-                alt="qr-code"
                 class="qr_code mobile"
                 :size="130"
                 :logoSrc="ke" 

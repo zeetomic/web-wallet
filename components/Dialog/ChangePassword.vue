@@ -57,7 +57,8 @@ export default {
       new_password: '',
       new_password1: '',
 
-      loading: false
+      loading: false,
+      dialogChangePassword: false
     }
   },
 

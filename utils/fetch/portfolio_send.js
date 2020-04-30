@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie';
 
-export const portfolio = async function() {
+export const portfolio_send = async function() {
   let token;
   const req = this.$nuxt.context.req;
   if (process.server) {

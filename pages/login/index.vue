@@ -39,7 +39,7 @@
             </div>
             <div class="pt-4" v-show="register_email">
               <RegisterEmail/>
-              <v-btn text class="btn" @click="register_email = false">Sign Up with email</v-btn>
+              <v-btn text class="btn" @click="register_email = false">Sign Up with phone</v-btn>
             </div>
           </v-tab-item>
         </v-tabs-items>

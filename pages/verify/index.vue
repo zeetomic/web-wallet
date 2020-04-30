@@ -34,7 +34,7 @@
           :rules="genderRule"
         >
         </v-select>
-        <v-btn color="primary" :loading="loading" @click="handleVerify()">setup</v-btn>
+        <v-btn style="width: 100%" large color="primary" :loading="loading" @click="handleVerify()">setup</v-btn>
       </v-form>
     </v-card>
   </div>

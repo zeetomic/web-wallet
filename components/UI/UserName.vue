@@ -12,9 +12,9 @@
         {{ user_profile.first_name + ' ' + user_profile.mid_name + ' ' + user_profile.last_name }}
       </span>
       <div v-else style="text-align: center">
-        <span style="color: #415593" class="font-weight-thin headline">Please Verify Your Account</span>
-        <v-row class="d-flex justify-center pt-6">
-          <v-btn to="/verify" color="primary">Verify Account</v-btn>
+        <span class="font-weight-thin headline">Please Setup Your User Profile</span>
+        <v-row class="d-flex justify-center pt-4">
+          <v-btn to="/verify" color="primary">Setup profile</v-btn>
         </v-row>
       </div>
     </v-row>

@@ -45,7 +45,7 @@
 export default {
   props: {
     history: {
-      type: Array,
+      type: Object,
       required: true
     }
   }

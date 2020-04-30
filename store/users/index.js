@@ -73,7 +73,13 @@ export const actions = {
       password: data.password
     })
     .then(async(res) => {
-      await commit('set_msg', res.data.message);
+      if(res.data.message === "Successfully registered!") {
+        await commit('set_msg', res.data.message);
+        await commit('set_type', 'success');
+      } else {
+        await commit('set_msg', res.data.message);
+        await commit('set_type', 'error');
+      }
     })
   },
 // Register with Email
@@ -83,7 +89,13 @@ export const actions = {
       password: data.password
     })
     .then(async(res) => {
-      await commit('set_msg', res.data.message);
+      if(res.data.message === "Successfully registered!") {
+        await commit('set_msg', res.data.message);
+        await commit('set_type', 'success');
+      } else {
+        await commit('set_msg', res.data.message);
+        await commit('set_type', 'error');
+      }
     })
   },
 // Get Wallet 

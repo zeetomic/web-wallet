@@ -10,7 +10,7 @@
 export default {
   props: {
     portfolio: {
-      type: Array,
+      type: Object,
       required: true
     }
   }

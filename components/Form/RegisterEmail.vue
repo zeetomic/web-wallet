@@ -53,7 +53,11 @@ export default {
           password: this.password
         })
         .then(() => {
-          this.$toast.show(this.msg);
+          if(this.type === 'success') {
+            this.$toast.success(this.msg);
+          } else {
+            this.$toast.error(this.msg);
+          }
           this.loading = false;
         })
       }

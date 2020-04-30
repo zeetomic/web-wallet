@@ -3,7 +3,7 @@
     hide-default-footer
     hide-default-header
   >
-    <template  v-slot:header> 
+    <template v-if="portfolio.length" v-slot:header> 
       <thead>
         <tr>
           <th class="text-left" style="color: #79c4ff">Asset</th>
@@ -11,7 +11,7 @@
         </tr>
       </thead>
     </template>
-    <template  v-slot:body>
+    <template v-if="portfolio.length" v-slot:body>
       <tbody>
         <tr v-for="item in portfolio" :key="item.id">
           <td class="d-flex align-center">
@@ -24,7 +24,7 @@
       </tbody>
     </template>
     <template v-if="portfolio.error" v-slot:no-data>
-      <span>No data available</span>
+      <span class="pt-4">No data available</span>
     </template>
   </v-data-table>
 </template>
@@ -33,7 +33,7 @@
 export default {
   props: {
     portfolio: {
-      type: Array,
+      type: Object,
       required: true
     }
   }
