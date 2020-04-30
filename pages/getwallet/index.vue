@@ -26,9 +26,11 @@
       persistent
       max-width="80%"
     >
-      <v-card>
+      <v-sheet>
         <v-card-title class="headline">
-          <span style="color: "> Warning </span>
+          <span style="color: "> 
+            <v-icon color="yellow" size="24px">fas fa-exclamation-triangle</v-icon> Warning 
+          </span>
         </v-card-title>
         <v-card-text>
           Please keep your key secure. This secret key will only
@@ -37,9 +39,9 @@
         </v-card-text>
         <v-card-text>
           <h4>Public Key: </h4>
-          <span style="background-color:yellow; color:  #191819">{{ this.value.wallet }}</span>
+          <span style="background-color:yellow; color:  #191819; border-radius: 4px" class="pa-1">{{ this.value.wallet }}</span>
           <h4>Secret Key: </h4>
-          <span style="background-color:yellow">{{ this.value.seed }}</span>
+          <span style="background-color:yellow; color:  #191819; border-radius: 4px" class="pa-1">{{ this.value.seed }}</span>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -58,7 +60,7 @@
             Save PDF
           </v-btn>
         </v-card-actions>
-      </v-card>
+      </v-sheet>
     </v-dialog>
   </div>
 </template>

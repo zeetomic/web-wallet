@@ -16,12 +16,7 @@
             <Getwallet :portfolio="portfolio"/>
           </div>
           <v-container v-if="!portfolio.error">
-            <v-form 
-              v-show="showForm" 
-              ref="form"
-              v-model="valid"
-              lazy-validation
-            >
+            <v-form v-show="showForm">
               <div v-show="optionSend" class="mobile">
                 <v-btn @click="handleScan()" outlined>Scan QR</v-btn>
                 <v-btn @click="handleType()" outlined>Type Wallet</v-btn>
@@ -31,14 +26,12 @@
                 label="Receiver Address"
                 v-show="textfield"
                 v-model="destination"
-                :rules="destinationRule"
                 outlined
               ></v-text-field>
               <v-text-field
                 class="desktop"
                 label="Receiver Address"
                 v-model="destination"
-                :rules="destinationRule"
                 outlined
               ></v-text-field>
               <v-select
@@ -48,13 +41,11 @@
                   portfolio.asset_code : portfolio.asset_type
                 )"
                 label="Asset Type"
-                :rules="asset_codeRule"
                 v-model="asset_code"
               ></v-select>
               <v-text-field
                 label="Amount"
                 v-model="amount"
-                :rules="amountRule"
                 outlined
               ></v-text-field>
               <v-text-field
@@ -101,12 +92,8 @@
 <script>
 import Spinner from '~/components/Spinner.vue';
 import Getwallet from '~/components/UI/Getwallet.vue';
-import VuePin from '~/components/VuePin.vue';
-import Portfolio from '~/components/Table/Portfolio.vue';
-
-// const VuePin = () => import('~/components/VuePin.vue');
-// const Portfolio = () => import('~/components/Table/Portfolio.vue');
-import { validateSend } from '~/utils/Mixin/validateSend.js';
+const VuePin = () => import('~/components/VuePin.vue');
+const Portfolio = () => import('~/components/Table/Portfolio.vue');
 import { message } from '~/utils/Mixin/message.js';
 import { portfolio_send } from '~/utils/fetch/portfolio_send.js';
 
@@ -118,7 +105,7 @@ export default {
     Spinner,
     Getwallet
   },
-  mixins: [validateSend, message],
+  mixins: [message],
   data() {
     return {
       portfolio: null,
@@ -187,9 +174,11 @@ export default {
       }
     },
     handleNext() {
-      if (this.$refs.form.validate()) {
+      if(this.destination && this.asset_code && this.amount) {
         this.showForm = false,
         this.showPin = true
+      } else {
+        this.$toast.error('Please Field all the Information');
       }
     },
     handleSend() {
@@ -202,14 +191,20 @@ export default {
           amount: this.amount,
           memo: this.memo
         })
-        .then(() => {
+        .then(async () => {
           if(this.type === 'success') {
             this.$toast.success(this.msg);
           } else {
             this.$toast.error(this.msg);
           }
+          this.loading = await false;    
+          this.showPin = await false;
+          this.showForm = await true;
+          this.destination = await '';
+          this.asset_code = await '';
+          this.amount = await '';
+          this.pin = await '';
           this.$router.push('/');    
-          this.loading = false;    
         })
       } else {
         this.pin_msg = 'PIN is required';
