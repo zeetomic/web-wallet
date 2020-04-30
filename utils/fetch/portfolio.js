@@ -21,7 +21,9 @@ export const portfolio = async function() {
   await this.$axios.get(process.env.baseApi + "/portforlio", config)
     .then(async(res) => {
       this.portfolio = await res.data;
-      if(!this.portfolio.error) this.fillData();
+      if(!this.portfolio.error) {
+        return await this.fillData();
+      }
     })
     .catch(() => {
       this.$router.push('/login');
