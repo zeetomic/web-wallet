@@ -1,9 +1,7 @@
 <template>
   <div>
-    <div v-if="history.error">
-      <h4 style="color: red" class="pt-6">{{ history.error.message }}</h4>
-      <br>
-      <v-btn rounded color="pink darken-3 white--text" to="/getwallet">Get Wallet</v-btn>
+    <div v-if="history.error" class="pt-4">
+      <Getwallet :portfolio="history"/>
     </div>
     <v-data-table
       v-if="!history.error"
@@ -42,12 +40,17 @@
 </template>
 
 <script>
+const Getwallet = () => import('~/components/UI/Getwallet.vue');
+
 export default {
   props: {
     history: {
       type: null,
       required: true
     }
+  },
+  components: {
+    Getwallet
   }
 }
 </script>

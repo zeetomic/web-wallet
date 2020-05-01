@@ -32,7 +32,7 @@
             <v-icon color="yellow" size="24px">fas fa-exclamation-triangle</v-icon> Warning 
           </span>
         </v-card-title>
-        <v-card-text>
+        <v-card-text class="title">
           Please keep your key secure. This secret key will only
           be showed to you once.
           Zeetomic will not be able to help you recover it if lost.

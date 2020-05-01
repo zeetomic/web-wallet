@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Spinner from '~/components/Spinner.vue';
+const Spinner = () => import('~/components/Spinner.vue');
 const History = () => import('~/components/Table/History.vue');
 import { history } from '~/utils/fetch/trx-history';
 

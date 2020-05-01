@@ -90,8 +90,8 @@
 </template>
 
 <script>
-import Spinner from '~/components/Spinner.vue';
-import Getwallet from '~/components/UI/Getwallet.vue';
+const Spinner = () => import('~/components/Spinner.vue');
+const Getwallet = () => import('~/components/UI/Getwallet.vue');
 const VuePin = () => import('~/components/VuePin.vue');
 const Portfolio = () => import('~/components/Table/Portfolio.vue');
 import { message } from '~/utils/Mixin/message.js';

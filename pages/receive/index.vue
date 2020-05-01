@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import Spinner from '~/components/Spinner.vue';
+const Spinner = () => import('~/components/Spinner.vue');
 const History = () => import(/* webpackChunkName: "History" */ '~/components/Table/History.vue');
 import { receive } from '~/utils/fetch/receive.js';
 

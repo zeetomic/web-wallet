@@ -25,10 +25,10 @@
 </template>
 
 <script>
-import Spinner from '~/components/Spinner.vue';
-import UserName from '~/components/UI/UserName.vue';
-import AddAsset from '~/components/Dialog/AddAsset.vue';
-import ChangePassword from '~/components/Dialog/ChangePassword.vue';
+const Spinner = () => import('~/components/Spinner.vue');
+const UserName = () => import('~/components/UI/UserName.vue');
+const AddAsset = () => import('~/components/Dialog/AddAsset.vue');
+const ChangePassword = () => import('~/components/Dialog/ChangePassword.vue');
 import { userprofile } from '~/utils/fetch/userprofile.js';
 
 export default {

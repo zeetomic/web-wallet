@@ -246,7 +246,7 @@ export const actions = {
     await this.$axios.post(process.env.baseApi + "/get-rewards", {
       hashs: data.hashs
     }, config)
-    .then(async (res) => {
+    .then(async(res) => {
       if(res.data.message) {
         await commit('set_msg', res.data.message);
         await commit('set_type', 'success');
@@ -257,6 +257,29 @@ export const actions = {
     })
     .catch(() => {
       // this.$router.push('/login');
+    })
+  },
+// Set-KYC
+  async handleSetKYC({commit}, data) {
+    const token = Cookie.get("jwt");
+    const config = {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    };
+    await this.$axios.post(process.env.baseApi + "/set-kyc", {
+      document_no: data.document_no,
+      documenttype_id: data.documenttype_id,
+      document_uri: data.document_uri,
+      face_uri: data.face_uri,
+      issue_date: data.issue_date,
+      expire_date: data.expire_date
+    })
+    .then((res) => {
+
+    })
+    .catch((err) => {
+
     })
   },
 // LogOut
