@@ -274,7 +274,7 @@ export const actions = {
       face_uri: data.face_uri,
       issue_date: data.issue_date,
       expire_date: data.expire_date
-    })
+    }, config)
     .then((res) => {
 
     })

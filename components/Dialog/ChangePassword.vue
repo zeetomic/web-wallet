@@ -4,7 +4,7 @@
     width="90%"
   >
     <template v-slot:activator="{ on }">
-      <v-btn large outlined v-on="on">Change Password</v-btn>
+      <v-btn large outlined v-on="on" style="width: 70%">Change Password</v-btn>
     </template>
     <v-sheet>
       <div class="container">

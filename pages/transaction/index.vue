@@ -4,12 +4,27 @@
   <div class="pt-4" v-else>
     <v-card class="pa-2" elevation="4">
       <h2>Transaction</h2>
-      <v-tabs height="40" color="white">
+      <v-tabs height="40" color="white" v-model="tabs">
         <v-tab>All</v-tab>
         <v-tab>Received</v-tab>
         <v-tab>Send</v-tab>
       </v-tabs>
-      <History :history="history"/>
+      <client-only>
+      <v-tabs-items 
+          v-model="tabs"
+          style="background: transparent"
+        >
+        <v-tab-item>
+          <History :history="history"/>
+        </v-tab-item>
+        <v-tab-item>
+          <History :history="history.map(his => his.from !== user_profile.wallet && his )"/>
+        </v-tab-item>
+        <v-tab-item>
+          <History :history="history.map(his => his.from === user_profile.wallet && his )"/>
+        </v-tab-item>
+      </v-tabs-items>
+      </client-only>
     </v-card>
   </div>
 </template>
@@ -27,7 +42,9 @@ export default {
   },
   data() {
     return {
-      history: null
+      history: null,
+      user_profile: null,
+      tabs: null
     }
   },
   activated() {
@@ -36,6 +53,11 @@ export default {
       this.$fetch();
     }
   },
-  fetch: history
+  fetch: history,
+  method() {
+    var filtered = array.filter(function (el) {
+      return el != null;
+    });
+  }
 }
 </script>

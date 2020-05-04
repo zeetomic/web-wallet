@@ -19,7 +19,7 @@
       </template>
       <template v-if="!history.error && history.length > 0" v-slot:body>
         <tbody>
-          <tr v-for="item in history" :key="item.id">
+          <tr v-for="item in history" :key="item.id" v-if="item.amount">
             <td class="d-flex align-center">
               <span>{{ item.asset_code !== undefined ? item.asset_code : 'Native' }}</span>
             </td>

@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie';
 
-export const history = async function history() {
+export const setting = async function() {
   let token;
   const req = this.$nuxt.context.req;
   if (process.server) {
@@ -20,16 +20,16 @@ export const history = async function history() {
       Authorization: "Bearer " + token
     }
   };
-  await this.$axios.get(process.env.baseApi + "/trx-history", config)
+  await this.$axios.get(process.env.baseApi + "/userprofile", config)
     .then((res) => {
-      this.history = res.data
+      this.user_profile = res.data
     })
     .catch(() => {
       this.$router.push('/login');
     })
-  await this.$axios.get(process.env.baseApi + "/userprofile", config)
+  await this.$axios.get(process.env.baseApi + "/get-documenttype", config)
     .then((res) => {
-      this.user_profile = res.data
+      this.doc = res.data
     })
     .catch(() => {
       this.$router.push('/login');

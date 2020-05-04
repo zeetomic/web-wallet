@@ -11,7 +11,7 @@
     </v-row> 
     <br>
     <v-row class="d-flex justify-center">
-      <v-btn class="indigo" large @click="handleSubmit()">Submit</v-btn>
+      <v-btn class="indigo" large @click="uploadImage()">Submit</v-btn>
     </v-row>
   </div>
 </template>
@@ -49,7 +49,7 @@ export default {
 
 <style scoped>
   .image {
-    width: 100%;
+    width: 50%;
     height: auto;
   }
   .inputfile::-webkit-file-upload-button {

@@ -12,7 +12,7 @@
           <v-tab>Sign Up</v-tab>
         </v-tabs>
         <br/>
-        <v-tabs-items 
+        <v-tabs-items
           v-model="tabs"
           style="background: transparent"
         >

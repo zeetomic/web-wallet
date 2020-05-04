@@ -4,7 +4,7 @@
     v-model="dialog"
   >
     <template v-slot:activator="{ on }">
-      <v-btn color="#2962FF" large v-on="on">
+      <v-btn color="#2962FF" large v-on="on" style="width: 70%">
         <span style="color: #fafafa">Add Asset</span>
       </v-btn>
     </template>
