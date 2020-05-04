@@ -2,7 +2,6 @@
   <Spinner v-if="$fetchState.pending"/>
   <p v-else-if="$fetchState.error">Error while fetching posts: {{ $fetchState.error.message }}</p>
   <div v-else>
-    <h2>Setting</h2>
     <v-card class="pa-8">
       <v-img :src="cover" class="cover"></v-img>
       <v-row>
@@ -14,8 +13,8 @@
           </div>
         </v-col>
         <v-col>
-          <h2>Name: {{ user_profile.first_name + ' ' + user_profile.mid_name + ' ' + user_profile.last_name }}</h2>
-          <h3>Status: {{user_profile.status_name}}</h3>
+          <h2>Name: <span class="body-1">{{ user_profile.first_name + ' ' + user_profile.mid_name + ' ' + user_profile.last_name }}</span></h2>
+          <h3>Status: <span class="body-1">{{user_profile.status_name}}</span></h3>
         </v-col>
       </v-row>
       <v-row>
@@ -28,7 +27,7 @@
         >
           <v-tab>User Detail</v-tab>
           <v-tab>Privacy</v-tab>
-          <v-tab>Set KYC</v-tab>
+          <v-tab>Identity Verification</v-tab>
         </v-tabs>
         <br>
         <v-tabs-items 
@@ -37,14 +36,14 @@
         >
           <v-tab-item>
             <div class="user_info">
-              <h3 class="font-weight-regular">Wallet: {{ user_profile.wallet }}</h3>
+              <h3 class="font-weight-medium">Wallet: <span class="body-1">{{ user_profile.wallet }}</span> </h3>
               <br>
-              <h3 class="font-weight-regular" v-if="user_profile.email">Email: {{ user_profile.email }}</h3>
-              <h3 class="font-weight-regular" v-else>Phone: {{ user_profile.phonenumber }}</h3>
+              <h3 class="font-weight-medium" v-if="user_profile.email">Email: <span class="body-1"> {{ user_profile.email }} </span></h3>
+              <h3 class="font-weight-medium" v-else>Phone: <span class="body-1"> {{ user_profile.phonenumber }} </span></h3>
               <br>
-              <h3 class="font-weight-regular">Name: {{ user_profile.first_name + ' ' + user_profile.mid_name + ' ' + user_profile.last_name }}</h3>
+              <h3 class="font-weight-medium">Name: <span class="body-1"> {{ user_profile.first_name + ' ' + user_profile.mid_name + ' ' + user_profile.last_name }} </span></h3>
               <br>
-              <h3 class="font-weight-regular">Gender: {{ user_profile.gender }}</h3>
+              <h3 class="font-weight-medium">Gender: <span class="body-1"> {{ user_profile.gender }} </span></h3>
             </div>
           </v-tab-item>
           <v-tab-item> 
@@ -72,7 +71,7 @@
                   v-model="documenttype_id"
                 ></v-select>
                 <v-row>
-                  <v-img :src="face_uri" max-width="250px"></v-img>
+                  <v-img :src="face_uri_demo" max-width="250px"></v-img>
                   <div id="app" class="pa-4">
                     <v-row class="d-flex justify-center">
                       <input type="file" id="file" ref="file" accept="image/*" @change="onFileChange" class="inputfile"/>
@@ -144,7 +143,7 @@
                   </v-date-picker>
                 </v-dialog>
               </v-form>
-              <v-btn large @click="handleSubmit" class="primary" style="width: 100%">Submit</v-btn>
+              <v-btn large @click="handleSubmit" :loading="laoding" class="primary" style="width: 100%">Submit</v-btn>
             </div>
           </v-tab-item>
         </v-tabs-items>
@@ -161,6 +160,7 @@ const AddAsset = () => import('~/components/Dialog/AddAsset.vue');
 const ChangePassword = () => import('~/components/Dialog/ChangePassword.vue');
 const ImageUpload = () => import('~/components/ImageUpload.vue');
 import { setting } from '~/utils/fetch/setting.js';
+import { message } from '~/utils/Mixin/message.js';
 import Cookie from 'js-cookie';
 
 export default {
@@ -172,6 +172,7 @@ export default {
     ChangePassword,
     ImageUpload
   },
+  mixins: [message],
   data() {
     return {
       user_profile: null,
@@ -194,8 +195,10 @@ export default {
 
       cover: require('~/assets/zee-landing.jpg'),
       profile: require('~/assets/profile.svg'),
-      face_uri: require('~/assets/face_uri.jpeg'),
-      passport_uri: require('~/assets/passport_uri.jpeg')
+      face_uri_demo: require('~/assets/face_uri.jpeg'),
+      passport_uri: require('~/assets/passport_uri.jpeg'),
+
+      loading: false
     }
   },
   activated() {
@@ -256,6 +259,7 @@ export default {
       })
     },
     handleSubmit() {
+      this.loading = true;
       this.$store.dispatch('users/handleSetKYC', {
         document_no: this.document_no,
         documenttype_id: this.documenttype_id,
@@ -263,6 +267,11 @@ export default {
         face_uri: this.face_uri,
         issue_date: this.date,
         expire_date: this.date1
+      })
+      .then(() => {
+        this.$toast.success(this.msg);
+        this.loading = false;
+        location.reload();
       })
     }
   }

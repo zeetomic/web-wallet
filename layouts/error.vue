@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app v-if="error.statusCode === 500">
     <v-row class="error_page d-flex flex-column justify-center align-center">
       <h2 class="font-weight-regular">Server Under Maintenance</h2>
         <img src="~/assets/maintenance.svg" alt="maintenance" class="image">
@@ -12,7 +12,13 @@
 
 <script>
 export default {
-  layout: 'empty'
+  layout: 'empty',
+  props: {
+    error: {
+      type: Object,
+      default: null
+    }
+  },
 }
 </script>
 

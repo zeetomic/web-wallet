@@ -256,7 +256,7 @@ export const actions = {
       }
     })
     .catch(() => {
-      // this.$router.push('/login');
+      this.$router.push('/login');
     })
   },
 // Set-KYC
@@ -276,10 +276,12 @@ export const actions = {
       expire_date: data.expire_date
     }, config)
     .then((res) => {
-
+      if(res.data) {
+        commit('set_msg', res.data.message);
+      }
     })
-    .catch((err) => {
-
+    .catch(() => {
+      this.$router.push('/login');
     })
   },
 // LogOut

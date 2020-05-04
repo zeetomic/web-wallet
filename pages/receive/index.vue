@@ -44,7 +44,7 @@
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
         <v-card class="pa-2" elevation="4">
           <h2>Receive Token</h2>
-          <History :history="history"/>
+          <History :history="history.map(his => his.from !== user_profile.wallet && his )"/>
         </v-card>
       </v-col>
     </v-row>
