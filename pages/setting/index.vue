@@ -143,7 +143,7 @@
                   </v-date-picker>
                 </v-dialog>
               </v-form>
-              <v-btn large @click="handleSubmit" :loading="laoding" class="primary" style="width: 100%">Submit</v-btn>
+              <v-btn large @click="handleSubmit" :loading="loading" class="primary" style="width: 100%">Submit</v-btn>
             </div>
           </v-tab-item>
         </v-tabs-items>
