@@ -52,7 +52,7 @@
             </v-row>
           </v-tab-item>
           <v-tab-item>
-            <div class="user_info">
+            <div class="user_info" v-if="user_profile.status_name === 'active'">
               <v-form>
                 <v-text-field
                 outlined
@@ -144,6 +144,9 @@
                 </v-dialog>
               </v-form>
               <v-btn large @click="handleSubmit" :loading="loading" class="primary" style="width: 100%">Submit</v-btn>
+            </div>
+            <div class="user_info">
+              <h2>Your Status is : {{user_profile.status_name}}</h2>
             </div>
           </v-tab-item>
         </v-tabs-items>
