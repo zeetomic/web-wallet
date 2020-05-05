@@ -18,10 +18,10 @@
           <History :history="history"/>
         </v-tab-item>
         <v-tab-item>
-          <History :history="history.map(his => his.from !== user_profile.wallet && his )"/>
+          <History v-if="!history.error" :history="history.map(his => his.from !== user_profile.wallet && his )"/>
         </v-tab-item>
         <v-tab-item>
-          <History :history="history.map(his => his.from === user_profile.wallet && his )"/>
+          <History v-if="!history.error" :history="history.map(his => his.from === user_profile.wallet && his )"/>
         </v-tab-item>
       </v-tabs-items>
       </client-only>

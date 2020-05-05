@@ -44,7 +44,8 @@
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
         <v-card class="pa-2" elevation="4">
           <h2>Receive Token</h2>
-          <History :history="history.map(his => his.from !== user_profile.wallet && his )"/>
+          <History v-if="!history.error" :history="history.map(his => his.from !== user_profile.wallet && his )"/>
+          <Getwallet v-else :portfolio="history"/>
         </v-card>
       </v-col>
     </v-row>
@@ -53,6 +54,7 @@
 
 <script>
 const Spinner = () => import('~/components/Spinner.vue');
+const Getwallet = () => import('~/components/UI/Getwallet.vue');
 const History = () => import(/* webpackChunkName: "History" */ '~/components/Table/History.vue');
 import { receive } from '~/utils/fetch/receive.js';
 
@@ -60,7 +62,8 @@ export default {
   middleware: ['auth'],
   components: {
     History,
-    Spinner
+    Spinner,
+    Getwallet
   },
   data () {
     return {
