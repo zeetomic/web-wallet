@@ -17,8 +17,8 @@
       </v-row>
       <br>
       <span class="error white--text d-flex justify-center">{{ this.pin_msg }}</span>
-      <v-row class="d-flex justify-center pt-10">
-        <v-btn color="success" @click="handleGetWallet()">Get Wallet</v-btn>
+      <v-row class="d-flex justify-center pt-4">
+        <v-btn large color="success" style="width: 60%" :loading="loading" @click="handleGetWallet()">Get Wallet</v-btn>
       </v-row>
     </v-card>
     <v-dialog
@@ -82,6 +82,7 @@ export default {
       value: [],
       pin_msg: '',
       dialog: false,
+      loading: false
     }
   },
   methods: {
@@ -89,6 +90,7 @@ export default {
       if( this.pin === '' || this.pin1 === '') return this.pin_msg = 'PIN is required';
       if(this.pin !== this.pin1) return this.pin_msg = 'PIN does not match!!';
       else {
+        this.loading = true;
         this.$store.dispatch('users/handleGetWallet', {
           pin: this.pin
         })
@@ -100,6 +102,7 @@ export default {
             this.value = this.msg;
             this.dialog = true;
           }
+          this.loading = false;
         })
       }
     },
