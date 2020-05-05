@@ -6,7 +6,7 @@
       <v-img :src="cover" class="cover"></v-img>
       <v-row>
         <v-col cols="12" xl="3" lg="3" md="" sm="" xs="">
-          <div style="margin-top: -80px">
+          <div class="img-margin">
             <div class="profile-container">
               <v-img :src="profile" class="profile"></v-img>
             </div>
@@ -26,10 +26,9 @@
           background-color="transparent"
         >
           <v-tab>User Detail</v-tab>
-          <v-tab>Privacy</v-tab>
           <v-tab>Identity Verification</v-tab>
         </v-tabs>
-        <br>
+        <br>  
         <v-tabs-items 
           v-model="tabs"
           style="background: transparent"
@@ -45,12 +44,11 @@
               <br>
               <h3 class="font-weight-medium">Gender: <span class="body-1"> {{ user_profile.gender }} </span></h3>
             </div>
-          </v-tab-item>
-          <v-tab-item> 
-            <v-row class="user_info d-flex flex-column justify-center align-center">
-              <AddAsset />
-              <div class="pt-4"></div>
+            <v-row class="d-flex justify-center">
               <ChangePassword />
+            </v-row>
+            <v-row class="d-flex justify-center pt-4">
+              <AddAsset />
             </v-row>
           </v-tab-item>
           <v-tab-item>
@@ -113,6 +111,7 @@
                       label="Issue Date"
                       readonly
                       v-on="on"
+                      outlined
                     ></v-text-field>
                   </template>
                   <v-date-picker v-model="date" scrollable>
@@ -134,6 +133,7 @@
                       label="Expired Date"
                       readonly
                       v-on="on"
+                      outlined
                     ></v-text-field>
                   </template>
                   <v-date-picker v-model="date1" scrollable>
@@ -302,6 +302,9 @@ export default {
   position: relative;
   margin: 0 3rem ;
 }
+.img-margin {
+  margin-top: -80px;
+}
 .user_info {
   padding: 2% 3%;
 }
@@ -322,5 +325,30 @@ export default {
   border: 1px solid grey;
   border-radius: 4px;
   cursor: pointer;
+}
+@media only screen and (max-width: 500px) {
+  .profile-container {
+    width: 60px;
+    height: 60px;
+    margin: 0 1rem;
+  }
+  .profile {
+    width: 60px;
+    height: 60px;
+  }
+  .img-margin {
+    margin-top: -40px
+  }
+  .v-tab {
+    width: 60px!important;
+  }
+}
+/* Tablet */
+@media only screen and (min-width: 501px) and (max-width: 768px) {
+    
+}
+/* Normal */
+@media only screen and (min-width: 769px) and (max-width: 1199px){
+    
 }
 </style>
