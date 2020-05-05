@@ -45,10 +45,10 @@
               <h3 class="font-weight-medium">Gender: <span class="body-1"> {{ user_profile.gender }} </span></h3>
             </div>
             <v-row class="d-flex justify-center">
-              <ChangePassword />
+              <AddAsset />
             </v-row>
             <v-row class="d-flex justify-center pt-4">
-              <AddAsset />
+              <ChangePassword />
             </v-row>
           </v-tab-item>
           <v-tab-item>
