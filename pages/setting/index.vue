@@ -68,6 +68,9 @@
                   label="Document Type"
                   v-model="documenttype_id"
                 ></v-select>
+                <div class="pb-4 font-weight-medium">Upload passport or ID card photo page and image of yourself 
+                  (Hold up a handwritten note with the phrase Zeetomic plus today’s date)
+                </div>
                 <v-row>
                   <v-img :src="face_uri_demo" max-width="250px"></v-img>
                   <div id="app" class="pa-4">
@@ -83,6 +86,9 @@
                   </div>
                 </v-row>
                 <br>
+                <div class="pb-4 font-weight-medium">
+                  Upload the photos of your document.
+                </div>  
                 <v-row>
                   <v-img :src="passport_uri" max-width="250px"></v-img>
                   <div id="app" class="pa-4">
@@ -90,7 +96,7 @@
                       <input type="file" id="file" ref="file1" accept="image/*" @change="onFileChange1" class="inputfile"/>
                     </v-row>
                     <br>
-                    <v-row id="preview" class="d-flex justify-center">
+                    <v-row id="preview">
                       <div class="frame">
                         <img v-if="url1" :src="url1" class="image"/>
                       </div>
@@ -145,7 +151,7 @@
               </v-form>
               <v-btn large @click="handleSubmit" :loading="loading" class="primary" style="width: 100%">Submit</v-btn>
             </div>
-            <div class="user_info">
+            <div class="user_info" v-else>
               <h2>Your Status is : {{user_profile.status_name}}</h2>
             </div>
           </v-tab-item>
@@ -328,6 +334,9 @@ export default {
   border: 1px solid grey;
   border-radius: 4px;
   cursor: pointer;
+}
+.row {
+  margin: 0!important;
 }
 @media only screen and (max-width: 500px) {
   .profile-container {
