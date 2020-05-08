@@ -268,6 +268,9 @@ export const actions = {
       }
     };
     await this.$axios.post(process.env.baseApi + "/set-kyc", {
+      address: data.address,
+      occupation: data.occupation,
+      nationlity: data.nationlity,
       document_no: data.document_no,
       documenttype_id: data.documenttype_id,
       document_uri: data.document_uri,
