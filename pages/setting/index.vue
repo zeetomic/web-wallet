@@ -72,17 +72,20 @@
                   (Hold up a handwritten note with the phrase Zeetomic plus today’s date)
                 </div>
                 <v-row>
-                  <v-img :src="face_uri_demo" max-width="250px"></v-img>
-                  <div id="app" class="pa-4">
-                    <v-row class="d-flex justify-center">
-                      <input type="file" id="file" ref="file" accept="image/*" @change="onFileChange" class="inputfile"/>
-                    </v-row>
-                    <br>
-                    <v-row id="preview">
-                      <div class="frame">
+                  <v-img :src="face_uri_demo" max-width="250px" max-height="300px"></v-img>
+                  <div id="app" class="px-6">
+                    <v-row id="preview" class="d-flex justify-center">
+                      <div class="frame d-flex justify-center">
                         <img v-if="url" :src="url" class="image"/>
                       </div>
-                    </v-row> 
+                    </v-row>
+                    <v-row class="d-flex justify-center pt-2">
+                      <input type="file" id="file" ref="file" accept="image/*" @change="onFileChange" class="inputfile"/>
+                      <label for="file">
+                        <v-icon small>fas fa-upload</v-icon>
+                        Upload Image
+                      </label>
+                    </v-row>
                   </div>
                 </v-row>
                 <br>
@@ -90,17 +93,20 @@
                   Upload the photos of your document.
                 </div>  
                 <v-row>
-                  <v-img :src="passport_uri" max-width="250px"></v-img>
+                  <v-img :src="passport_uri" max-width="250px" max-height="300px"></v-img>
                   <div id="app" class="pa-4">
-                    <v-row class="d-flex justify-center">
-                      <input type="file" id="file" ref="file1" accept="image/*" @change="onFileChange1" class="inputfile"/>
-                    </v-row>
-                    <br>
                     <v-row id="preview">
-                      <div class="frame">
+                      <div class="frame d-flex justify-center">
                         <img v-if="url1" :src="url1" class="image"/>
                       </div>
                     </v-row> 
+                    <v-row class="d-flex justify-center pt-2">
+                      <input type="file" id="file1" ref="file1" accept="image/*" @change="onFileChange1" class="inputfile"/>
+                      <label for="file1">
+                        <v-icon small>fas fa-upload</v-icon>
+                        Upload Image
+                      </label>
+                    </v-row>
                   </div>
                 </v-row>
                 <br>
@@ -321,9 +327,28 @@ export default {
   width: 100%;
 }
 
+.frame {
+  max-width: 600px;
+  max-height: 320px;
+  border: 1px dashed grey;
+  border-radius: 6px;
+}
 .image {
   width: 50%;
   height: auto;
+}
+input[type="file"] {
+  display: none;
+}
+label {
+  height: 40px;
+  width: 140px;
+  background: burlywood;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  cursor: pointer;
 }
 .inputfile::-webkit-file-upload-button {
   visibility: hidden;
