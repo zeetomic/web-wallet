@@ -71,6 +71,7 @@
         <div class="pt-4"></div>
         <v-row class="d-flex justify-center" v-if="!mini">
           <img src="~/assets/zeetomic-logo-header.png" alt="zeetomic" class="zee_header">
+          <span class="testing">Testnet</span>
         </v-row>
         <v-row class="d-flex justify-center" v-if="mini">
           <img src="~/assets/z-logo.png" alt="z-logo" class="z_logo">
@@ -135,6 +136,11 @@ export default {
 </script>
 
 <style>
+  .testing {
+    padding-left: 4px;
+    margin-top: -12px;
+    color: #E53935;
+  }
   .v-navigation-drawer,
   .v-app-bar {
     background: #1A1E27!important;

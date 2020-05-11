@@ -1,14 +1,19 @@
 <template>
-  <v-form>
+  <v-form
+    ref="form"
+    v-model="valid"
+  >
     <v-select
       outlined
       v-model="nationality"
+      :rules="nationalityRule"
       :items="country"
       label="Nationality"
     ></v-select>
     <v-text-field
       outlined
       v-model="occupation"
+      :rules="occupationRule"
       label="occupation"
     ></v-text-field>
     <v-select
@@ -18,13 +23,14 @@
       item-value="id"
       label="Document Type"
       v-model="documenttype_id"
+      :rules="documenttypeRule"
     ></v-select>
     <v-text-field
-    outlined
-    label="Document NO"
-    v-model="document_no"
-    >
-    </v-text-field>
+      outlined
+      label="Document NO"
+      v-model="document_no"
+      :rules="documentnoRule"
+    ></v-text-field>
     <div class="pb-4 font-weight-medium">Upload passport or ID card photo page and image of yourself 
       (Hold up a handwritten note with the phrase Zeetomic plus today’s date)
     </div>
@@ -71,6 +77,7 @@
       outlined
       v-model="address"
       label="Address"
+      :rules="addressRule"
     ></v-text-field>
     <v-dialog
       ref="dialog"
@@ -82,6 +89,7 @@
       <template v-slot:activator="{ on }">
         <v-text-field
           v-model="date"
+          :rules="dateRule"
           label="Issue Date"
           readonly
           v-on="on"
@@ -104,6 +112,7 @@
       <template v-slot:activator="{ on }">
         <v-text-field
           v-model="date1"
+          :rules="date1Rule"
           label="Expired Date"
           readonly
           v-on="on"
@@ -123,6 +132,7 @@
 <script>
 import Cookie from 'js-cookie';
 import { message } from '~/utils/Mixin/message.js';
+import { validateSetkyc } from '~/utils/Mixin/set-kyc.js'
 export default {
   props: {
     doc: {
@@ -130,7 +140,7 @@ export default {
       required: true
     }
   },
-  mixins: [message],
+  mixins: [message, validateSetkyc],
   data() {
     return {
       url: null,
@@ -456,26 +466,28 @@ export default {
       })
     },
     handleSubmit() {
-      this.loading = true;
-      this.$store.dispatch('users/handleSetKYC', {
-        address: this.address,
-        occupation: this.occupation,
-        nationality: this.nationality,
-        document_no: this.document_no,
-        documenttype_id: this.documenttype_id,
-        document_uri: this.document_uri,
-        face_uri: this.face_uri,
-        issue_date: this.date,
-        expire_date: this.date1
-      })
-      .then(() => {
-        if(this.type === 'success') {
-          this.$toast.success(this.msg);
-        } else {
-          this.$toast.error(this.msg);
-        }
-        this.loading = false;
-      })
+      if(this.$refs.form.validate()) {
+        this.loading = true;
+        this.$store.dispatch('users/handleSetKYC', {
+          address: this.address,
+          occupation: this.occupation,
+          nationality: this.nationality,
+          document_no: this.document_no,
+          documenttype_id: this.documenttype_id,
+          document_uri: this.document_uri,
+          face_uri: this.face_uri,
+          issue_date: this.date,
+          expire_date: this.date1
+        })
+        .then(() => {
+          if(this.type === 'success') {
+            this.$toast.success(this.msg);
+          } else {
+            this.$toast.error(this.msg);
+          }
+          this.loading = false;
+        })
+      }
     }
   }
 }

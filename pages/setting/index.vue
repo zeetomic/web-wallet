@@ -57,6 +57,23 @@
             </div>
             <div class="user_info" v-else>
               <h2>Your Status is : {{user_profile.status_name}}</h2>
+              <br>
+              <v-row class="d-flex align-center px-4">
+                <div class="d-flex flex-column align-center">
+                  <v-img :src="profile" max-width="66px"></v-img>
+                  <p>Not Verify <v-icon color="success" v-if="user_profile.status_name === 'inactive'">fas fa-check-circle</v-icon></p>
+                </div>
+                <v-divider></v-divider>
+                <div class="d-flex flex-column align-center">
+                  <v-img :src="progress" max-width="66px"></v-img>
+                  <p>Verifying <v-icon color="success" v-if="user_profile.status_name === 'verifying'">fas fa-check-circle</v-icon></p>
+                </div>
+                <v-divider></v-divider>
+                <div class="d-flex flex-column align-center">
+                  <v-img :src="verified" max-width="66px"></v-img>
+                  <p>Verified <v-icon v-if="user_profile.status_name === 'verified'">fas fa-check-circle</v-icon></p></p>
+                </div>
+              </v-row>
             </div>
           </v-tab-item>
         </v-tabs-items>
@@ -90,6 +107,8 @@ export default {
       tabs: null,
       cover: require('~/assets/zee-landing.jpg'),
       profile: require('~/assets/profile.svg'),
+      progress: require('~/assets/progress.svg'),
+      verified: require('~/assets/verified.svg'),
     }
   },
   activated() {
