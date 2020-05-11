@@ -270,7 +270,7 @@ export const actions = {
     await this.$axios.post(process.env.baseApi + "/set-kyc", {
       address: data.address,
       occupation: data.occupation,
-      nationlity: data.nationlity,
+      nationality: data.nationality,
       document_no: data.document_no,
       documenttype_id: data.documenttype_id,
       document_uri: data.document_uri,
@@ -278,9 +278,13 @@ export const actions = {
       issue_date: data.issue_date,
       expire_date: data.expire_date
     }, config)
-    .then((res) => {
-      if(res.data) {
-        commit('set_msg', res.data.message);
+    .then(async(res) => {
+      if(res.data.message) {
+        await commit('set_msg', res.data.message);
+        await commit('set_type', 'success');
+      } else {
+        await commit('set_msg', res.data.error.message);
+        await commit('set_type', 'error');
       }
     })
     .catch(() => {
