@@ -1,7 +1,7 @@
 <template>
   <v-row class="my-container">
     <v-col class="text-center d-flex flex-column align-center justify-center">
-      <v-card class="py-12">
+      <v-card class="py-6 px-2">
         <v-row class="d-flex justify-center pb-4">
           <v-img :src="confirm" max-width="160px"></v-img>
         </v-row>

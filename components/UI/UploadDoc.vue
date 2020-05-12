@@ -482,6 +482,7 @@ export default {
         .then(() => {
           if(this.type === 'success') {
             this.$toast.success(this.msg);
+            this.$router.push('/');
           } else {
             this.$toast.error(this.msg);
           }
