@@ -71,10 +71,10 @@ export default {
           last_name: this.last_name,
           gender: this.gender
         })
-        .then(() => {
+        .then(async() => {
           if(this.type === 'success') {
-            this.$toast.success(this.msg);
-            this.$router.push('/setting');
+            await this.$toast.success(this.msg);
+            await this.$router.push('/setting');
           } else {
             this.$toast.error(this.msg);
           }

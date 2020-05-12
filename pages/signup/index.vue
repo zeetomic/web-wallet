@@ -12,15 +12,15 @@
         </v-tabs>
         <br/>
         <span class="font-weight-bold display-1"> 
-          Login To ZEETOMIC
+          Sign Up To ZEETOMIC
         </span>
-        <div class="pt-4" v-show="!login_email">
-          <Login/>
-          <v-btn text class="btn" @click="login_email = true">Login With Email</v-btn>
+        <div class="pt-4" v-show="!register_email">
+          <Register/>
+          <v-btn text class="btn" @click="register_email = true">Sign Up with email</v-btn>
         </div>
-        <div class="pt-4" v-show="login_email">
-          <LoginEmail />
-          <v-btn text class="btn" @click="login_email = false">Login With Phone</v-btn>
+        <div class="pt-4" v-show="register_email">
+          <RegisterEmail/>
+          <v-btn text class="btn" @click="register_email = false">Sign Up with phone</v-btn>
         </div>
       </v-col>
     </v-row>
@@ -28,14 +28,14 @@
 </template>
 
 <script>
-const Login = () => import('~/components/Form/Login.vue');
-const LoginEmail = () => import('~/components/Form/LoginEmail.vue');
+const Register = () => import('~/components/Form/Register.vue');
+const RegisterEmail = () => import('~/components/Form/RegisterEmail.vue');
 
 export default {
   layout: 'login_register',
   components: {
-    Login,
-    LoginEmail
+    Register,
+    RegisterEmail
   },
   data() {
     return {

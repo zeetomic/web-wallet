@@ -76,6 +76,7 @@ export const actions = {
       if(res.data.message === "Successfully registered!") {
         await commit('set_msg', res.data.message);
         await commit('set_type', 'success');
+        await this.$router.push('/successfullyregister');
       } else {
         await commit('set_msg', res.data.message);
         await commit('set_type', 'error');
@@ -92,6 +93,7 @@ export const actions = {
       if(res.data.message === "Successfully registered!") {
         await commit('set_msg', res.data.message);
         await commit('set_type', 'success');
+        await this.$router.push('/successfullyregister');
       } else {
         await commit('set_msg', res.data.message);
         await commit('set_type', 'error');

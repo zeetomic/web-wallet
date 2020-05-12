@@ -55,7 +55,6 @@ export default {
         .then(() => {
           if(this.type === 'success') {
             this.$toast.success(this.msg);
-            location.reload();
           } else {
             this.$toast.error(this.msg);
           }

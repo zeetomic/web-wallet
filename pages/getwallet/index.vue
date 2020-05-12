@@ -48,7 +48,7 @@
           <v-btn
             color="green darken-1"
             text
-            @click="dialog = false"
+            @click="handleClose"
           >
             Close
           </v-btn>
@@ -117,6 +117,10 @@ export default {
         doc.text("Private Key: " + this.msg.seed, 10, 20);
         doc.save("YourKey.pdf");
       }
+    },
+    handleClose() {
+      this.dialog = false;
+      this.$router.push('/');
     }
   }
 }

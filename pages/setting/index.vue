@@ -119,8 +119,8 @@ export default {
     }
   },
   activated() {
-    // Call fetch again if last fetch more than 30 sec ago
-    if (this.$fetchState.timestamp <= (Date.now() - 30000)) {
+    // Call fetch again if last fetch more than 3 sec ago
+    if (this.$fetchState.timestamp <= (Date.now() - 3000)) {
       this.$fetch();
     }
   },
