@@ -13,7 +13,7 @@
           </div>
         </v-col>
         <v-col>
-          <h2>Name: <span class="body-1">{{ user_profile.first_name + ' ' + user_profile.mid_name + ' ' + user_profile.last_name }}</span></h2>
+          <h2 v-if="user_profile.first_name || user_profile.mid_name || user_profile.last_name">Name: <span class="body-1">{{ user_profile.first_name + ' ' + user_profile.mid_name + ' ' + user_profile.last_name }}</span></h2>
           <h3>Status: <span class="body-1">{{user_profile.status_name}}</span></h3>
         </v-col>
       </v-row>
@@ -34,7 +34,7 @@
           style="background: transparent"
         >
           <v-tab-item>
-            <div class="user_info">
+            <div class="user_info" v-if="user_profile.first_name || user_profile.mid_name || user_profile.last_name">
               <h3 class="font-weight-medium">Wallet: <span class="body-1">{{ user_profile.wallet }}</span> </h3>
               <br>
               <h3 class="font-weight-medium" v-if="user_profile.email">Email: <span class="body-1"> {{ user_profile.email }} </span></h3>
@@ -43,6 +43,13 @@
               <h3 class="font-weight-medium">Name: <span class="body-1"> {{ user_profile.first_name + ' ' + user_profile.mid_name + ' ' + user_profile.last_name }} </span></h3>
               <br>
               <h3 class="font-weight-medium">Gender: <span class="body-1"> {{ user_profile.gender }} </span></h3>
+            </div>
+            <div v-else>
+              <br>
+              <span class="font-weight-thin headline">Please Setup Your User Profile</span>
+              <v-row class="d-flex justify-center py-4">
+                <v-btn to="/verify" large color="primary" style="width: 70%">Setup profile</v-btn>
+              </v-row>
             </div>
             <v-row class="d-flex justify-center">
               <AddAsset />
