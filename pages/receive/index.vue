@@ -45,7 +45,7 @@
         <v-card class="pa-2" elevation="4" v-if="history.map(h => h.amount)">
           <h2>Receive Token</h2>
           <br>
-          <HistoryMobo v-if="!history.error" :history="history.map(his => his.from !== user_profile.wallet && his )"/>
+          <HistoryMobo v-if="!history.error" :history="history.map(his => his.to === user_profile.wallet && his )"/>
           <Getwallet v-else :portfolio="history"/>
           <div 
             v-for="(item,index) in history"
