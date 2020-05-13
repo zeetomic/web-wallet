@@ -15,8 +15,10 @@
     <v-text-field
       label="Password"
       v-model="password"
-      type="password"
       :rules="passwordRule"
+      :append-icon="show ? 'fas fa-eye' : 'fas fa-eye-slash'"
+      @click:append="show = !show"
+      :type="show ? 'text' : 'password'"
       outlined
       required
     ></v-text-field>
@@ -35,6 +37,7 @@ export default {
       email: '',
       password: '',
 
+      show: false,
       loading: false,
     }
   },
@@ -49,7 +52,7 @@ export default {
         .then(() => {
           if(this.type === 'error'){ 
             this.$toast.error(this.msg);
-          } else {
+          } else if(this.type === 'success') {
             this.$toast.success('Login Successfully');
           }
           this.loading = false;

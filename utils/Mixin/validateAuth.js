@@ -4,7 +4,6 @@ export const validateAuth = {
       valid: true,
       phoneRule: [
         () => !!this.phone || 'Phone is required',
-        () => (this.phone !== '+855') || 'Phone is required',
       ],
       passwordRule: [
         () => !!this.password || 'Password is required',

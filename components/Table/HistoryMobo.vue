@@ -2,26 +2,27 @@
   <div>
     <v-expansion-panels popout focusable class="mb-6" v-if="!history.error && history.length > 0">
       <v-expansion-panel
-        v-for="(item,i) in history"
-        :key="i"
-        v-if="item.amount"
+        v-for="(item,index) in history"
+        :key="index"
         style="background: transparent!important"
       >
-        <v-expansion-panel-header expand-icon="fas fa-sort-down" v-slot="{ open }">
-          <v-row no-gutters v-if="!open">
-            <v-col>Asset: {{item.asset_code !== undefined ? item.asset_code : 'Native'}}</v-col>
-            <v-col>Amount: {{item.amount}}</v-col>
-          </v-row>
-          <v-row v-if="open" class="primary--text">Detail</v-row>
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
-          <p>Asset: {{item.asset_code !== undefined ? item.asset_code : 'Native'}}</p>
-          <p>Amount: {{item.amount}}</p>
-          <p>Date: {{ Timecon(item.created_at) }}</p>
-          <p v-if="item.from">From: {{ sliceString(item.from) }}</p>
-          <p v-if="item.to">To: {{ sliceString(item.to) }}</p>
-          <p>Status: Complete</p>
-        </v-expansion-panel-content>
+        <div v-if="item.amount">
+          <v-expansion-panel-header expand-icon="fas fa-sort-down" v-slot="{ open }">
+            <v-row no-gutters v-if="!open">
+              <v-col>Asset: {{item.asset_code !== undefined ? item.asset_code : 'Native'}}</v-col>
+              <v-col>Amount: {{item.amount}}</v-col>
+            </v-row>
+            <v-row v-if="open" class="primary--text">Detail</v-row>
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <p>Asset: {{item.asset_code !== undefined ? item.asset_code : 'Native'}}</p>
+            <p>Amount: {{item.amount}}</p>
+            <p>Date: {{ Timecon(item.created_at) }}</p>
+            <p v-if="item.from">From: {{ sliceString(item.from) }}</p>
+            <p v-if="item.to">To: {{ sliceString(item.to) }}</p>
+            <p>Status: Complete</p>
+          </v-expansion-panel-content>
+        </div>
       </v-expansion-panel>
     </v-expansion-panels>
     <div v-else>

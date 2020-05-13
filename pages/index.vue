@@ -1,37 +1,35 @@
 <template>
   <Spinner v-if="$fetchState.pending"/>
   <p v-else-if="$fetchState.error">Error while fetching posts: {{ $fetchState.error.message }}</p>
-  <div class="pt-4" v-else>
-    <v-row>
-      <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6" v-if="!portfolio.error">
-        <v-card class="pa-2" elevation="4" >
-          <h2>ZEETOMIC Wallet</h2>
-          <v-row>
-            <v-col class="d-flex justify-center">
-              <client-only>
-                <PieChart 
-                  :chart-data="datacollection"
-                  :styles="chart">
-                </PieChart>
-              </client-only>
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-col>
-      <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
-        <v-card class="pa-2" elevation="4">
-          <h2>My Porfolio</h2>
-          <div v-if="portfolio.error" style="padding-top: 1rem">
-            <Getwallet :portfolio="portfolio" />
-          </div>
-          <Portfolio 
-            v-else
-            :portfolio="portfolio"
-          />
-        </v-card>
-      </v-col>
-    </v-row>
-  </div>
+  <v-row v-else>
+    <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6" v-if="!portfolio.error">
+      <v-card class="pa-2" elevation="4" >
+        <h2>ZEETOMIC Wallet</h2>
+        <v-row>
+          <v-col class="d-flex justify-center">
+            <client-only>
+              <PieChart 
+                :chart-data="datacollection"
+                :styles="chart"
+              ></PieChart>
+            </client-only>
+          </v-col>
+        </v-row>
+      </v-card>
+    </v-col>
+    <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
+      <v-card class="pa-2" elevation="4">
+        <h2>My Porfolio</h2>
+        <div v-if="portfolio.error" style="padding-top: 1rem">
+          <Getwallet :portfolio="portfolio" />
+        </div>
+        <Portfolio 
+          v-else
+          :portfolio="portfolio"
+        />
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -52,7 +50,7 @@ export default {
   data() {
     return {
       datacollection: null,
-      width: 300,
+      width: 260,
       portfolio: null
     }
   },

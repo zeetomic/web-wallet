@@ -29,7 +29,51 @@
     <div class="mobile">
       <h2 class="pl-2">Transaction</h2>
       <br>
-      <HistoryMobo v-if="!history.error" :history="history.map(his => his.from !== user_profile.wallet && his )"/>
+      <v-tabs height="40" color="white" v-model="tabs">
+        <v-tab>All</v-tab>
+        <v-tab>Received</v-tab>
+        <v-tab>Send</v-tab>
+      </v-tabs>
+      <v-tabs-items 
+        v-model="tabs"
+        style="background: transparent"
+      >
+        <client-only>
+          <v-tab-item>
+            <HistoryMobo v-if="!history.error" :history="history"/>
+            <div 
+              v-for="(item,index) in history"
+              :key="index"
+            >
+              <div v-if="!item.amount">
+                <p class="text-center pt-2" v-if="index <= 0">no-data-available</p>
+              </div>
+            </div>
+          </v-tab-item>
+          <v-tab-item>
+            <HistoryMobo v-if="!history.error" :history="history.map(h => h.from !== user_profile.wallet && h )"/>
+            <div 
+              v-for="(item,index) in history"
+              :key="index"
+            >
+              <div v-if="!item.amount">
+                <p class="text-center pt-2" v-if="index <= 0">no-data-available</p>
+              </div>
+            </div>
+          </v-tab-item>
+          <v-tab-item>
+            <HistoryMobo v-if="!history.error" :history="history.map(h => h.from === user_profile.wallet && h )"/>
+            <div 
+              v-for="(item,index) in history"
+              :key="index"
+            >
+              <div v-if="!item.amount">
+                <p class="text-center pt-2" v-if="index <= 0">no-data-available</p>
+              </div>
+            </div>
+          </v-tab-item>
+        </client-only>
+      </v-tabs-items>
     </div>
   </div>
 </template>

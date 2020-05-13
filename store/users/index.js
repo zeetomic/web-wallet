@@ -42,6 +42,9 @@ export const actions = {
         await commit('set_type', 'error');
       }
     })
+    .catch(()=> {
+      this.$toast.error('Something Went Wrong At Our End');
+    })
   },
 // Login with Email
   async handleLoginWithEmail({commit}, data) {
@@ -65,6 +68,9 @@ export const actions = {
         await commit('set_type', 'error');
       }
     })
+    .catch(()=> {
+      this.$toast.error('Something Went Wrong At Our End');
+    })
   },
 // Register
   async handleRegister({commit}, data) {
@@ -82,6 +88,9 @@ export const actions = {
         await commit('set_type', 'error');
       }
     })
+    .catch(()=> {
+      this.$toast.error('Something Went Wrong At Our End');
+    })
   },
 // Register with Email
   async handleRegisterWithEmail({commit}, data) {
@@ -98,6 +107,9 @@ export const actions = {
         await commit('set_msg', res.data.message);
         await commit('set_type', 'error');
       }
+    })
+    .catch(()=> {
+      this.$toast.error('Something Went Wrong At Our End');
     })
   },
 // Get Wallet 

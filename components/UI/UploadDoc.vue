@@ -36,7 +36,7 @@
     </div>
     <v-row>
       <v-img :src="face_uri_demo" max-width="250px" max-height="300px"></v-img>
-      <div id="app" class="px-6">
+      <div id="app" class="pa-4">
         <v-row id="preview" class="d-flex justify-center">
           <div class="frame d-flex justify-center">
             <img v-if="url" :src="url" class="image"/>

@@ -13,16 +13,20 @@
     ></v-text-field>
     <v-text-field
       label="Password"
-      type="password"
       v-model="password"
       :rules="passwordRule"
+      :append-icon="show ? 'fas fa-eye' : 'fas fa-eye-slash'"
+      @click:append="show = !show"
+      :type="show ? 'text' : 'password'"
       outlined
     ></v-text-field>
     <v-text-field
       label="Confirm Password"
-      type="password"
       v-model="password2"
       :rules="passwordMatch"
+      :append-icon="show1 ? 'fas fa-eye' : 'fas fa-eye-slash'"
+      @click:append="show1 = !show1"
+      :type="show1 ? 'text' : 'password'"
       outlined
     ></v-text-field>
     <v-btn class="primary" large style="width: 100%" :loading="loading" @click="handleRegister()">Sign Up</v-btn>
@@ -41,6 +45,8 @@ export default {
       password: '',
       password2: '',
 
+      show: false,
+      show1: false,
       loading: false,
     }
   },
@@ -55,7 +61,7 @@ export default {
         .then(() => {
           if(this.type === 'success') {
             this.$toast.success(this.msg);
-          } else {
+          } else if(this.type === 'error') {
             this.$toast.error(this.msg);
           }
           this.loading = false;
