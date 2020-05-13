@@ -44,7 +44,7 @@
           </tr>
         </tbody>
       </template>
-      <template v-if="history.length <= 0" v-slot:no-data>
+      <template v-if="!history.amount" v-slot:no-data>
         <span>No data available</span>
       </template>
     </v-data-table>

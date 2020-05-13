@@ -15,10 +15,10 @@
         >
         <client-only>
           <v-tab-item>
-            <History :history="history"/>
+            <History v-if="!history.error" :history="history"/>
           </v-tab-item>
           <v-tab-item>
-            <History v-if="!history.error" :history="history.map(h => h.from !== user_profile.wallet && h )"/>
+            <History v-if="!history.error" :history="history.map(h => h.to === user_profile.wallet && h )"/>
           </v-tab-item>
           <v-tab-item>
             <History v-if="!history.error" :history="history.map(h => h.from === user_profile.wallet && h )"/>
@@ -51,7 +51,7 @@
             </div>
           </v-tab-item>
           <v-tab-item>
-            <HistoryMobo v-if="!history.error" :history="history.map(h => h.from !== user_profile.wallet && h )"/>
+            <HistoryMobo v-if="!history.error" :history="history.map(h => h.to === user_profile.wallet && h )"/>
             <div 
               v-for="(item,index) in history"
               :key="index"
