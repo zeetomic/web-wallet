@@ -1,8 +1,7 @@
 import Cookie from 'js-cookie';
 
-export const getdocumenttype = async function() {
+export const setting = async function({req, redirect, $axios}) {
   let token;
-  const req = this.$nuxt.context.req;
   if (process.server) {
     const jwtCookie = req.headers.cookie
       .split(";")
@@ -18,11 +17,15 @@ export const getdocumenttype = async function() {
       Authorization: "Bearer " + token
     }
   };
-  await this.$axios.post(process.env.baseApi + '/get-documenttype', config)
-  .then((res) => {
-
-  })
-  .catch((err) => {
-    
-  })
+  try {
+    let doc = await $axios.get("/get-documenttype", config)
+    let user_profile = await $axios.get("/userprofile", config)
+    return {
+      user_profile: user_profile.data,
+      doc: doc.data
+    }
+  }
+  catch(e) {
+    redirect('/login');
+  }
 }

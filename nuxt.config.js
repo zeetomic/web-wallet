@@ -17,7 +17,7 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: false,
+  loading: { color: '#fff' },
   /*
   ** Global CSS
   */
@@ -82,8 +82,8 @@ export default {
     extend (config, ctx) {
     }
   },
-  env: {
-    baseApi: 'https://testnet-api.zeetomic.com/pub/v1'
+  axios: {
+    baseURL: 'https://testnet-api.zeetomic.com/pub/v1'
   },
   icon: {
     iconSrc: './assets/z-logo_copy.png',

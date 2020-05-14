@@ -23,7 +23,7 @@ export const mutations = {
 export const actions = {
 // LogIn
   async handleLogin({commit}, data) {
-    await this.$axios.post(process.env.baseApi + '/loginbyphone', {
+    await this.$axios.post('/loginbyphone', {
       phone: data.phone,
       password: data.password
     })
@@ -48,7 +48,7 @@ export const actions = {
   },
 // Login with Email
   async handleLoginWithEmail({commit}, data) {
-    await this.$axios.post(process.env.baseApi + '/loginbyemail', {
+    await this.$axios.post('/loginbyemail', {
       email: data.email,
       password: data.password
     })
@@ -74,7 +74,7 @@ export const actions = {
   },
 // Register
   async handleRegister({commit}, data) {
-    await this.$axios.post(process.env.baseApi + '/registerbyphone', {
+    await this.$axios.post('/registerbyphone', {
       phone: data.phone,
       password: data.password
     })
@@ -94,7 +94,7 @@ export const actions = {
   },
 // Register with Email
   async handleRegisterWithEmail({commit}, data) {
-    await this.$axios.post(process.env.baseApi + '/registerbyemail', {
+    await this.$axios.post('/registerbyemail', {
       email: data.email,
       password: data.password
     })
@@ -120,7 +120,7 @@ export const actions = {
         Authorization: 'Bearer ' + token
       }
     }
-    await this.$axios.post(process.env.baseApi + '/getwallet', {
+    await this.$axios.post('/getwallet', {
       pin: data.pin
     }, config)
     .then(async (res)=> {
@@ -141,7 +141,7 @@ export const actions = {
         Authorization: 'Bearer ' + token
       }
     }
-    await this.$axios.post(process.env.baseApi + '/sendpayment', {
+    await this.$axios.post('/sendpayment', {
       pin: data.pin,
       asset_code: data.asset_code,
       destination: data.destination,
@@ -166,7 +166,7 @@ export const actions = {
         Authorization: 'Bearer ' + token
       }
     }
-    await this.$axios.post(process.env.baseApi + '/userprofile', {
+    await this.$axios.post('/userprofile', {
       first_name: data.first_name,
       mid_name: data.mid_name,
       last_name: data.last_name,
@@ -190,7 +190,7 @@ export const actions = {
         Authorization: 'Bearer ' + token
       }
     }
-    await this.$axios.post(process.env.baseApi + '/addasset', {
+    await this.$axios.post('/addasset', {
       asset_code: data.asset_code,
       asset_issuer: data.asset_issuer
     }, config)
@@ -206,7 +206,7 @@ export const actions = {
         Authorization: 'Bearer ' + token
       }
     }
-    await this.$axios.post(process.env.baseApi + '/change-password', {
+    await this.$axios.post('/change-password', {
       current_password: data.current_password,
       new_password: data.new_password
     }, config)
@@ -229,7 +229,7 @@ export const actions = {
       }
     };
     await this.$axios
-      .post(process.env.baseApi + "/addreceipt", {
+      .post("/addreceipt", {
         receipt_no: data.receipt_no,
         amount: data.amount,
         location: data.location,
@@ -257,7 +257,7 @@ export const actions = {
         Authorization: "Bearer " + token
       }
     };
-    await this.$axios.post(process.env.baseApi + "/get-rewards", {
+    await this.$axios.post("/get-rewards", {
       hashs: data.hashs
     }, config)
     .then(async(res) => {
@@ -281,7 +281,7 @@ export const actions = {
         Authorization: "Bearer " + token
       }
     };
-    await this.$axios.post(process.env.baseApi + "/set-kyc", {
+    await this.$axios.post("/set-kyc", {
       address: data.address,
       occupation: data.occupation,
       nationality: data.nationality,

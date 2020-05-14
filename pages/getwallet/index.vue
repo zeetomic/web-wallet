@@ -66,8 +66,8 @@
 </template>
 
 <script>
-import VuePin from "@/components/VuePin";
-import { message } from '@/utils/Mixin/message.js';
+import VuePin from "~/components/VuePin";
+import { message } from '~/utils/Mixin/message.js';
 export default {
   middleware: ['auth'],
   mixins: [message],

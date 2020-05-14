@@ -1,7 +1,5 @@
 <template>
-  <Spinner v-if="$fetchState.pending"/>
-  <p v-else-if="$fetchState.error">Error while fetching posts: {{ $fetchState.error.message }}</p>
-  <div class="pt-4" v-else>
+  <div class="pt-4">
     <v-row>
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
         <v-card class="pa-4" elevation="4">
@@ -95,7 +93,7 @@ const Getwallet = () => import('~/components/UI/Getwallet.vue');
 const VuePin = () => import('~/components/VuePin.vue');
 const Portfolio = () => import('~/components/Table/Portfolio.vue');
 import { message } from '~/utils/Mixin/message.js';
-import { portfolio_send } from '~/utils/fetch/portfolio_send.js';
+import { portfolio } from '~/utils/asyncData/portfolio.js';
 
 export default {
   middleware: ['auth'],
@@ -108,8 +106,6 @@ export default {
   mixins: [message],
   data() {
     return {
-      portfolio: null,
-
       optionSend: true,
       dialogScan: false,
       textfield: false,
@@ -131,13 +127,7 @@ export default {
       loading: false,
     }
   },
-  activated() {
-    // Call fetch again if last fetch more than 30 sec ago
-    if (this.$fetchState.timestamp <= (Date.now() - 30000)) {
-      this.$fetch();
-    }
-  },
-  fetch: portfolio_send,
+  asyncData: portfolio,
   methods: {
     async handleType() {
       this.textfield = await true;

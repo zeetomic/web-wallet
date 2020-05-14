@@ -1,7 +1,5 @@
 <template>
-  <Spinner v-if="$fetchState.pending"/>
-  <p v-else-if="$fetchState.error">Error while fetching posts: {{ $fetchState.error.message }}</p>
-  <div class="pt-4" v-else>
+  <div class="pt-4">
     <v-card class="pa-2 desktop" elevation="4">
       <h2>Transaction</h2>
       <v-tabs height="40" color="white" v-model="tabs">
@@ -16,12 +14,39 @@
         <client-only>
           <v-tab-item>
             <History v-if="!history.error" :history="history"/>
+            <p class="text-center pt-2" v-else>no-data-available</p>
+            <div 
+              v-for="(item,index) in history"
+              :key="index"
+            >
+              <div v-if="!item.amount">
+                <p class="text-center pt-2" v-if="index <= 0">no-data-available</p>
+              </div>
+            </div>
           </v-tab-item>
           <v-tab-item>
             <History v-if="!history.error" :history="history.map(h => h.to === user_profile.wallet && h )"/>
+            <p class="text-center pt-2" v-else>no-data-available</p>
+            <div 
+              v-for="(item,index) in history"
+              :key="index"
+            >
+              <div v-if="!item.amount">
+                <p class="text-center pt-2" v-if="index <= 0">no-data-available</p>
+              </div>
+            </div>
           </v-tab-item>
           <v-tab-item>
             <History v-if="!history.error" :history="history.map(h => h.from === user_profile.wallet && h )"/>
+            <p class="text-center pt-2" v-else>no-data-available</p>
+            <div 
+              v-for="(item,index) in history"
+              :key="index"
+            >
+              <div v-if="!item.amount">
+                <p class="text-center pt-2" v-if="index <= 0">no-data-available</p>
+              </div>
+            </div>
           </v-tab-item>
         </client-only>
       </v-tabs-items>
@@ -82,7 +107,7 @@
 const Spinner = () => import('~/components/Spinner.vue');
 const History = async() => await import('~/components/Table/History.vue');
 const HistoryMobo = () => import(/* webpackChunkName: "History" */ '~/components/Table/HistoryMobo.vue');
-import { history } from '~/utils/fetch/trx-history';
+import { transaction } from '~/utils/asyncData/transaction';
 
 export default {
   middleware: ['auth'],
@@ -93,18 +118,10 @@ export default {
   },
   data() {
     return {
-      history: null,
-      user_profile: null,
       tabs: null
     }
   },
-  activated() {
-    // Call fetch again if last fetch more than 30 sec ago
-    if (this.$fetchState.timestamp <= (Date.now() - 30000)) {
-      this.$fetch();
-    }
-  },
-  fetch: history
+  asyncData: transaction
 }
 </script>
 <style scoped>

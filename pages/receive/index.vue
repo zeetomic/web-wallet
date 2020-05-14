@@ -1,7 +1,5 @@
 <template>
-  <Spinner v-if="$fetchState.pending"/>
-  <p v-else-if="$fetchState.error">Error while fetching posts: {{ $fetchState.error.message }}</p>
-  <div class="container" v-else>
+  <div class="container">
     <v-row>
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
         <v-card class="pa-4" elevation="4">
@@ -42,7 +40,7 @@
         </v-card>
       </v-col>
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
-        <v-card class="pa-2" elevation="4" v-if="history.map(h => h.amount)">
+        <v-card class="pa-2" elevation="4">
           <h2>Receive Token</h2>
           <br>
           <HistoryMobo v-if="!history.error" :history="history.map(his => his.to === user_profile.wallet && his )"/>
@@ -65,7 +63,7 @@
 const Spinner = () => import('~/components/Spinner.vue');
 const Getwallet = () => import('~/components/UI/Getwallet.vue');
 const HistoryMobo = () => import(/* webpackChunkName: "History" */ '~/components/Table/HistoryMobo.vue');
-import { receive } from '~/utils/fetch/receive.js';
+import { transaction } from '~/utils/asyncData/transaction.js';
 
 export default {
   middleware: ['auth'],
@@ -77,17 +75,9 @@ export default {
   data () {
     return {
       ke: require("~/assets/zee_qr.png"),
-      user_profile: null,
-      history: null
     }
   },
-  activated() {
-    // Call fetch again if last fetch more than 30 sec ago
-    if (this.$fetchState.timestamp <= (Date.now() - 30000)) {
-      this.$fetch();
-    }
-  },
-  fetch: receive,
+  asyncData: transaction,
   methods: {
     onCopy() {
       /* Get the text field */

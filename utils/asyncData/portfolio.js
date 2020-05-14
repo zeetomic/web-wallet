@@ -1,15 +1,12 @@
 import Cookie from 'js-cookie';
 
-export const userprofile = async function() {
+export const portfolio = function({req, redirect, $axios}) {
   let token;
-  const req = this.$nuxt.context.req;
   if (process.server) {
     const jwtCookie = req.headers.cookie
       .split(";")
       .find(c => c.trim().startsWith("jwt="));
-    if (!jwtCookie) {
-      return;
-    }
+    if (!jwtCookie) return;
     token = jwtCookie.split("=")[1];
   }
   if (process.client) {
@@ -20,11 +17,13 @@ export const userprofile = async function() {
       Authorization: "Bearer " + token
     }
   };
-  await this.$axios.get(process.env.baseApi + "/userprofile", config)
+  return $axios.get("/portforlio", config)
     .then((res) => {
-      this.user_profile = res.data
+      return {
+        portfolio: res.data,
+      }
     })
-    .catch(() => {
-      this.$router.push('/login');
+    .catch((e) => {
+      redirect('/login');
     })
 }

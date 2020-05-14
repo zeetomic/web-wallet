@@ -1,7 +1,5 @@
 <template>
-  <Spinner v-if="$fetchState.pending"/>
-  <p v-else-if="$fetchState.error">Error while fetching posts: {{ $fetchState.error.message }}</p>
-  <div v-else>
+  <div>
     <v-card class="pa-8">
       <v-img :src="cover" class="cover"></v-img>
       <v-row>
@@ -91,17 +89,15 @@
 </template>
 
 <script>
-const Spinner = () => import('~/components/Spinner.vue');
 const UserName = () => import('~/components/UI/UserName.vue');
 const AddAsset = () => import('~/components/Dialog/AddAsset.vue');
 const ChangePassword = () => import('~/components/Dialog/ChangePassword.vue');
 const UploadDoc = () => import('~/components/UI/UploadDoc.vue');
-import { setting } from '~/utils/fetch/setting.js';
+import { setting } from '~/utils/asyncData/setting.js';
 
 export default {
   middleware: ['auth'],
   components: {
-    Spinner,
     UserName,
     AddAsset,
     ChangePassword,
@@ -109,8 +105,6 @@ export default {
   },
   data() {
     return {
-      user_profile: null,
-      doc: [],
       tabs: null,
       cover: require('~/assets/zee-landing.jpg'),
       profile: require('~/assets/profile.svg'),
@@ -118,13 +112,7 @@ export default {
       verified: require('~/assets/verified.svg'),
     }
   },
-  activated() {
-    // Call fetch again if last fetch more than 3 sec ago
-    if (this.$fetchState.timestamp <= (Date.now() - 30000)) {
-      this.$fetch();
-    }
-  },
-  fetch: setting,
+  asyncData: setting,
   methods: {
     handleSignOut() {
       this.$store.dispatch('users/handleLogout');

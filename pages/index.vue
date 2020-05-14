@@ -1,7 +1,5 @@
 <template>
-  <Spinner v-if="$fetchState.pending"/>
-  <p v-else-if="$fetchState.error">Error while fetching posts: {{ $fetchState.error.message }}</p>
-  <v-row v-else>
+  <v-row>
     <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6" v-if="!portfolio.error">
       <v-card class="pa-2" elevation="4" >
         <h2>ZEETOMIC Wallet</h2>
@@ -34,10 +32,13 @@
 
 <script>
 const Spinner = () => import('~/components/Spinner.vue');
-const PieChart = () => import('~/plugins/PieChart.js');
-const Getwallet = () => import('~/components/UI/Getwallet.vue');
-const Portfolio = () => import('~/components/Table/Portfolio.vue');
-import { portfolio } from '~/utils/fetch/portfolio.js';
+import PieChart from '~/plugins/PieChart.js';
+import Getwallet from '~/components/UI/Getwallet.vue';
+import Portfolio from '~/components/Table/Portfolio.vue';
+// const PieChart = () => import('~/plugins/PieChart.js');
+// const Getwallet = () => import('~/components/UI/Getwallet.vue');
+// const Portfolio = () => import('~/components/Table/Portfolio.vue');
+import { portfolio } from '~/utils/asyncData/portfolio.js';
 
 export default {
   middleware: ['auth'],
@@ -51,16 +52,12 @@ export default {
     return {
       datacollection: null,
       width: 260,
-      portfolio: null
     }
   },
-  activated() {
-    // Call fetch again if last fetch more than 30 sec ago
-    if (this.$fetchState.timestamp <= (Date.now() - 30000)) {
-      this.$fetch();
-    }
+  asyncData: portfolio,
+  mounted() {
+    if(!this.portfolio.error) this.fillData();
   },
-  fetch: portfolio,
   computed: {
     chart () {
       return {
