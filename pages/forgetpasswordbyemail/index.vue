@@ -47,9 +47,13 @@ export default {
           email: this.email,
         })
         .then(() => {
-          this.$toast.success(this.msg);
+          if(this.type === 'error') {
+            this.$toast.error(this.msg);
+          } else if(this.type === 'success') {
+            this.$toast.success(this.msg);
+            this.$router.push('/resetpasswordbyemail');
+          }
           this.loading = false;
-          this.$router.push('/resetpasswordbyemail');
         })
       }
     }

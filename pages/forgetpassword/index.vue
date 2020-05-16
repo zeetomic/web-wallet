@@ -47,9 +47,13 @@ export default {
           phone: ('+855' + (this.phone).replace(/^0+/, '')),
         })
         .then(() => {
-          this.$toast.success(this.msg);
+          if(this.type === 'error') {
+            this.$toast.error(this.msg);
+          } else if(this.type === 'success') {
+            this.$toast.success(this.msg);
+            this.$router.push('/resetpassword');  
+          }
           this.loading = false;
-          this.$router.push('/resetpassword');
         })
       }
     }

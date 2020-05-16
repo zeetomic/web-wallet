@@ -310,10 +310,13 @@ export const actions = {
     await this.$axios.post('/forget-password', {
       phone: data.phone
     })
-    .then((res) => {
+    .then(async(res) => {
       if(res.data.message) {
-        commit('set_msg', res.data.message);
-        commit('set_type', 'success');
+        await commit('set_msg', res.data.message);
+        await commit('set_type', 'success');
+      } else {
+        await commit('set_msg', res.data.error.message);
+        await commit('set_type', 'error');
       }
     })
     .catch(() => {
@@ -345,10 +348,13 @@ export const actions = {
     await this.$axios.post('/forget-password-by-email', {
       email: data.email
     })
-    .then((res) => {
+    .then(async(res) => {
       if(res.data.message) {
-        commit('set_msg', res.data.message);
-        commit('set_type', 'success');
+        await commit('set_msg', res.data.message);
+        await commit('set_type', 'success');
+      } else {
+        await commit('set_msg', res.data.error.message);
+        await commit('set_type', 'error');
       }
     })
     .catch(() => {
