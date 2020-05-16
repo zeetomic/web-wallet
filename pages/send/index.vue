@@ -88,7 +88,6 @@
 </template>
 
 <script>
-const Spinner = () => import('~/components/Spinner.vue');
 const Getwallet = () => import('~/components/UI/Getwallet.vue');
 const VuePin = () => import('~/components/VuePin.vue');
 const Portfolio = () => import('~/components/Table/Portfolio.vue');
@@ -100,7 +99,6 @@ export default {
   components: {
     VuePin,
     Portfolio,
-    Spinner,
     Getwallet
   },
   mixins: [message],

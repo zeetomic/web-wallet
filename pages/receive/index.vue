@@ -60,7 +60,6 @@
 </template>
 
 <script>
-const Spinner = () => import('~/components/Spinner.vue');
 const Getwallet = () => import('~/components/UI/Getwallet.vue');
 const HistoryMobo = () => import(/* webpackChunkName: "History" */ '~/components/Table/HistoryMobo.vue');
 import { transaction } from '~/utils/asyncData/transaction.js';
@@ -69,7 +68,6 @@ export default {
   middleware: ['auth'],
   components: {
     HistoryMobo,
-    Spinner,
     Getwallet
   },
   data () {

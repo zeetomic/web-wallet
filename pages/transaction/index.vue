@@ -104,7 +104,6 @@
 </template>
 
 <script>
-const Spinner = () => import('~/components/Spinner.vue');
 const History = async() => await import('~/components/Table/History.vue');
 const HistoryMobo = () => import(/* webpackChunkName: "History" */ '~/components/Table/HistoryMobo.vue');
 import { transaction } from '~/utils/asyncData/transaction';
@@ -114,7 +113,6 @@ export default {
   components: {
     History,
     HistoryMobo,
-    Spinner
   },
   data() {
     return {

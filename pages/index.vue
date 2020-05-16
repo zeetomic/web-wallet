@@ -31,7 +31,6 @@
 </template>
 
 <script>
-const Spinner = () => import('~/components/Spinner.vue');
 import PieChart from '~/plugins/PieChart.js';
 import Getwallet from '~/components/UI/Getwallet.vue';
 import Portfolio from '~/components/Table/Portfolio.vue';
@@ -45,7 +44,6 @@ export default {
   components : {
     PieChart,
     Portfolio,
-    Spinner,
     Getwallet
   },
   data() {

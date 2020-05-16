@@ -16,11 +16,25 @@
         </span>
         <div class="pt-4" v-show="!login_email">
           <Login/>
-          <v-btn text class="btn" @click="login_email = true">Login With Email</v-btn>
+          <v-row>
+            <v-col>
+              <v-btn text class="btn" @click="login_email = true">Login With Email</v-btn>
+            </v-col>
+            <v-col class="d-flex justify-end">
+              <v-btn text class="btn" to="/forgetpassword">Forget Password?</v-btn>
+            </v-col>
+          </v-row>
         </div>
         <div class="pt-4" v-show="login_email">
           <LoginEmail />
-          <v-btn text class="btn" @click="login_email = false">Login With Phone</v-btn>
+          <v-row>
+            <v-col>
+              <v-btn text class="btn" @click="login_email = false">Login With Phone</v-btn>
+            </v-col>
+            <v-col class="d-flex justify-end">
+              <v-btn text class="btn" to="/forgetpasswordbyemail">Forget Password?</v-btn>
+            </v-col>
+          </v-row>
         </div>
       </v-col>
     </v-row>

@@ -305,6 +305,76 @@ export const actions = {
       this.$router.push('/login');
     })
   },
+//forget password
+  async handleForgetPassword({commit}, data) {
+    await this.$axios.post('/forget-password', {
+      phone: data.phone
+    })
+    .then((res) => {
+      if(res.data.message) {
+        commit('set_msg', res.data.message);
+        commit('set_type', 'success');
+      }
+    })
+    .catch(() => {
+      this.$router.push('/login');
+    })
+  },
+//reset password
+  async handleResetPassword({commit}, data) {
+    await this.$axios.post('/reset-password', {
+      temp_code: data.temp_code,
+      phone: data.phone,
+      password: data.password
+    })
+    .then(async(res) => {
+      if(res.data.message) {
+        await commit('set_msg', res.data.message);
+        await commit('set_type', 'success');
+      } else {
+        await commit('set_msg', res.data.error.message);
+        await commit('set_type', 'error');
+      }
+    })
+    .catch(() => {
+      this.$router.push('/login');
+    })
+  },
+//forget password email
+  async handleForgetPasswordByEmail({commit}, data) {
+    await this.$axios.post('/forget-password-by-email', {
+      email: data.email
+    })
+    .then((res) => {
+      if(res.data.message) {
+        commit('set_msg', res.data.message);
+        commit('set_type', 'success');
+      }
+    })
+    .catch(() => {
+      this.$router.push('/login');
+    })
+  },
+//reset password email
+  async handleResetPasswordByEmail({commit}, data) {
+    await this.$axios.post('/reset-password-by-email', {
+      temp_code: data.temp_code,
+      email: data.email,
+      password: data.password
+    })
+    .then(async(res) => {
+      if(res.data.message) {
+        await commit('set_msg', res.data.message);
+        await commit('set_type', 'success');
+      } else {
+        await commit('set_msg', res.data.error.message);
+        await commit('set_type', 'error');
+      }
+    })
+    .catch(() => {
+      this.$router.push('/login');
+    })
+  },
 // LogOut
   handleLogout({commit}) {
     Cookie.remove('jwt');
