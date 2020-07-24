@@ -12,7 +12,7 @@
         </v-tabs>
         <br/>
         <span class="font-weight-bold display-1"> 
-          Sign Up To ZEETOMIC
+          Sign Up To SELENDRA
         </span>
         <div class="pt-4" v-show="!register_email">
           <Register/>

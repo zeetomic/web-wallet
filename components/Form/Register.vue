@@ -37,6 +37,7 @@
 <script>
 import { validateAuth } from '~/utils/Mixin/validateAuth.js';
 import { message } from '~/utils/Mixin/message.js';
+import Cookie from 'js-cookie';
 
 export default {
   mixins: [message, validateAuth],
@@ -61,7 +62,8 @@ export default {
         })
         .then(() => {
           if(this.type === 'success') {
-            this.$toast.success(this.msg);
+            Cookie.set('phone', ((this.phone).replace(/^0+/, '')));
+            this.$router.push('/confirmation');
           } else if(this.type === 'error') {
             this.$toast.error(this.msg);
           }

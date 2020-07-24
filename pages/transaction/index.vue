@@ -2,6 +2,7 @@
   <div class="pt-4">
     <v-card class="pa-2 desktop" elevation="4">
       <h2>Transaction</h2>
+      <hr>
       <v-tabs height="40" color="white" v-model="tabs">
         <v-tab>All</v-tab>
         <v-tab>Received</v-tab>

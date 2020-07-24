@@ -10,6 +10,7 @@
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
         <v-card class="pa-2" elevation="4">
           <h2>Send Token</h2>
+          <hr><br>
           <div v-if="portfolio.error">
             <Getwallet :portfolio="portfolio"/>
           </div>

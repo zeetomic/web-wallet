@@ -12,7 +12,7 @@
         </v-tabs>
         <br/>
         <span class="font-weight-bold display-1"> 
-          Login To ZEETOMIC
+          Login To SELENDRA
         </span>
         <div class="pt-4" v-show="!login_email">
           <Login/>

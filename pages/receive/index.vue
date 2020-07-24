@@ -6,6 +6,7 @@
         <v-row>
           <v-col cols="6">
             <h4 class="font-weight-thin headline">ZEETOMIC TOKEN</h4>
+            <hr>
           </v-col>
           <v-col cols="6">
             <v-row class="d-flex justify-center">
@@ -42,6 +43,7 @@
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
         <v-card class="pa-2" elevation="4">
           <h2>Receive Token</h2>
+          <hr>
           <br>
           <HistoryMobo v-if="!history.error" :history="history.map(his => his.to === user_profile.wallet && his )"/>
           <Getwallet v-else :portfolio="history"/>

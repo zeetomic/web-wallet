@@ -18,6 +18,7 @@
     <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
       <v-card class="pa-2" elevation="4">
         <h2>My Porfolio</h2>
+        <hr>
         <div v-if="portfolio.error" style="padding-top: 1rem">
           <Getwallet :portfolio="portfolio" />
         </div>

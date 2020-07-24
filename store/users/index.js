@@ -82,7 +82,7 @@ export const actions = {
       if(res.data.message === "Successfully registered!") {
         await commit('set_msg', res.data.message);
         await commit('set_type', 'success');
-        await this.$router.push('/successfullyregister');
+        // await this.$router.push('/successfullyregister');
       } else {
         await commit('set_msg', res.data.message);
         await commit('set_type', 'error');
@@ -90,6 +90,23 @@ export const actions = {
     })
     .catch(()=> {
       this.$toast.error('Something Went Wrong At Our End');
+    })
+  },
+// Handle Confirm
+  async handleConfirm({commit}, data) {
+    await this.$axios.post('/account-confirmation', {
+      phone: data.phone,
+      verification_code: data.verification_code
+    })
+    .then(async res => {
+      if(res.data.message) {
+        await commit('set_msg', res.data.message);
+        await commit('set_type', 'success');
+        Cookie.remove('phone');
+      } else {
+        await commit('set_msg', res.data.error.message);
+        await commit('set_type', 'error');
+      }
     })
   },
 // Register with Email
@@ -367,6 +384,24 @@ export const actions = {
       temp_code: data.temp_code,
       email: data.email,
       password: data.password
+    })
+    .then(async(res) => {
+      if(res.data.message) {
+        await commit('set_msg', res.data.message);
+        await commit('set_type', 'success');
+      } else {
+        await commit('set_msg', res.data.error.message);
+        await commit('set_type', 'error');
+      }
+    })
+    .catch(() => {
+      this.$router.push('/login');
+    })
+  },
+// Verify Phone
+  async handleVerifyPhone({commit}, data) {
+    await this.$axios.post('/add-phonenumber', {
+      phone: data.phone
     })
     .then(async(res) => {
       if(res.data.message) {

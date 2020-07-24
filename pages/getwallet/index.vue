@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h2>Get Wallet</h2>
-    <br>
     <v-card class="pa-6">
       <span class="font-weight-bold headline">Please Input PIN Code</span>
       <v-row>
@@ -22,26 +20,59 @@
       </v-row>
     </v-card>
     <v-dialog
+      v-model="dialogOpp"
+      max-width="80%"
+    >
+      <v-sheet light>
+        <v-card-title class="headline">
+          <span style="color: #ff304f"> 
+            <v-icon color="#ff304f" size="24px" class="pb-2">fas fa-exclamation-triangle</v-icon>
+            Opp! 
+          </span>
+        </v-card-title>
+        <v-card-text class="title font-weight-light">
+          {{ this.msg }}
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="red darken-1"
+            text
+            @click="this.dialogOpp = false"
+          >
+            Close
+          </v-btn>
+          <v-btn
+            color="green darken-1"
+            text
+            to="/confirmationemail"
+          >
+            Verify Phone number
+          </v-btn>
+        </v-card-actions>
+      </v-sheet>
+    </v-dialog>
+    <v-dialog
       v-model="dialog"
       persistent
       max-width="80%"
     >
-      <v-sheet>
+      <v-sheet light>
         <v-card-title class="headline">
-          <span style="color: "> 
-            <v-icon color="yellow" size="24px">fas fa-exclamation-triangle</v-icon> Warning 
+          <span style="color: #ff304f"> 
+            <v-icon color="#ff304f" size="24px" class="pb-2">fas fa-exclamation-triangle</v-icon> Warning 
           </span>
         </v-card-title>
-        <v-card-text class="title">
+        <v-card-text class="title font-weight-light">
           Please keep your key secure. This secret key will only
           be showed to you once.
           Zeetomic will not be able to help you recover it if lost.
         </v-card-text>
         <v-card-text>
           <h4>Public Key: </h4>
-          <span style="background-color:yellow; color:  #191819; border-radius: 4px" class="pa-1">{{ this.value.wallet }}</span>
+          <span class="pa-1 bg-key">{{ this.value.wallet }}</span>
           <h4>Secret Key: </h4>
-          <span style="background-color:yellow; color:  #191819; border-radius: 4px" class="pa-1">{{ this.value.seed }}</span>
+          <span class="pa-1 bg-key">{{ this.value.seed }}</span>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -82,6 +113,7 @@ export default {
       value: [],
       pin_msg: '',
       dialog: false,
+      dialogOpp: false,
       loading: false
     }
   },
@@ -95,9 +127,12 @@ export default {
           pin: this.pin
         })
         .then(() => {
-          if(this.msg === 'Opp! look like you already had a wallet') {
+          if (this.msg === 'Opp! look like you already had a wallet') {
             this.$toast.error(this.msg);
             this.$router.push('/');
+          } 
+          if (this.msg === 'Opp! You need to verify your phone number first') {
+            this.dialogOpp = true;
           } else {
             this.value = this.msg;
             this.dialog = true;
@@ -129,5 +164,11 @@ export default {
 <style scoped>
 .v-card {
   background: rgba(52, 64, 81, 0.1)!important;
+}
+.bg-key {
+  background-color:#002651;
+  color:  #191819;
+  border-radius: 4px;
+  color: #fff;
 }
 </style>
