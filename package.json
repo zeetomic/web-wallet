@@ -14,7 +14,7 @@
     "@nuxtjs/axios": "^5.9.7",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "@nuxtjs/toast": "^3.3.0",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "js-cookie": "^2.2.1",
     "jspdf": "^1.5.3",
     "nuxt": "^2.12.2",
